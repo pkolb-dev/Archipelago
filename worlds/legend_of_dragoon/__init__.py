@@ -8,6 +8,7 @@ from .items import get_items_by_category, item_table
 # LoD imports
 from .options import LegendOfDragoonOptions, lod_option_groups
 from .locations import location_table
+from .rules import set_rules
 
 class LegendOfDragoonWebWorld(WebWorld):
     setup_en = Tutorial(
@@ -63,6 +64,9 @@ class LegendOfDragoonWorld(World):
     # map items & locations
     item_name_to_id = {name: data.code for name, data in item_table.items()}
     location_name_to_id = {name: data.code for name, data in location_table.items()}
+
+    def set_rules(self):
+        set_rules(self)
 
     def create_item(self, name: str) -> LegendOfDragoonItem:
         data = item_table[name]

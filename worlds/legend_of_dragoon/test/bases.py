@@ -1,13 +1,6 @@
-import typing
-
-from BaseClasses import MultiWorld
 from test.bases import WorldTestBase
-from worlds.legend_of_dragoon import LegendOfDragoonWorld
-from worlds import AutoWorld
-from worlds.AutoWorld import World, call_all
-
-from BaseClasses import Location, MultiWorld, CollectionState, Item
+from worlds.legend_of_dragoon import LegendOfDragoonWorld, lod_name
 
 class LegendOfDragoonTestBase(WorldTestBase):
-    game = "The Legend of Dragoon"
+    game = lod_name
     world = LegendOfDragoonWorld
