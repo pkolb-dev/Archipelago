@@ -1,21 +1,43 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, StartInventoryPool, Choice, AssembleOptions, OptionGroup
+from Options import PerGameCommonOptions, StartInventoryPool, Choice, AssembleOptions, OptionGroup, Toggle
 
-class EnableAdditionRandomizer(Choice):
+
+class AdditionRandomization(Choice):
     """
-    Include Addition levels as checks. Every time you reach an addition threshold (level, uses), you will trigger another check.
+    Controls how character Additions are unlocked.
 
-    Shuffled (Character): Additions are randomized per character but only on that character.
-    Shuffled (Party): Addition unlocks are shuffled between all characters in the party.
+    Off:
+        Additions unlock via in-game events only (vanilla behavior).
 
-    Progressive (Character): Additions are considered items to be added to the randomized pool and can be placed in other games.
+    Shuffled (Character):
+        Addition unlock events are shuffled within each character.
+
+    Shuffled (Party):
+        Addition unlock events are shuffled across all characters.
+
+    Progressive (Character):
+        Progressive addition items are added to the item pool
+        and unlock additions for their respective character.
+
+    Addition Sanity:
+        Each addition unlock is its own item in the item pool
+        and can be placed in any world.
     """
-    display_name = "Enable Addition Randomization"
+    display_name = "Addition Randomization"
+
     option_off = 0
     option_shuffled_character = 1
     option_shuffled_party = 2
     option_progressive_character = 3
+    option_addition_sanity = 4
+
     default = 0
+
+class RandomStartingAddition(Toggle):
+    """Start each character with a random addition unlocked."""
+    display_name = "Random Starting Addition"
+    rich_text_doc = True
+
 
 class CompletionCondition(Choice):
     """
@@ -35,12 +57,14 @@ class CompletionCondition(Choice):
 
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
-    enable_addition_randomizer: EnableAdditionRandomizer
+    enable_addition_randomizer: AdditionRandomization
+    random_starting_addition: RandomStartingAddition
     lod_completion_condition: CompletionCondition
 
 lod_option_groups = [
     OptionGroup("General", [
-        EnableAdditionRandomizer,
+        AdditionRandomization,
+        RandomStartingAddition,
         CompletionCondition,
     ], False)
 ]
