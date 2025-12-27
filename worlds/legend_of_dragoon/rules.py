@@ -16,11 +16,7 @@ def lod_set_rule(lod_world: World, location: str, rule):
 
 def set_rules(lod_world: World):
     player = lod_world.player
-    set_generated_rules(lod_world, lod_set_rule)
+    multiworld = lod_world.multiworld
+    options = lod_world.options
 
-    for location in lod_world.multiworld.get_locations(player):
-        if location.costs:
-            for term, amount in location.costs.items():
-                add_rule(location, lambda state, term=term, amount=amount: state.count(term, player) >= amount)
-
-
+    multiworld.completion_condition[player] = lambda state: state.has("Defeat Commander in Seles", player)

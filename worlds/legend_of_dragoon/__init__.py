@@ -1,27 +1,13 @@
-# Python standard libraries
-from collections import defaultdict
-from math import ceil
-from random import choice
-from typing import Any, ClassVar, Callable, Union, cast
-
-# Archipelago imports
-import settings
 from worlds.AutoWorld import World, WebWorld
-from worlds.LauncherComponents import components, Component, launch_subprocess, Type, icon_paths
-from BaseClasses import (Item,
-                         ItemClassification as ItemClass,
-                         Tutorial,
-                         CollectionState)
-from Options import OptionGroup
-from .data.additions import ADDITIONS
-from .data.equipment import EQUIPMENT
+from BaseClasses import Tutorial
+
+from .game_id import lod_name
+from .item.item_data import LegendOfDragoonItem
+from .items import get_items_by_category, item_table
 
 # LoD imports
 from .options import LegendOfDragoonOptions, lod_option_groups
-
-from .locations import SHOP_LOCATIONS
-from .data.items import ITEMS, ItemType
-from .data.shops import ShopType
+from .locations import location_table
 
 class LegendOfDragoonWebWorld(WebWorld):
     setup_en = Tutorial(
@@ -38,6 +24,7 @@ class LegendOfDragoonWebWorld(WebWorld):
     option_groups = lod_option_groups
     options_presets = {}
 
+
 class LegendOfDragoonWorld(World):
     """
     The Legend of Dragoon is a role-playing game developed and published by Sony Computer Entertainment for the video game console PlayStation.
@@ -46,9 +33,9 @@ class LegendOfDragoonWorld(World):
     The game follows a young man, Dart Feld, on his journey through a world of magic, where ancient dragon warriors
     called Dragoons exist, to fight against evil forces who are threatening to destroy the world. 
     """
-    
+
     # ID, name, version
-    game = "The Legend of Dragoon"
+    game = lod_name
     required_client_version = (0, 6, 0)
 
     # Web world
@@ -69,39 +56,18 @@ class LegendOfDragoonWorld(World):
     options_dataclass = options.LegendOfDragoonOptions
     options: options.LegendOfDragoonOptions
 
-    item_name_to_id = {item.name: item.key for item in ITEMS}
-    location_name_to_id = {location.name: location.key for location in SHOP_LOCATIONS} # swap to LOCATIONS, rather than SHOP_LOCATIONS
+    fillers = {}
+    fillers.update(get_items_by_category("Consumable"))
 
-    def create_items(self) -> None:
-        items_made: int = 0
-        for item_name in self.item_name_to_id:
-            item_id = self.item_name_to_id[item_name]
+
+    # map items & locations
+    item_name_to_id = {name: data.code for name, data in item_table.items()}
+    location_name_to_id = {name: data.code for name, data in location_table.items()}
+
+    def create_item(self, name: str) -> LegendOfDragoonItem:
+        data = item_table[name]
+        return LegendOfDragoonItem(name, data.classification, data.code, self.player)
+
 
     def get_filler_item_name(self) -> str:
-        return ''
-
-    def __init__(self, multiworld, player):
-        super(LegendOfDragoonWorld, self).__init__(multiworld, player)
-        self.randomized_shop_items = {}
-        self.slots_by_shop = defaultdict(list)
-        for loc in SHOP_LOCATIONS:
-            self.slots_by_shop[loc.key].append(loc)
-
-    def generate_shop_randomization(self, settings):
-        healing_items = [item for item in ITEMS if item.item_type == ItemType.HEALING]
-        attack_items = [item for item in ITEMS if item.item_type == ItemType.ATTACK]
-        status_items = [item for item in ITEMS if item.item_type == ItemType.STATUS]
-
-        for key, slots in self.slots_by_shop.items():
-            for loc in slots:
-                if loc.shop_type == ShopType.EQUIPMENT:
-                    item = choice(attack_items)
-                elif loc.shop_type == ShopType.ITEM:
-                    item = choice(healing_items + status_items)
-                else:
-                    item = choice(ITEMS)
-
-                self.randomized_shop_items[loc.id] = item
-
-    def get_item_for_slot(self, shop_location_id):
-        return self.randomized_shop_items.get(shop_location_id)
+        return self.random.choices([filler for filler in self.fillers.keys()])[0]

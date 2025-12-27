@@ -1,28 +1,26 @@
-from dataclasses import dataclass
-from .data.shops import shop_locations, ShopType, Shop
+from typing import Dict, Set
 
-SHOP_LOCATION_BASE_ID = 3000000
+from worlds.legend_of_dragoon.loc.additions import addition_table
+from worlds.legend_of_dragoon.loc.chests import chests_table
+from worlds.legend_of_dragoon.loc.events import events_table
+from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData
+from worlds.legend_of_dragoon.loc.shops import shop_table
 
-@dataclass
-class ShopLocation:
-    name: str
-    id: int
-    key: str
-    slot_index: int
-    shop_type: ShopType
+def get_locations_by_type(location_type: str) -> Dict[str, LegendOfDragoonLocationData]:
+    return {name: data for name, data in location_table.items() if data.category == location_type}
 
-SHOP_LOCATIONS = []
-current_id = SHOP_LOCATION_BASE_ID
+location_table: Dict[str, LegendOfDragoonLocationData] = {
+    **shop_table,
+    **addition_table,
+    **chests_table,
+    **events_table,
+}
 
-for shop in shop_locations:
-    for slot_index in range(shop.slot_count):
-        name: str = f"{shop.display_name} - Slot {slot_index + 1}"
-        shop_id: int = current_id
-        shop_type = shop.shop_type
+#Make location categories
+location_name_groups: Dict[str, Set[str]] = {}
+for location in location_table.keys():
+    category = location_table[location].category
+    if category not in location_name_groups.keys():
+        location_name_groups[category] = set()
+    location_name_groups[category].add(location)
 
-        SHOP_LOCATIONS.append(ShopLocation(name, shop_id, shop.key, slot_index, shop_type))
-        current_id += 1
-
-SHOP_LOCATIONS_BY_KEY = {loc.key: [] for loc in SHOP_LOCATIONS}
-for loc in SHOP_LOCATIONS:
-    SHOP_LOCATIONS_BY_KEY[loc.key].append(loc)
