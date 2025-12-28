@@ -23,7 +23,7 @@ def create_regions(legend_of_dragoon_world):
         # SERDIO
         "Seles":                        LegendOfDragoonRegionData([],   ["Forest"]),
         "Forest":                       LegendOfDragoonRegionData([],   ["Hellena Prison"]),
-        "Hellena Prison":               LegendOfDragoonRegionData([],   ["Prarie"]),
+        "Hellena Prison":               LegendOfDragoonRegionData([],   ["Prairie"]),
         "Prairie":                      LegendOfDragoonRegionData([],   ["Limestone Cave"]),
         "Limestone Cave":               LegendOfDragoonRegionData([],   ["Bale"]),
         "Bale":                         LegendOfDragoonRegionData([],   ["Hoax"]),
@@ -37,7 +37,7 @@ def create_regions(legend_of_dragoon_world):
         "Black Castle":                 LegendOfDragoonRegionData([],   ["Queen Fury"]),
 
         # TIBEROA
-        "Queen Fury":                   LegendOfDragoonRegionData([],   ["Fletz Castle"]),
+        "Queen Fury":                   LegendOfDragoonRegionData([],   ["Fletz Castle", "Phantom Ship"]),
         "Phantom Ship":                 LegendOfDragoonRegionData([],   []),
         "Fletz Castle":                 LegendOfDragoonRegionData([],   ["Barrens"]),
         "Barrens":                      LegendOfDragoonRegionData([],   ["Donau"]),
@@ -139,49 +139,24 @@ def create_regions(legend_of_dragoon_world):
         regions["Zenebatos"].locations.append(shop_loc)
 
     # add events
-    regions["Seles"].locations.append("Commander in Seles (Defeated)")
-
-    #
-    # if options.faust:
-    #     # add faust if enabled
-    #     pass
-    #
-    # for i in range(1,options.level_checks+1):
-    #     regions["Additions"].locations.append("Addition " + str(i+1).rjust(3, '0') + " (Slot 1)")
-
-    #
-    #
-    # for location in legend_of_dragoon_world.get_starting_accessory_locations():
-    #     regions[location_table[location].category].locations.append(location)
+    regions["Seles"].locations.append("Defeat Commander in Seles")
 
     # Set up the regions correctly.
     for name, data in regions.items():
         multiworld.regions.append(create_region(multiworld, player, name, data))
 
-def connect_entrances(legend_of_dragoon_world):
-    multiworld = legend_of_dragoon_world.multiworld
-    player     = legend_of_dragoon_world.player
-    options    = legend_of_dragoon_world.options
+def connect_entrances(lod_world):
+    multiworld = lod_world.multiworld
+    player     = lod_world.player
+    options    = lod_world.options
 
-    # multiworld.get_entrance("Awakening", player).connect(multiworld.get_region("Awakening", player))
-    # if options.destiny_islands:
-    #     multiworld.get_entrance("Destiny Islands", player).connect(multiworld.get_region("Destiny Islands", player))
-    # multiworld.get_entrance("Traverse Town", player).connect(multiworld.get_region("Traverse Town", player))
-    # multiworld.get_entrance("Wonderland", player).connect(multiworld.get_region("Wonderland", player))
-    # multiworld.get_entrance("Olympus Coliseum", player).connect(multiworld.get_region("Olympus Coliseum", player))
-    # multiworld.get_entrance("Deep Jungle", player).connect(multiworld.get_region("Deep Jungle", player))
-    # multiworld.get_entrance("Agrabah", player).connect(multiworld.get_region("Agrabah", player))
-    # multiworld.get_entrance("Monstro", player).connect(multiworld.get_region("Monstro", player))
-    # if options.atlantica:
-    #     multiworld.get_entrance("Atlantica", player).connect(multiworld.get_region("Atlantica", player))
-    # multiworld.get_entrance("Halloween Town", player).connect(multiworld.get_region("Halloween Town", player))
-    # multiworld.get_entrance("Neverland", player).connect(multiworld.get_region("Neverland", player))
-    # multiworld.get_entrance("Hollow Bastion", player).connect(multiworld.get_region("Hollow Bastion", player))
-    # multiworld.get_entrance("End of the World", player).connect(multiworld.get_region("End of the World", player))
-    # multiworld.get_entrance("100 Acre Wood", player).connect(multiworld.get_region("100 Acre Wood", player))
-    # multiworld.get_entrance("World Map", player).connect(multiworld.get_region("World Map", player))
-    # multiworld.get_entrance("Levels", player).connect(multiworld.get_region("Levels", player))
-    # multiworld.get_entrance("Homecoming", player).connect(multiworld.get_region("Homecoming", player))
+    for region in multiworld.regions:
+        if region.player != player:
+            continue
+        for entrance in region.exits:
+            target_region = multiworld.get_region(entrance.name, player)
+            entrance.connect(target_region)
+
 
 def create_region(multiworld: MultiWorld, player: int, name: str, data: LegendOfDragoonRegionData):
     region = Region(name, player, multiworld)
