@@ -1,6 +1,7 @@
 from ..generic.Rules import set_rule, add_rule
 from ..AutoWorld import World
 
+
 def lod_set_rule(lod_world: World, location: str, rule):
     player = lod_world.player
 
@@ -14,9 +15,10 @@ def lod_set_rule(lod_world: World, location: str, rule):
     for location in locations:
         set_rule(location, rule)
 
-def set_rules(lod_world: World):
+
+def set_rules(lod_world):
     player = lod_world.player
     multiworld = lod_world.multiworld
     options = lod_world.options
 
-    multiworld.completion_condition[player] = lambda state: state.has("Defeat Commander in Seles", player)
+    multiworld.completion_condition[player] = lambda state: state.has("Victory", player)

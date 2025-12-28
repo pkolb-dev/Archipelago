@@ -52,7 +52,8 @@ class CompletionCondition(Choice):
     option_lenus2 = 4# goal after defeating lenus w/ regole
     option_faust =  5 # goal after defeating Magician Faust
     option_melbu =  6 # goal after defeating Melbu Frahma
-    default = 0
+    option_seles_commander = 7
+    default = 7
 
 
 @dataclass
