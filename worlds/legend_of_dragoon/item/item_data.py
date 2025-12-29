@@ -1,6 +1,6 @@
 from typing import NamedTuple, Optional
 from BaseClasses import ItemClassification, Item
-from worlds.legend_of_dragoon import lod_name
+from worlds.legend_of_dragoon.game_id import lod_name
 
 class LegendOfDragoonItem(Item):
     game: str = lod_name

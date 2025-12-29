@@ -1,177 +1,221 @@
-from typing import Dict, List, NamedTuple, Optional
+from __future__ import annotations
+from typing import  List, NamedTuple, Optional, TYPE_CHECKING
 
-from BaseClasses import MultiWorld, Region, Entrance
-from .loc.additions import addition_table
-from .loc.location_data import LegendOfDragoonLocation
-from .locations import location_table, location_name_groups
+from BaseClasses import Region
 
+if TYPE_CHECKING:
+    from .world import LegendOfDragoonWorld
 
 class LegendOfDragoonRegionData(NamedTuple):
     locations: List[str]
     region_exits: Optional[List[str]]
 
 
-def create_regions(legend_of_dragoon_world):
-    multiworld = legend_of_dragoon_world.multiworld
-    player     = legend_of_dragoon_world.player
-    options    = legend_of_dragoon_world.options
+def create_and_connect_regions(world: LegendOfDragoonWorld) -> None:
+    create_all_regions(world)
+    connect_regions(world)
 
-    regions: Dict[str, LegendOfDragoonRegionData] = {
-        "Menu":                         LegendOfDragoonRegionData([], ["Seles", "Additions"]),
-        "Additions":                    LegendOfDragoonRegionData(list(addition_table), []),
+def create_all_regions(world: LegendOfDragoonWorld) -> None:
+    regions = [
+        Region("Menu", world.player, world.multiworld),
+        Region("Additions", world.player, world.multiworld),
+        Region("Seles", world.player, world.multiworld),
+        Region("Forest", world.player, world.multiworld),
+        Region("Hellena Prison", world.player, world.multiworld),
+        Region("Prairie", world.player, world.multiworld),
+        Region("Limestone Cave", world.player, world.multiworld),
+        Region("Bale", world.player, world.multiworld),
+        Region("Hoax", world.player, world.multiworld),
+        Region("Marshland", world.player, world.multiworld),
+        Region("Volcano Villude", world.player, world.multiworld),
+        Region("Dragon's Nest", world.player, world.multiworld),
+        Region("Lohan", world.player, world.multiworld),
+        Region("Shrine of Shirley", world.player, world.multiworld),
+        Region("Kazas", world.player, world.multiworld),
+        Region("Black Castle", world.player, world.multiworld),
 
-        # SERDIO
-        "Seles":                        LegendOfDragoonRegionData([],   ["Forest"]),
-        "Forest":                       LegendOfDragoonRegionData([],   ["Hellena Prison"]),
-        "Hellena Prison":               LegendOfDragoonRegionData([],   ["Prairie"]),
-        "Prairie":                      LegendOfDragoonRegionData([],   ["Limestone Cave"]),
-        "Limestone Cave":               LegendOfDragoonRegionData([],   ["Bale"]),
-        "Bale":                         LegendOfDragoonRegionData([],   ["Hoax"]),
-        "Hoax":                         LegendOfDragoonRegionData([],   ["Marshland"]),
-        "Marshland":                    LegendOfDragoonRegionData([],   ["Volcano Villude"]),
-        "Volcano Villude":              LegendOfDragoonRegionData([],   ["Nest of Dragon"]),
-        "Nest of Dragon":               LegendOfDragoonRegionData([],   ["Lohan"]),
-        "Lohan":                        LegendOfDragoonRegionData([],   ["Shrine of Shirley"]),
-        "Shrine of Shirley":            LegendOfDragoonRegionData([],   ["Kazas"]),
-        "Kazas":                        LegendOfDragoonRegionData([],   ["Black Castle"]),
-        "Black Castle":                 LegendOfDragoonRegionData([],   ["Queen Fury"]),
+        Region("Queen Fury", world.player, world.multiworld),
+        Region("Phantom Ship", world.player, world.multiworld),
+        Region("Fletz", world.player, world.multiworld),
+        Region("Fletz Castle", world.player, world.multiworld),
+        Region("Barrens", world.player, world.multiworld),
+        Region("Donau", world.player, world.multiworld),
+        Region("Valley of Corrupted Gravity", world.player, world.multiworld),
+        Region("Home of Giganto", world.player, world.multiworld),
 
-        # TIBEROA
-        "Queen Fury":                   LegendOfDragoonRegionData([],   ["Fletz Castle", "Phantom Ship"]),
-        "Phantom Ship":                 LegendOfDragoonRegionData([],   []),
-        "Fletz Castle":                 LegendOfDragoonRegionData([],   ["Barrens"]),
-        "Barrens":                      LegendOfDragoonRegionData([],   ["Donau"]),
-        "Donau":                        LegendOfDragoonRegionData([],   ["Valley of Corrupted Gravity"]),
-        "Valley of Corrupted Gravity":  LegendOfDragoonRegionData([],   ["Home of Giganto"]),
-        "Home of Giganto":              LegendOfDragoonRegionData([],   ['Lidiera']),
+        Region("Lidiera", world.player, world.multiworld),
+        Region("Underwater Cavern", world.player, world.multiworld),
+        Region("Fueno", world.player, world.multiworld),
+        Region("Furni", world.player, world.multiworld),
+        Region("Evergreen Forest", world.player, world.multiworld),
+        Region("Deningrad", world.player, world.multiworld),
+        Region("Neet", world.player, world.multiworld),
+        Region("Wingly Forest", world.player, world.multiworld),
+        Region("Forbidden Land", world.player, world.multiworld),
+        Region("Mortal Dragon Mountain", world.player, world.multiworld),
+        Region("Kashua Glacier", world.player, world.multiworld),
+        Region("Tower of Flanvel", world.player, world.multiworld),
+        Region("Snowfield", world.player, world.multiworld),
+        Region("Fort Magrad", world.player, world.multiworld),
+        Region("Vellweb", world.player, world.multiworld),
+        Region("Death Frontier", world.player, world.multiworld),
+        Region("Ulara", world.player, world.multiworld),
+        Region("Rouge", world.player, world.multiworld),
+        Region("Aglis", world.player, world.multiworld),
+        Region("Zenebatos", world.player, world.multiworld),
+        Region("Mayfil", world.player, world.multiworld),
+        Region("Divine Tree", world.player, world.multiworld),
+        Region("Moon That Never Sets", world.player, world.multiworld),
+    ]
 
-        # MILLE SESEAU
-        "Lidiera":                      LegendOfDragoonRegionData([],   ['Undersea Cavern']),
-        "Undersea Cavern":              LegendOfDragoonRegionData([],   ['Prison Island']),
-        "Prison Island":                LegendOfDragoonRegionData([],   ['Fueno']),
-        "Fueno":                        LegendOfDragoonRegionData([],   ['Furni']),
-        "Furni":                        LegendOfDragoonRegionData([],   ['Evergreen Forest']),
-        "Evergreen Forest":             LegendOfDragoonRegionData([],   ['Deningrad']),
-        "Deningrad":                    LegendOfDragoonRegionData([],   ['Neet']),
-        "Neet":                         LegendOfDragoonRegionData([],   ['Wingly Forest']),
-        "Wingly Forest":                LegendOfDragoonRegionData([],   ['Kadessa']),
-        "Kadessa":                      LegendOfDragoonRegionData([],   ['Mountain of Mortal Dragon']),
-        "Mountain of Mortal Dragon":    LegendOfDragoonRegionData([],   ['Kashua Glacier']),
+    world.multiworld.regions += regions
 
-        # GLORIANO & BROKEN ISLANDS
-        "Kashua Glacier":               LegendOfDragoonRegionData([],   ['Tower of Flanvel']),
-        "Tower of Flanvel":             LegendOfDragoonRegionData([],   ['Snowfield']),
-        "Snowfield":                    LegendOfDragoonRegionData([],   ['Fort Magrad']),
-        "Fort Magrad":                  LegendOfDragoonRegionData([],   ['Vellweb']),
-        "Vellweb":                      LegendOfDragoonRegionData([],   ['Death Frontier']),
-        "Death Frontier":               LegendOfDragoonRegionData([],   ['Ulara']),
-        "Ulara":                        LegendOfDragoonRegionData([],   ['Rouge']),
-        "Rouge":                        LegendOfDragoonRegionData([],   ['Aglis']),
-        "Aglis":                        LegendOfDragoonRegionData([],   ['Zenebatos']),
-        "Zenebatos":                    LegendOfDragoonRegionData([],   ['Mayfil']),
-        "Mayfil":                       LegendOfDragoonRegionData([],   ['Divine Tree']),
-        "Divine Tree":                  LegendOfDragoonRegionData([],   ['Moon That Never Sets']),
-        "Moon That Never Sets":         LegendOfDragoonRegionData([],   []),
-    }
+def connect_regions(world: LegendOfDragoonWorld) -> None:
+    menu = world.get_region("Menu")
+    additions = world.get_region("Additions")
+    seles = world.get_region("Seles")
+    forest = world.get_region("Forest")
+    hellena_prison = world.get_region("Hellena Prison")
+    prairie = world.get_region("Prairie")
+    limestone_cave = world.get_region("Limestone Cave")
+    bale = world.get_region("Bale")
+    hoax = world.get_region("Hoax")
+    marshland = world.get_region("Marshland")
+    volcano_villude = world.get_region("Volcano Villude")
+    dragons_nest = world.get_region("Dragon's Nest")
+    lohan = world.get_region("Lohan")
+    shrine_of_shirley = world.get_region("Shrine of Shirley")
+    kazas = world.get_region("Kazas")
+    black_castle = world.get_region("Black Castle")
 
+    fletz = world.get_region("Fletz")
+    barrens = world.get_region("Barrens")
+    donau = world.get_region("Donau")
+    fletz_castle = world.get_region("Fletz Castle")
+    valley_of_corrupted_gravity = world.get_region("Valley of Corrupted Gravity")
+    home_of_giganto = world.get_region("Home of Giganto")
+    queen_fury = world.get_region("Queen Fury")
+    phantom_ship = world.get_region("Phantom Ship")
+    lidiera = world.get_region("Lidiera")
+    underwater_cavern = world.get_region("Underwater Cavern")
+    fueno = world.get_region("Fueno")
 
-    # Set up locations
+    furni = world.get_region("Furni")
+    evergreen_forest = world.get_region("Evergreen Forest")
+    deningrad = world.get_region("Deningrad")
+    neet = world.get_region("Neet")
+    wingly_forest = world.get_region("Wingly Forest")
+    forbidden_land = world.get_region("Forbidden Land")
+    mortal_dragon_mountain = world.get_region("Mortal Dragon Mountain")
+    kashua_glacier = world.get_region("Kashua Glacier")
+    tower_of_flanvel = world.get_region("Tower of Flanvel")
+    snowfield = world.get_region("Snowfield")
+    fort_magrad = world.get_region("Fort Magrad")
+    vellweb = world.get_region("Vellweb")
 
-    # shops
-    for shop_loc in location_name_groups["Bale"]:
-        regions["Bale"].locations.append(shop_loc)
+    death_frontier = world.get_region("Death Frontier")
+    ulara = world.get_region("Ulara")
+    rouge = world.get_region("Rouge")
+    aglis = world.get_region("Aglis")
+    zenebatos = world.get_region("Zenebatos")
+    mayfil = world.get_region("Mayfil")
+    divine_tree = world.get_region("Divine Tree")
+    moon_that_never_sets = world.get_region("Moon That Never Sets")
 
-    for shop_loc in location_name_groups["Lohan"]:
-        regions["Lohan"].locations.append(shop_loc)
+    # set up always available locations
+    menu.connect(additions, "Menu to Additions") # TODO: this can probably be deleted and additions added to menu
 
-    for shop_loc in location_name_groups["Kazas"]:
-        regions["Kazas"].locations.append(shop_loc)
+    # path out disc one
+    menu.connect(seles, "Intro to Seles")
+    seles.connect(forest, "Seles to Forest")
+    forest.connect(seles, "Forest to Seles")
+    forest.connect(hellena_prison, "Forest to Hellena Prison")
+    forest.connect(prairie, "Forest to Prairie")
+    hellena_prison.connect(forest, "Hellena Prison to Forest")
+    hellena_prison.connect(prairie, "Hellena Prison to Prairie")
+    prairie.connect(forest, "Prairie to Forest")
+    prairie.connect(hellena_prison, "Prairie to Hellena Prison")
+    prairie.connect(limestone_cave, "Prairie to Limestone Cave", lambda state: state.has("Axe from the Shack", world.player))
+    limestone_cave.connect(prairie, "Limestone Cave to Prairie")
+    limestone_cave.connect(bale, "Limestone Cave to Bale")
+    bale.connect(limestone_cave, "Bale to Limestone Cave")
+    bale.connect(hoax, "Bale to Hoax")
+    hoax.connect(bale, "Hoax to Bale")
+    hoax.connect(marshland, "Hoax to Marshland")
+    marshland.connect(hoax, "Marshland to Hoax")
+    marshland.connect(volcano_villude, "Marshland to Volcano Villude")
+    volcano_villude.connect(marshland, "Volcano Villude to Marshland")
+    volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest")
+    dragons_nest.connect(volcano_villude, "Dragon's Nest to Volcano Villude")
+    dragons_nest.connect(lohan, "Dragon's Nest to Lohan")
+    lohan.connect(shrine_of_shirley, "Lohan to Shrine of Shirley")
+    shrine_of_shirley.connect(lohan, "Shrine of Shirley to Lohan")
+    forest.connect(kazas, "Forest to Kazas")
+    kazas.connect(forest, "Kazas to Forest")
+    kazas.connect(black_castle, "Kazas to Black Castle")
+    black_castle.connect(kazas, "Black Castle to Kazas")
+    black_castle.connect(fletz, "Black Castle to Fletz")
 
-    for shop_loc in location_name_groups["Fletz"]:
-        regions["Fletz Castle"].locations.append(shop_loc)
+    # path out disc 2
 
-    for shop_loc in location_name_groups["Donau"]:
-        regions["Donau"].locations.append(shop_loc)
+    fletz.connect(barrens, "Fletz to Barrens")
+    fletz.connect(fletz_castle, "Fletz to Fletz Castle")
+    fletz_castle.connect(fletz, "Fletz Castle to Fletz")
+    barrens.connect(fletz, "Barrens to Fletz")
+    barrens.connect(donau, "Barrens to Donau")
+    barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity", lambda state: state.has("Pass for Valley", world.player))
+    valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
+    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto")
+    home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
+    donau.connect(queen_fury, "Donau to Queen Fury")
+    queen_fury.connect(donau, "Queen Fury to Donau")
+    queen_fury.connect(phantom_ship, "Queen Fury to Phantom Ship")
+    phantom_ship.connect(lidiera, "Phantom Ship to Lidiera")
+    lidiera.connect(underwater_cavern, "Lidiera to Underwater Cavern")
+    underwater_cavern.connect(lidiera, "Underwater Cavern to Lidiera")
+    underwater_cavern.connect(fueno, "Underwater Cavern to Fueno")
+    fueno.connect(underwater_cavern, "Fueno to Underwater Cavern")
+    fueno.connect(queen_fury, "Fueno to Queen Fury")
+    donau.connect(furni, "Donau to Furni")
 
-    for shop_loc in location_name_groups["Queen Fury"]:
-        regions["Queen Fury"].locations.append(shop_loc)
+    # path out disc 3
+    furni.connect(evergreen_forest, "Furni to Evergreen Forest")
+    evergreen_forest.connect(furni, "Evergreen Forest to Furni")
+    evergreen_forest.connect(deningrad, "Evergreen Forest to Deningrad")
+    evergreen_forest.connect(neet, "Evergreen Forest to Neet")
+    deningrad.connect(evergreen_forest, "Deningrad to Evergreen Forest")
+    neet.connect(evergreen_forest, "Neet to Evergreen Forest")
+    evergreen_forest.connect(wingly_forest, "Evergreen Forest to Wingly Forest")
+    wingly_forest.connect(forbidden_land, "Wingly Forest to Forbidden Land")
+    forbidden_land.connect(wingly_forest, "Forbidden Land to Wingly Forest")
+    wingly_forest.connect(deningrad, "Wingly Forest to Deningrad")
+    evergreen_forest.connect(mortal_dragon_mountain, "Evergreen Forest to Mortal Dragon Mountain")
+    mortal_dragon_mountain.connect(evergreen_forest, "Mortal Dragon Mountain to Evergreen Forest")
+    deningrad.connect(kashua_glacier, "Deningrad to Kashua Glacier")
+    kashua_glacier.connect(deningrad, "Kashua Glacier to Deningrad")
+    kashua_glacier.connect(tower_of_flanvel, "Kashua Glacier to Tower of Flanvel")
+    tower_of_flanvel.connect(kashua_glacier, "Tower of Flanvel to Kashua Glacier")
+    kashua_glacier.connect(snowfield, "Kashua Glacier to Snowfield")
+    snowfield.connect(kashua_glacier, "Snowfield to Kashua Glacier")
+    snowfield.connect(fort_magrad, "Snowfield to Fort Magrad")
+    fort_magrad.connect(snowfield, "Fort Magrad to Snowfield")
+    snowfield.connect(vellweb, "Snowfield to Vellweb")
+    vellweb.connect(snowfield, "Vellweb to Snowfield")
+    vellweb.connect(death_frontier)
 
-    for shop_loc in location_name_groups["Fueno"]:
-        regions["Fueno"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Furni"]:
-        regions["Furni"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Deningrad"]:
-        regions["Deningrad"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Wingly Forest"]:
-        regions["Wingly Forest"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Vellweb"]:
-        regions["Vellweb"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Ulara"]:
-        regions["Ulara"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Rouge"]:
-        regions["Rouge"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Moon"]:
-        regions["Moon That Never Sets"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Hellena 01"]:
-        regions["Hellena Prison"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Hellena 02"]:
-        regions["Hellena Prison"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Kashua"]:
-        regions["Kashua Glacier"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Forest"]:
-        regions["Forest"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Volcano"]:
-        regions["Volcano Villude"].locations.append(shop_loc)
-
-    for shop_loc in location_name_groups["Zenebatos"]:
-        regions["Zenebatos"].locations.append(shop_loc)
-
-    # add events
-    regions["Seles"].locations.append("Defeat Commander in Seles")
-
-    # Set up the regions correctly.
-    for name, data in regions.items():
-        multiworld.regions.append(create_region(multiworld, player, name, data))
-
-def connect_entrances(lod_world):
-    multiworld = lod_world.multiworld
-    player     = lod_world.player
-    options    = lod_world.options
-
-    for region in multiworld.regions:
-        if region.player != player:
-            continue
-        for entrance in region.exits:
-            target_region = multiworld.get_region(entrance.name, player)
-            entrance.connect(target_region)
-
-
-def create_region(multiworld: MultiWorld, player: int, name: str, data: LegendOfDragoonRegionData):
-    region = Region(name, player, multiworld)
-    if data.locations:
-        for loc_name in data.locations:
-            loc_data = location_table.get(loc_name)
-            location = LegendOfDragoonLocation(player, loc_name, loc_data.code if loc_data else None, region)
-            if loc_data and loc_data.type == "Event":
-                location.address = None
-                location.event = True
-            region.locations.append(location)
-
-    if data.region_exits:
-        for region_exit in data.region_exits:
-            entrance = Entrance(player, region_exit, region)
-            region.exits.append(entrance)
-
-    return region
+    # path out disc 4
+    death_frontier.connect(ulara, "Death Frontier to Ulara")
+    ulara.connect(death_frontier, "Ulara to Death Frontier")
+    ulara.connect(home_of_giganto, "Ulara to Home of Giganto")
+    home_of_giganto.connect(ulara, "Home of Giganto to Ulara")
+    queen_fury.connect(rouge, "Queen Fury to Rouge")
+    rouge.connect(queen_fury, "Rouge to Queen Fury")
+    rouge.connect(aglis, "Rouge to Aglis")
+    aglis.connect(rouge, "Aglis to Rouge")
+    aglis.connect(zenebatos, "Aglis to Zenebatos")
+    # coolon is now able to fly us anywhere, minus phantom ship.
+    zenebatos.connect(aglis, "Zenebatos to Aglis")
+    zenebatos.connect(mayfil, "Zenebatos to Mayfil")
+    mayfil.connect(zenebatos, "Mayfil to Zenebatos")
+    mayfil.connect(divine_tree, "Mayfil to Divine Tree")
+    divine_tree.connect(moon_that_never_sets, "Divine Tree to Moon That Never Sets")

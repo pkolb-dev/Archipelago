@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, StartInventoryPool, Choice, AssembleOptions, OptionGroup, Toggle
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle
 
 
 class AdditionRandomization(Choice):
@@ -42,7 +42,6 @@ class RandomStartingAddition(Toggle):
 class CompletionCondition(Choice):
     """
     Set the goal for completing the game.
-
     """
     display_name = "Completion Condition"
     option_stardust_count_25 = 0
@@ -62,10 +61,14 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     random_starting_addition: RandomStartingAddition
     lod_completion_condition: CompletionCondition
 
-lod_option_groups = [
+option_groups = [
     OptionGroup("General", [
         AdditionRandomization,
         RandomStartingAddition,
         CompletionCondition,
     ], False)
 ]
+
+option_presets = {
+
+}
