@@ -1,7 +1,7 @@
 from typing import Optional, NamedTuple
 
 from BaseClasses import Location
-from worlds.legend_of_dragoon import lod_name
+from worlds.legend_of_dragoon.game_id import lod_name
 
 
 class LegendOfDragoonLocation(Location):

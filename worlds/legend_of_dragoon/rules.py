@@ -1,24 +1,26 @@
-from ..generic.Rules import set_rule, add_rule
-from ..AutoWorld import World
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from BaseClasses import CollectionState
+from worlds.generic.Rules import add_rule, set_rule
+
+if TYPE_CHECKING:
+    from .world import LegendOfDragoonWorld
+
+def set_all_rules(world: LegendOfDragoonWorld) -> None:
+    set_all_entrance_rules(world)
+    set_all_location_rules(world)
+    set_completion_condition(world)
 
 
-def lod_set_rule(lod_world: World, location: str, rule):
-    player = lod_world.player
+def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
 
-    locations = lod_world.created_multi_locations.get(location)
-    if locations is None:
-        try:
-            locations = [lod_world.multiworld.get_location(location, player)]
-        except KeyError:
-            return
+    lohan_to_shrine_of_shirley = world.get_entrance("Lohan to Shrine of Shirley")
+    set_rule(lohan_to_shrine_of_shirley, lambda state: state.has("Life Water", world.player))
 
-    for location in locations:
-        set_rule(location, rule)
+def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
+    pass
 
-
-def set_rules(lod_world):
-    player = lod_world.player
-    multiworld = lod_world.multiworld
-    options = lod_world.options
-
-    multiworld.completion_condition[player] = lambda state: state.has("Victory", player)
+def set_completion_condition(world: LegendOfDragoonWorld) -> None:
+    world.multiworld.completion_condition[world.player] = lambda state: state.has("Victory", world.player)
