@@ -1,5 +1,7 @@
 from typing import Mapping, Any
 
+import Utils
+from BaseClasses import CollectionState, MultiWorld
 from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world, options as lod_options
 from .game_id import lod_name
@@ -22,14 +24,6 @@ class LegendOfDragoonWorld(World):
     options_dataclass = lod_options.LegendOfDragoonOptions
     options: lod_options.LegendOfDragoonOptions
 
-    # fillers = {}
-    # fillers.update(get_items_by_category("Consumable"))
-
-
-    # map items & locations
-
-    # item_name_to_id = {name: data.code for name, data in item_table.items()}
-    # location_name_to_id = {name: data.code for name, data in location_table.items()}
     location_name_to_id = locations.LOCATION_NAME_TO_ID
     item_name_to_id = items.ITEM_NAME_TO_ID
 
@@ -38,11 +32,9 @@ class LegendOfDragoonWorld(World):
     def create_regions(self):
         regions.create_and_connect_regions(self)
         locations.create_all_locations(self)
-        # create_regions(self)
 
     def set_rules(self):
         rules.set_all_rules(self)
-        # set_rules(self)
 
     def create_item(self, name: str) -> LegendOfDragoonItem:
         return items.create_item(self, name)
@@ -54,7 +46,22 @@ class LegendOfDragoonWorld(World):
     def get_filler_item_name(self) -> str:
         return items.get_random_filler_item_name(self)
 
+    # There may be data that the game client will need to modify the behavior of the game.
+    # This is what slot_data exists for. Upon every client connection, the slot's slot_data is sent to the client.
+    # slot_data is just a dictionary using basic types, that will be converted to json when sent to the client.
+    def fill_slot_data(self) -> Mapping[str, Any]:
+        # If you need access to the player's chosen options on the client side, there is a helper for that.
+        return self.options.as_dict(
+            "enable_addition_randomizer",
+            "random_starting_addition",
+            "lod_completion_condition",
+        )
 
-    # def fill_slot_data(self) -> Mapping[str, Any]:
-    #     # TODO: send shop data here?
-    #     return self.options.as_dict()
+    def visualize_world(self, multiworld: "MultiWorld", state: "CollectionState" = None):
+        if not state:
+            state = CollectionState(multiworld, True)
+            for item in multiworld.itempool:
+                state.collect(item, True)
+            state.sweep_for_advancements()
+        Utils.visualize_regions(multiworld.get_region(multiworld.worlds[1].origin_region_name, 1), f"{multiworld.player_name[1]}-new.puml",
+                            regions_to_highlight=state.reachable_regions[1])

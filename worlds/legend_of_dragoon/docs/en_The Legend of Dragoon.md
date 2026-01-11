@@ -10,8 +10,19 @@ The [Player Options Page](../player-options) for this game contains all the opti
 a config file.
 
 
-## What does randomization do to this game
-TBD
-that are required to complete the game.
+## What is randomized in this game?
 
+- Chests (TBD)
+- Additions
+- Goods
+- Equipment
+- Items
 
+## What Legend of Dragoon items can appear in other players' worlds?
+
+All the things!
+
+# What do other players' items look like in Legend of Dragoon?
+If an item is in the shop it will have an Archipelago logo denoting useful/progression!
+
+otherwise it will be hidden until you pick up the item/open chest/level addition

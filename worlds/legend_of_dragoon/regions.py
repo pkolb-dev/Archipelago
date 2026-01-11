@@ -1,7 +1,8 @@
 from __future__ import annotations
 from typing import  List, NamedTuple, Optional, TYPE_CHECKING
 
-from BaseClasses import Region
+import Utils
+from BaseClasses import Region, MultiWorld, CollectionState
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -18,10 +19,17 @@ def create_and_connect_regions(world: LegendOfDragoonWorld) -> None:
 def create_all_regions(world: LegendOfDragoonWorld) -> None:
     regions = [
         Region("Menu", world.player, world.multiworld),
-        Region("Additions", world.player, world.multiworld),
+        Region("Dart Additions", world.player, world.multiworld),
+        Region("Lavitz Additions", world.player, world.multiworld),
+        Region("Rose Additions", world.player, world.multiworld),
+        Region("Haschel Additions", world.player, world.multiworld),
+        Region("Albert Additions", world.player, world.multiworld),
+        Region("Meru Additions", world.player, world.multiworld),
+        Region("Kongol Additions", world.player, world.multiworld),
         Region("Seles", world.player, world.multiworld),
         Region("Forest", world.player, world.multiworld),
-        Region("Hellena Prison", world.player, world.multiworld),
+        Region("Hellena Prison 01", world.player, world.multiworld),
+        Region("Hellena Prison 02", world.player, world.multiworld),
         Region("Prairie", world.player, world.multiworld),
         Region("Limestone Cave", world.player, world.multiworld),
         Region("Bale", world.player, world.multiworld),
@@ -72,10 +80,17 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
 
 def connect_regions(world: LegendOfDragoonWorld) -> None:
     menu = world.get_region("Menu")
-    additions = world.get_region("Additions")
+    dart_additions = world.get_region("Dart Additions")
+    lavitz_additions = world.get_region("Lavitz Additions")
+    rose_additions = world.get_region("Rose Additions")
+    haschel_additions = world.get_region("Haschel Additions")
+    albert_additions = world.get_region("Albert Additions")
+    meru_additions = world.get_region("Meru Additions")
+    kongol_additions = world.get_region("Kongol Additions")
     seles = world.get_region("Seles")
     forest = world.get_region("Forest")
-    hellena_prison = world.get_region("Hellena Prison")
+    hellena_prison_01 = world.get_region("Hellena Prison 01")
+    hellena_prison_02 = world.get_region("Hellena Prison 02")
     prairie = world.get_region("Prairie")
     limestone_cave = world.get_region("Limestone Cave")
     bale = world.get_region("Bale")
@@ -122,20 +137,27 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     divine_tree = world.get_region("Divine Tree")
     moon_that_never_sets = world.get_region("Moon That Never Sets")
 
-    # set up always available locations
-    menu.connect(additions, "Menu to Additions") # TODO: this can probably be deleted and additions added to menu
+    menu.connect(dart_additions, "Menu to Dart Additions")
+    menu.connect(lavitz_additions, "Menu to Lavitz Additions")
+    menu.connect(rose_additions, "Menu to Rose Additions")
+    menu.connect(haschel_additions, "Menu to Haschel Additions")
+    menu.connect(albert_additions, "Menu to Albert Additions")
+    menu.connect(meru_additions, "Menu to Meru Additions")
+    menu.connect(kongol_additions, "Menu to Kongol Additions")
 
     # path out disc one
     menu.connect(seles, "Intro to Seles")
     seles.connect(forest, "Seles to Forest")
     forest.connect(seles, "Forest to Seles")
-    forest.connect(hellena_prison, "Forest to Hellena Prison")
+    forest.connect(hellena_prison_01, "Forest to Hellena Prison 01")
     forest.connect(prairie, "Forest to Prairie")
-    hellena_prison.connect(forest, "Hellena Prison to Forest")
-    hellena_prison.connect(prairie, "Hellena Prison to Prairie")
+    hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest")
+    # hellena_prison_01.connect(prairie, "Hellena Prison 01 to Prairie")
+    hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02")
+    hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01")
     prairie.connect(forest, "Prairie to Forest")
-    prairie.connect(hellena_prison, "Prairie to Hellena Prison")
-    prairie.connect(limestone_cave, "Prairie to Limestone Cave", lambda state: state.has("Axe from the Shack", world.player))
+    # prairie.connect(hellena_prison_01, "Prairie to Hellena Prison 01")
+    prairie.connect(limestone_cave, "Prairie to Limestone Cave")
     limestone_cave.connect(prairie, "Limestone Cave to Prairie")
     limestone_cave.connect(bale, "Limestone Cave to Bale")
     bale.connect(limestone_cave, "Bale to Limestone Cave")
@@ -148,8 +170,10 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest")
     dragons_nest.connect(volcano_villude, "Dragon's Nest to Volcano Villude")
     dragons_nest.connect(lohan, "Dragon's Nest to Lohan")
-    lohan.connect(shrine_of_shirley, "Lohan to Shrine of Shirley")
-    shrine_of_shirley.connect(lohan, "Shrine of Shirley to Lohan")
+    lohan.connect(dragons_nest, "Lohan to Dragon's Nest")
+    dragons_nest.connect(shrine_of_shirley, "Dragon's Nest to Shrine of Shirley")
+    shrine_of_shirley.connect(dragons_nest, "Shrine of Shirley to Dragon's Nest")
+    lohan.connect(hellena_prison_02, "Lohan to Hellena Prison 02")
     forest.connect(kazas, "Forest to Kazas")
     kazas.connect(forest, "Kazas to Forest")
     kazas.connect(black_castle, "Kazas to Black Castle")
@@ -163,7 +187,7 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     fletz_castle.connect(fletz, "Fletz Castle to Fletz")
     barrens.connect(fletz, "Barrens to Fletz")
     barrens.connect(donau, "Barrens to Donau")
-    barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity", lambda state: state.has("Pass for Valley", world.player))
+    barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity")
     valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
     valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto")
     home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
@@ -201,7 +225,7 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     fort_magrad.connect(snowfield, "Fort Magrad to Snowfield")
     snowfield.connect(vellweb, "Snowfield to Vellweb")
     vellweb.connect(snowfield, "Vellweb to Snowfield")
-    vellweb.connect(death_frontier)
+    vellweb.connect(death_frontier, "Vellweb to Death Frontier")
 
     # path out disc 4
     death_frontier.connect(ulara, "Death Frontier to Ulara")
@@ -219,3 +243,13 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     mayfil.connect(zenebatos, "Mayfil to Zenebatos")
     mayfil.connect(divine_tree, "Mayfil to Divine Tree")
     divine_tree.connect(moon_that_never_sets, "Divine Tree to Moon That Never Sets")
+    visualize_world(world.multiworld)
+
+def visualize_world(multiworld: "MultiWorld", state: "CollectionState" = None):
+    if not state:
+        state = CollectionState(multiworld, True)
+        for item in multiworld.itempool:
+            state.collect(item, True)
+        state.sweep_for_advancements()
+    Utils.visualize_regions(multiworld.get_region(multiworld.worlds[1].origin_region_name, 1), f"{multiworld.player_name[1]}.puml",
+                            regions_to_highlight=state.reachable_regions[1])
