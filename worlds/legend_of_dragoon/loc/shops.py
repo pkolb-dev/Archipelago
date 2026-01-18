@@ -271,7 +271,4 @@ shop_table: Dict[str, LegendOfDragoonLocationData] = {
     "Hellena 02 Item Shop - Slot 04": LegendOfDragoonLocationData("Hellena 02", 108_50266, "Shop"),
     "Hellena 02 Item Shop - Slot 05": LegendOfDragoonLocationData("Hellena 02", 108_50267, "Shop"),
     "Hellena 02 Item Shop - Slot 06": LegendOfDragoonLocationData("Hellena 02", 108_50268, "Shop"),
-    "Unknown Shop 01 - Slot 01": LegendOfDragoonLocationData("Unknown", 108_50269, "Shop"),
-    "Unknown Shop 01 - Slot 02": LegendOfDragoonLocationData("Unknown", 108_50270, "Shop"),
-    "Unknown Shop 01 - Slot 03": LegendOfDragoonLocationData("Unknown", 108_50271, "Shop"),
 }

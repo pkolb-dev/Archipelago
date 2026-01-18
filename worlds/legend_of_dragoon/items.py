@@ -18,7 +18,7 @@ def get_items_by_category(item_category: str) -> Dict[str, LegendOfDragoonItemDa
 lookup_table: Dict[str, LegendOfDragoonItemData] = {
     **all_additions,
     **consumables_table,
-    **equipment_table,
+    # **equipment_table,
     **goods_table,
 }
 
@@ -40,10 +40,11 @@ def create_all_items(world: LegendOfDragoonWorld):
         if not lod_item.classification.filler:
             itempool.append(lod_item)
 
+    # shops not yet included
     # set up equipment
-    for lod_item in map(world.create_item, equipment_table):
-        if not lod_item.classification.filler:
-            itempool.append(lod_item)
+    # for lod_item in map(world.create_item, equipment_table):
+    #     if not lod_item.classification.filler:
+    #         itempool.append(lod_item)
 
     # set up additions
     if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
@@ -55,10 +56,11 @@ def create_all_items(world: LegendOfDragoonWorld):
             if lod_item not in ["Dart Double Slash", "Lavitz Harpoon", "Rose Whip Smack", "Haschel Double Punch", "Albert Harpoon", "Meru Double Smack", "Kongol Pursuit"]:
                 itempool.append(lod_item)
 
+    #TODO: add when shops are included
     # we need to add at least three to the pool in order to fight faust
-    if world.options.lod_completion_condition.option_faust:
-        itempool.append(create_item(world, "Legend Casque"))
-        itempool.append(create_item(world, "Legend Casque"))
+    # if world.options.lod_completion_condition.option_faust:
+    #     itempool.append(create_item(world, "Legend Casque"))
+    #     itempool.append(create_item(world, "Legend Casque"))
 
     if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
         for addition in progressive_additions_table.keys():
