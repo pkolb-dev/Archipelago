@@ -27,7 +27,7 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Lenus 1":                      LegendOfDragoonLocationData("Fletz Castle",                 108_70022, "Enemy"),
     "Ghost Commander":              LegendOfDragoonLocationData("Phantom Ship",                 108_70023, "Enemy"),
     "Lenus 2":                      LegendOfDragoonLocationData("Underwater Cavern",            108_70024, "Enemy"),
-    "Forbidden Virage":             LegendOfDragoonLocationData("Evergreen Forest",             108_70025, "Enemy"),
+    "Forbidden Virage":             LegendOfDragoonLocationData("Forbidden Land",               108_70025, "Enemy"),
     "Grand Jewel":                  LegendOfDragoonLocationData("Forbidden Land",               108_70026, "Enemy"),
     "Divine Dragon":                LegendOfDragoonLocationData("Mortal Dragon Mountain",       108_70027, "Enemy"),
     "Windigo":                      LegendOfDragoonLocationData("Kashua Glacier",               108_70028, "Enemy"),
@@ -49,4 +49,6 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Moon Virage":                  LegendOfDragoonLocationData("Moon That Never Sets",         108_70044, "Enemy"),
     "Zieg Feld":                    LegendOfDragoonLocationData("Moon That Never Sets",         108_70045, "Enemy"),
     "Melbu Frahma":                 LegendOfDragoonLocationData("Moon That Never Sets",         108_70046, "Enemy"),
+    "Jiango":                       LegendOfDragoonLocationData("Hellena 02",                   108_70047, "Enemy"),
+    "Kamuy":                        LegendOfDragoonLocationData("Evergreen Forest",             108_70048, "Enemy"),
 }
