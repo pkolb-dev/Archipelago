@@ -36,7 +36,7 @@ goods_table:  Dict[str, LegendOfDragoonItemData] = {
     # "Omega Master":          LegendOfDragoonItemData(ItemCategory.GOOD, 108_20031, IC.progression),
     "Law Maker":             LegendOfDragoonItemData(ItemCategory.GOOD, 108_20032, IC.progression),
     "Law Output":            LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
-    "Gold Dragoon Spirit 2": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20034, IC.progression),
+    # "Gold Dragoon Spirit 2": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20034, IC.useful),
     # "Magic Shiny Bag":       LegendOfDragoonItemData(ItemCategory.GOOD, 108_20035, IC.progression),
     "Vanishing Stone":       LegendOfDragoonItemData(ItemCategory.GOOD, 108_20036, IC.progression),
     "Lavitzs Picture":       LegendOfDragoonItemData(ItemCategory.GOOD, 108_20037, IC.progression),
