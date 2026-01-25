@@ -9,6 +9,7 @@ from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationDa
 from worlds.legend_of_dragoon.loc.shops import shop_table
 from .item.item_data import LegendOfDragoonItem
 from .loc.enemies import enemy_table
+from .loc.goods import goods_location_table
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -19,6 +20,7 @@ location_table: Dict[str, LegendOfDragoonLocationData] = {
     **chests_table,
     **events_table,
     **enemy_table,
+    **goods_location_table,
 }
 
 LOCATION_NAME_TO_ID = {name: data.code for name, data in location_table.items()}
