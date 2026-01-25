@@ -58,7 +58,8 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(forest_to_kazas, lambda state: state.has("Fruegel 2", world.player))
 
     black_castle_to_fletz = world.get_entrance("Black Castle to Fletz")
-    set_rule(black_castle_to_fletz, lambda state: state.has_all(["Magic Oil", "Red Stone", "Blue Stone", "Yellow Stone"], world.player))
+
+    set_rule(black_castle_to_fletz, lambda state: state.has("Dragoon Doel", world.player))
 
     barrens_to_valley = world.get_entrance("Barrens to Valley of Corrupted Gravity")
     set_rule(barrens_to_valley, lambda state: state.has("Pass for Valley", world.player))
@@ -72,6 +73,9 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     donau_to_furni = world.get_entrance("Donau to Furni")
     set_rule(donau_to_furni, lambda state: state.has_all(["Boat License", "Lenus 2"], world.player))
 
+    snowfield_to_vellweb = world.get_entrance("Snowfield to Vellweb")
+    set_rule(snowfield_to_vellweb, lambda state: state.has_all(["Moon Mirror", "Moon Dagger", "Moon Gem"], world.player))
+
     vellweb_to_death_frontier = world.get_entrance("Vellweb to Death Frontier")
     set_rule(vellweb_to_death_frontier, lambda state: state.has_all(["Moon Mirror", "Moon Dagger", "Moon Gem"], world.player))
 
@@ -79,6 +83,15 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(zenebatos_to_mayfil, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
+    set_addition_starting_rules(world)
+
+    kongol_2 = world.get_location("Kongol 2")
+    set_rule(kongol_2, lambda state: state.has("Magic Oil", world.player))
+
+    doel = world.get_location("Dragoon Doel")
+    set_rule(doel, lambda state: state.has_all(["Red Stone", "Blue Stone", "Yellow Stone"], world.player))
+
+def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
     blazing_dynamo = world.get_location("Dart - Blazing Dynamo Unlock")
     lavitz_blossom_storm = world.get_location("Lavitz - Blossom Storm Unlock")
     demons_dance = world.get_location("Rose - Demon's Dance Unlock")
@@ -106,7 +119,7 @@ def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
                     "Dart Crush Dance",
                     "Dart Madness Hero",
                     "Dart Moon Strike",
-                    ), world.player)
+                ), world.player)
             ),
         )
 
