@@ -84,6 +84,7 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_starting_rules(world)
+    set_addition_progression_rules(world)
 
     kongol_2 = world.get_location("Kongol 2")
     set_rule(kongol_2, lambda state: state.has("Magic Oil", world.player))
@@ -214,3 +215,59 @@ def set_completion_condition(world: LegendOfDragoonWorld) -> None:
         item = "Melbu Frahma"
 
     world.multiworld.completion_condition[world.player] = lambda state: state.has(item, world.player)
+
+def set_addition_progression_rules(world: LegendOfDragoonWorld) -> None:
+    # dart additions
+    dart_burning_rush = world.get_location("Dart - Burning Rush Unlock")
+    dart_crush_dance = world.get_location("Dart - Crush Dance Unlock")
+    dart_madness_hero = world.get_location("Dart - Madness Hero Unlock")
+    dart_moon_strike = world.get_location("Dart - Moon Strike Unlock")
+
+    set_rule(dart_burning_rush, lambda state: state.has("Kongol 1", world.player))
+    set_rule(dart_crush_dance, lambda state: state.has("Dragoon Doel", world.player))
+    set_rule(dart_madness_hero, lambda state: state.has("Kamuy", world.player))
+    set_rule(dart_moon_strike, lambda state: state.has_all(["Moon Mirror", "Moon Dagger", "Moon Gem"], world.player))
+
+    # rose additions
+    rose_more_more = world.get_location("Rose - More and More Unlock")
+    rose_hard_blade = world.get_location("Rose - Hard Blade Unlock")
+
+    set_rule(rose_more_more, lambda state: state.has("Dragoon Doel", world.player))
+    set_rule(rose_hard_blade, lambda state: state.has("Key to Ship", world.player))
+
+    lavitz_spinning_cane = world.get_location("Lavitz - Spinning Cane Unlock")
+    lavitz_rod_typhoon = world.get_location("Lavitz - Rod Typhoon Unlock")
+    lavitz_gust_of_wind_dance = world.get_location("Lavitz - Gust of Wind Dance Unlock")
+
+    set_rule(lavitz_spinning_cane, lambda state: state.has("Axe from the Shack", world.player))
+    set_rule(lavitz_rod_typhoon, lambda state: state.has("Kongol 1", world.player))
+    set_rule(lavitz_gust_of_wind_dance, lambda state: state.has("Shirley", world.player))
+
+    albert_spinning_cane = world.get_location("Albert - Spinning Cane Unlock")
+    albert_rod_typhoon = world.get_location("Albert - Rod Typhoon Unlock")
+    albert_gust_of_wind_dance = world.get_location("Albert - Gust of Wind Dance Unlock")
+
+    set_rule(albert_spinning_cane, lambda state: state.has("Axe from the Shack", world.player))
+    set_rule(albert_rod_typhoon, lambda state: state.has("Kongol 1", world.player))
+    set_rule(albert_gust_of_wind_dance, lambda state: state.has("Shirley", world.player))
+
+    haschel_flurry_of_styx = world.get_location("Haschel - Flurry of Styx Unlock")
+    haschel_summon_4_gods = world.get_location("Haschel - Summon 4 Gods Unlock")
+    haschel_5_ring_shattering = world.get_location("Haschel - 5-Ring Shattering Unlock")
+    haschel_hex_hammer = world.get_location("Haschel - Hex Hammer Unlock")
+
+    set_rule(haschel_flurry_of_styx, lambda state: state.has("Dragoon Doel", world.player))
+    set_rule(haschel_summon_4_gods, lambda state: state.has("Gehrich", world.player))
+    set_rule(haschel_5_ring_shattering, lambda state: state.has("Kamuy", world.player))
+    set_rule(haschel_hex_hammer, lambda state: state.has("Polter", world.player))
+
+    meru_hammer_spin = world.get_location("Meru - Hammer Spin Unlock")
+    meru_cool_boogie = world.get_location("Meru - Cool Boogie Unlock")
+    meru_cats_cradle = world.get_location("Meru - Cat's Cradle Unlock")
+
+    set_rule(meru_hammer_spin, lambda state: state.has("Lenus 2", world.player))
+    set_rule(meru_cool_boogie, lambda state: state.has("Polter", world.player))
+    set_rule(meru_cats_cradle, lambda state: state.has("Kraken", world.player))
+
+    kongol_inferno = world.get_location("Kongol - Inferno Unlock")
+    set_rule(kongol_inferno, lambda state: state.has("Divine Dragon", world.player))

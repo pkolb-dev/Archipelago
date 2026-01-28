@@ -1,6 +1,6 @@
 {
     "game": "The Legend of Dragoon",
-    "world_version": "0.0.3",
+    "world_version": "0.0.4",
     "minimum_ap_version": "0.6.5",
     "authors": ["pkolb-dev"]
 }
