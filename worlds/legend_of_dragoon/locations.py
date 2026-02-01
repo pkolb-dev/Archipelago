@@ -15,7 +15,7 @@ if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
 
 location_table: Dict[str, LegendOfDragoonLocationData] = {
-    # **shop_table,
+    **shop_table,
     **addition_table,
     **chests_table,
     **events_table,
