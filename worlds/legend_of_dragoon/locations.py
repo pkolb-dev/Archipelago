@@ -66,6 +66,7 @@ def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     shrine_of_shirley = world.get_region("Shrine of Shirley")
     kazas = world.get_region("Kazas")
     black_castle = world.get_region("Black Castle")
+    black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
     fletz = world.get_region("Fletz")
     barrens = world.get_region("Barrens")
@@ -113,6 +114,7 @@ def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     dragons_nest.add_locations(get_locations_by_category_with_ids("Dragon's Nest"), LegendOfDragoonLocation)
     kazas.add_locations(get_locations_by_category_with_ids("Kazas"), LegendOfDragoonLocation)
     black_castle.add_locations(get_locations_by_category_with_ids("Black Castle"), LegendOfDragoonLocation)
+    black_castle_throne_room.add_locations(get_locations_by_category_with_ids("Black Castle Throne Room"), LegendOfDragoonLocation)
     fletz.add_locations(get_locations_by_category_with_ids("Fletz"), LegendOfDragoonLocation)
     fletz_castle.add_locations(get_locations_by_category_with_ids("Fletz Castle"), LegendOfDragoonLocation)
     barrens.add_locations(get_locations_by_category_with_ids("Barrens"), LegendOfDragoonLocation)
@@ -172,6 +174,7 @@ def create_events(world: LegendOfDragoonWorld) -> None:
     shrine_of_shirley = world.get_region("Shrine of Shirley")
     kazas = world.get_region("Kazas")
     black_castle = world.get_region("Black Castle")
+    black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
     fletz = world.get_region("Fletz")
     barrens = world.get_region("Barrens")
@@ -218,7 +221,8 @@ def create_events(world: LegendOfDragoonWorld) -> None:
     shrine_of_shirley.add_event("Defeat Shirley", "Shirley", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     lohan.add_event("Lose to Lloyd", "Lloyd 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     hellena_prison_02.add_event("Defeat Fruegel 2", "Fruegel 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    black_castle.add_event("Defeat Dragoon Doel", "Dragoon Doel", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    black_castle.add_event("Defeat Kongol 2", "Kongol 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    black_castle_throne_room.add_event("Defeat Dragoon Doel", "Dragoon Doel", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     barrens.add_event("Mappi Steals Orb", "Mappi Steals Orb", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     home_of_giganto.add_event("Defeat Gehrich", "Gehrich", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     fletz_castle.add_event("Defeat Lenus 1", "Lenus 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
@@ -232,6 +236,7 @@ def create_events(world: LegendOfDragoonWorld) -> None:
     tower_of_flanvel.add_event("Defeat Lloyd", "Lloyd 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     tower_of_flanvel.add_event("Defeat Magician Faust", "Faust", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     snowfield.add_event("Defeat Polter", "Polter", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    ulara.add_event("Unlock Ulara Teleporter", "Ulara Teleporter", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     aglis.add_event("Defeat Kraken", "Kraken", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
 
     zenebatos.add_event("Defeat Vector", "Vector", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)

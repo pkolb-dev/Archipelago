@@ -20,7 +20,7 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Lloyd 1":                      LegendOfDragoonLocationData("Lohan",                        108_70015, "Enemy"),
     "Fruegel 2":                    LegendOfDragoonLocationData("Hellena 02",                   108_70016, "Enemy"),
     "Kongol 2":                     LegendOfDragoonLocationData("Black Castle",                 108_70017, "Enemy"),
-    "Dragoon Doel":                 LegendOfDragoonLocationData("Black Castle",                 108_70018, "Enemy"),
+    "Dragoon Doel":                 LegendOfDragoonLocationData("Black Castle Throne Room",     108_70018, "Enemy"),
     "Mappi":                        LegendOfDragoonLocationData("Barrens",                      108_70019, "Enemy"),
     "Valley Virage":                LegendOfDragoonLocationData("Valley of Corrupted Gravity",  108_70020, "Enemy"),
     "Gehrich and Mappi":            LegendOfDragoonLocationData("Home of Giganto",              108_70021, "Enemy"),

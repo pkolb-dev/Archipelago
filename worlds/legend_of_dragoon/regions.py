@@ -41,6 +41,7 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Shrine of Shirley", world.player, world.multiworld),
         Region("Kazas", world.player, world.multiworld),
         Region("Black Castle", world.player, world.multiworld),
+        Region("Black Castle Throne Room", world.player, world.multiworld),
 
         Region("Queen Fury", world.player, world.multiworld),
         Region("Phantom Ship", world.player, world.multiworld),
@@ -102,6 +103,7 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     shrine_of_shirley = world.get_region("Shrine of Shirley")
     kazas = world.get_region("Kazas")
     black_castle = world.get_region("Black Castle")
+    black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
     fletz = world.get_region("Fletz")
     barrens = world.get_region("Barrens")
@@ -151,37 +153,34 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     forest.connect(seles, "Forest to Seles")
     forest.connect(hellena_prison_01, "Forest to Hellena Prison 01")
     forest.connect(prairie, "Forest to Prairie")
-    hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest")
-    # hellena_prison_01.connect(prairie, "Hellena Prison 01 to Prairie")
-    hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02")
-    hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01")
+    hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest", lambda state: state.has("Fruegel 1", world.player))
+    hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02", lambda state: state.has("Lloyd 1", world.player))
+    hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01", lambda state: state.has("Lloyd 1", world.player))
     prairie.connect(forest, "Prairie to Forest")
-    # prairie.connect(hellena_prison_01, "Prairie to Hellena Prison 01")
     prairie.connect(limestone_cave, "Prairie to Limestone Cave")
     limestone_cave.connect(prairie, "Limestone Cave to Prairie")
-    limestone_cave.connect(bale, "Limestone Cave to Bale")
+    limestone_cave.connect(bale, "Limestone Cave to Bale", lambda state: state.has("Urobolus", world.player))
     bale.connect(limestone_cave, "Bale to Limestone Cave")
     bale.connect(hoax, "Bale to Hoax")
     hoax.connect(bale, "Hoax to Bale")
-    hoax.connect(marshland, "Hoax to Marshland")
+    hoax.connect(marshland, "Hoax to Marshland", lambda state: state.has("Kongol 1", world.player))
     marshland.connect(hoax, "Marshland to Hoax")
     marshland.connect(volcano_villude, "Marshland to Volcano Villude")
     volcano_villude.connect(marshland, "Volcano Villude to Marshland")
-    volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest")
+    volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest", lambda state: state.has("Firebird", world.player))
     dragons_nest.connect(volcano_villude, "Dragon's Nest to Volcano Villude")
     dragons_nest.connect(lohan, "Dragon's Nest to Lohan")
     lohan.connect(dragons_nest, "Lohan to Dragon's Nest")
     dragons_nest.connect(shrine_of_shirley, "Dragon's Nest to Shrine of Shirley")
     shrine_of_shirley.connect(dragons_nest, "Shrine of Shirley to Dragon's Nest")
-    lohan.connect(hellena_prison_02, "Lohan to Hellena Prison 02")
     forest.connect(kazas, "Forest to Kazas")
     kazas.connect(forest, "Kazas to Forest")
     kazas.connect(black_castle, "Kazas to Black Castle")
     black_castle.connect(kazas, "Black Castle to Kazas")
-    black_castle.connect(fletz, "Black Castle to Fletz")
+    black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room", lambda state: state.has_all(["Magic Oil", "Blue Stone", "Yellow Stone", "Red Stone"], world.player))
+    black_castle_throne_room.connect(fletz, "Black Castle Throne Room to Fletz")
 
     # path out disc 2
-
     fletz.connect(barrens, "Fletz to Barrens")
     fletz.connect(fletz_castle, "Fletz to Fletz Castle")
     fletz_castle.connect(fletz, "Fletz Castle to Fletz")
@@ -189,7 +188,7 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     barrens.connect(donau, "Barrens to Donau")
     barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity")
     valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
-    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto")
+    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto", lambda state: state.has("Valley Virage", world.player))
     home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
     donau.connect(queen_fury, "Donau to Queen Fury")
     queen_fury.connect(donau, "Queen Fury to Donau")
@@ -243,7 +242,6 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     mayfil.connect(zenebatos, "Mayfil to Zenebatos")
     mayfil.connect(divine_tree, "Mayfil to Divine Tree")
     divine_tree.connect(moon_that_never_sets, "Divine Tree to Moon That Never Sets")
-    visualize_world(world.multiworld)
 
 def visualize_world(multiworld: "MultiWorld", state: "CollectionState" = None):
     if not state:
@@ -252,4 +250,5 @@ def visualize_world(multiworld: "MultiWorld", state: "CollectionState" = None):
             state.collect(item, True)
         state.sweep_for_advancements()
     Utils.visualize_regions(multiworld.get_region(multiworld.worlds[1].origin_region_name, 1), f"{multiworld.player_name[1]}.puml",
+                            linetype_ortho=False,
                             regions_to_highlight=state.reachable_regions[1])

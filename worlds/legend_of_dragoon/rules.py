@@ -46,23 +46,26 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     prairie_to_limestone_cave = world.get_entrance("Prairie to Limestone Cave")
     set_rule(prairie_to_limestone_cave, lambda state: state.has("Axe from the Shack", world.player))
 
+    limestone_cave_to_bale = world.get_entrance("Limestone Cave to Bale")
+    set_rule(limestone_cave_to_bale, lambda state: state.has("Urobolus", world.player))
+
     bale_to_hoax = world.get_entrance("Bale to Hoax")
     set_rule(bale_to_hoax, lambda state: state.has_all(["Lavitzs Picture", "Fathers Stone"], world.player))
 
     dragons_nest_to_shrine_of_shirley = world.get_entrance("Dragon's Nest to Shrine of Shirley")
     set_rule(dragons_nest_to_shrine_of_shirley, lambda state: state.has_all(["Life Water", "Water Bottle"], world.player))
 
-    lohan_to_hellena_prison_02 = world.get_entrance("Lohan to Hellena Prison 02")
-    set_rule(lohan_to_hellena_prison_02, lambda state: state.has("Lloyd 1", world.player))
     forest_to_kazas = world.get_entrance("Forest to Kazas")
     set_rule(forest_to_kazas, lambda state: state.has("Fruegel 2", world.player))
 
-    black_castle_to_fletz = world.get_entrance("Black Castle to Fletz")
-
-    set_rule(black_castle_to_fletz, lambda state: state.has("Dragoon Doel", world.player))
+    black_castle_throne_room_to_fletz = world.get_entrance("Black Castle Throne Room to Fletz")
+    set_rule(black_castle_throne_room_to_fletz, lambda state: state.has("Dragoon Doel", world.player))
 
     barrens_to_valley = world.get_entrance("Barrens to Valley of Corrupted Gravity")
     set_rule(barrens_to_valley, lambda state: state.has("Pass for Valley", world.player))
+
+    valley_to_home_of_giganto = world.get_entrance("Valley of Corrupted Gravity to Home of Giganto")
+    set_rule(valley_to_home_of_giganto, lambda state: state.has("Valley Virage", world.player))
 
     donau_to_queen_fury = world.get_entrance("Donau to Queen Fury")
     set_rule(donau_to_queen_fury, lambda state: state.has("Lenus 1", world.player))
@@ -79,6 +82,11 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     vellweb_to_death_frontier = world.get_entrance("Vellweb to Death Frontier")
     set_rule(vellweb_to_death_frontier, lambda state: state.has_all(["Moon Mirror", "Moon Dagger", "Moon Gem"], world.player))
 
+    ulara_to_home_of_giganto = world.get_entrance("Ulara to Home of Giganto")
+    home_of_giganto_to_ulara = world.get_entrance("Home of Giganto to Ulara")
+    set_rule(ulara_to_home_of_giganto, lambda state: state.has("Ulara Teleporter", world.player))
+    set_rule(home_of_giganto_to_ulara, lambda state: state.has("Ulara Teleporter", world.player))
+
     zenebatos_to_mayfil = world.get_entrance("Zenebatos to Mayfil")
     set_rule(zenebatos_to_mayfil, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
 
@@ -86,11 +94,23 @@ def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_starting_rules(world)
     set_addition_progression_rules(world)
 
+    fruegel_1 = world.get_location("Fruegel 1")
+    set_rule(fruegel_1, lambda state: state.has("Prison Key", world.player))
+
+    life_water = world.get_location("Life Water")
+    set_rule(life_water, lambda state: state.has("Water Bottle", world.player))
+
     kongol_2 = world.get_location("Kongol 2")
     set_rule(kongol_2, lambda state: state.has("Magic Oil", world.player))
 
     doel = world.get_location("Dragoon Doel")
     set_rule(doel, lambda state: state.has_all(["Red Stone", "Blue Stone", "Yellow Stone"], world.player))
+
+    ghost_commander = world.get_location("Ghost Commander")
+    set_rule(ghost_commander, lambda state: state.has("Key to Ship", world.player))
+
+    vanishing_stone = world.get_location("Vanishing Stone")
+    # set_rule(vanishing_stone, lambda state: state.has("Stardust", world.player, 50))
 
 def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
     blazing_dynamo = world.get_location("Dart - Blazing Dynamo Unlock")
