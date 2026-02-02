@@ -18,7 +18,7 @@ def get_items_by_category(item_category: str) -> Dict[str, LegendOfDragoonItemDa
 lookup_table: Dict[str, LegendOfDragoonItemData] = {
     **all_additions,
     **consumables_table,
-    # **equipment_table,
+    **equipment_table,
     **goods_table,
 }
 
