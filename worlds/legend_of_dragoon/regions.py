@@ -198,8 +198,8 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     underwater_cavern.connect(lidiera, "Underwater Cavern to Lidiera")
     underwater_cavern.connect(fueno, "Underwater Cavern to Fueno")
     fueno.connect(underwater_cavern, "Fueno to Underwater Cavern")
-    fueno.connect(queen_fury, "Fueno to Queen Fury")
-    donau.connect(furni, "Donau to Furni")
+    fueno.connect(queen_fury, "Fueno to Queen Fury", lambda state: state.has("Lenus 2", world.player))
+    donau.connect(furni, "Donau to Furni", lambda state: state.has("Lenus 2", world.player))
 
     # path out disc 3
     furni.connect(evergreen_forest, "Furni to Evergreen Forest")
