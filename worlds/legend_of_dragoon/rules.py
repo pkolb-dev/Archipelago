@@ -14,7 +14,7 @@ def set_all_rules(world: LegendOfDragoonWorld) -> None:
     set_completion_condition(world)
 
     # for debugging purposes:
-    visualize_world(world.multiworld)
+    # visualize_world(world.multiworld)
 
 
 def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
