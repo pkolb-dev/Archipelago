@@ -14,7 +14,7 @@ def set_all_rules(world: LegendOfDragoonWorld) -> None:
     set_completion_condition(world)
 
     # for debugging purposes:
-    # visualize_world(world.multiworld)
+    visualize_world(world.multiworld)
 
 
 def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
@@ -68,13 +68,31 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(valley_to_home_of_giganto, lambda state: state.has("Valley Virage", world.player))
 
     donau_to_queen_fury = world.get_entrance("Donau to Queen Fury")
-    set_rule(donau_to_queen_fury, lambda state: state.has("Lenus 1", world.player))
+    set_rule(donau_to_queen_fury, lambda state: state.has("Gehrich", world.player))
 
     phantom_ship_to_lidiera = world.get_entrance("Phantom Ship to Lidiera")
     set_rule(phantom_ship_to_lidiera, lambda state: state.has("Key to Ship", world.player))
 
     donau_to_furni = world.get_entrance("Donau to Furni")
     set_rule(donau_to_furni, lambda state: state.has_all(["Boat License", "Lenus 2"], world.player))
+
+    evergreen_forest_to_wingly_forest = world.get_entrance("Evergreen Forest to Wingly Forest")
+    set_rule(evergreen_forest_to_wingly_forest, lambda state: state.has("Talk to Ute", world.player))
+
+    wingly_forest_to_deningrad = world.get_entrance("Wingly Forest to Deningrad")
+    set_rule(wingly_forest_to_deningrad, lambda state: state.has("Dragon Blocker", world.player))
+
+    evergreen_forest_to_mortal_dragon_mountain = world.get_entrance("Evergreen Forest to Mortal Dragon Mountain")
+    set_rule(evergreen_forest_to_mortal_dragon_mountain, lambda state: state.has("Grand Jewel", world.player))
+
+    deningrad_to_kashua_glacier = world.get_entrance("Deningrad to Kashua Glacier")
+    set_rule(deningrad_to_kashua_glacier, lambda state: state.has("Divine Dragon", world.player))
+
+    kashua_glacier_to_flanvel_tower = world.get_entrance("Kashua Glacier to Tower of Flanvel")
+    set_rule(kashua_glacier_to_flanvel_tower, lambda state: state.has("Windigo", world.player))
+
+    kashua_glacier_to_snowfield = world.get_entrance("Kashua Glacier to Snowfield")
+    set_rule(kashua_glacier_to_snowfield, lambda state: state.has("Lloyd 2", world.player))
 
     snowfield_to_vellweb = world.get_entrance("Snowfield to Vellweb")
     set_rule(snowfield_to_vellweb, lambda state: state.has_all(["Moon Mirror", "Moon Dagger", "Moon Gem"], world.player))
@@ -87,8 +105,20 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(ulara_to_home_of_giganto, lambda state: state.has("Ulara Teleporter", world.player))
     set_rule(home_of_giganto_to_ulara, lambda state: state.has("Ulara Teleporter", world.player))
 
+    queen_fury_to_rouge = world.get_entrance("Queen Fury to Rouge")
+    set_rule(queen_fury_to_rouge, lambda state: state.has("Ulara Teleporter", world.player))
+
+    aglis_to_zenebatos = world.get_entrance("Aglis to Zenebatos")
+    set_rule(aglis_to_zenebatos, lambda state: state.has("Kraken", world.player))
+
     zenebatos_to_mayfil = world.get_entrance("Zenebatos to Mayfil")
     set_rule(zenebatos_to_mayfil, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
+
+    mayfil_to_divine_tree = world.get_entrance("Mayfil to Divine Tree")
+    set_rule(mayfil_to_divine_tree, lambda state: state.has("Zackwell", world.player))
+
+    divine_tree_to_moon_that_never_sets = world.get_entrance("Divine Tree to Moon That Never Sets")
+    set_rule(divine_tree_to_moon_that_never_sets, lambda state: state.has("Imago", world.player))
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_starting_rules(world)
@@ -108,6 +138,14 @@ def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
 
     ghost_commander = world.get_location("Ghost Commander")
     set_rule(ghost_commander, lambda state: state.has("Key to Ship", world.player))
+
+    kubila = world.get_location("Defeat Kubila")
+    selebus = world.get_location("Defeat Selebus")
+    vector = world.get_location("Defeat Vector")
+
+    set_rule(kubila, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
+    set_rule(selebus, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
+    set_rule(vector, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
 
     vanishing_stone = world.get_location("Vanishing Stone")
     # set_rule(vanishing_stone, lambda state: state.has("Stardust", world.player, 50))
