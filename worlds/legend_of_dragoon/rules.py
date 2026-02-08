@@ -14,7 +14,7 @@ def set_all_rules(world: LegendOfDragoonWorld) -> None:
     set_completion_condition(world)
 
     # for debugging purposes:
-    # visualize_world(world.multiworld)
+    visualize_world(world.multiworld)
 
 
 def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
@@ -127,8 +127,8 @@ def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     fruegel_1 = world.get_location("Fruegel 1")
     set_rule(fruegel_1, lambda state: state.has("Prison Key", world.player))
 
-    life_water = world.get_location("Life Water")
-    set_rule(life_water, lambda state: state.has("Water Bottle", world.player))
+    # life_water = world.get_location("Life Water")
+    # set_rule(life_water, lambda state: state.has("Water Bottle", world.player))
 
     kongol_2 = world.get_location("Kongol 2")
     set_rule(kongol_2, lambda state: state.has("Magic Oil", world.player))
@@ -147,7 +147,7 @@ def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(selebus, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
     set_rule(vector, lambda state: state.has_all(["Law Maker", "Law Output"], world.player))
 
-    vanishing_stone = world.get_location("Vanishing Stone")
+    # vanishing_stone = world.get_location("Vanishing Stone")
     # set_rule(vanishing_stone, lambda state: state.has("Stardust", world.player, 50))
 
 def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
