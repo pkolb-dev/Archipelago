@@ -47,8 +47,10 @@ class LegendOfDragoonWorld(World):
 
     def fill_slot_data(self) -> Mapping[str, Any]:
         # If you need access to the player's chosen options on the client side, there is a helper for that.
-        return self.options.as_dict(
-            "enable_addition_randomizer",
-            "random_starting_addition",
-            "lod_completion_condition",
-        )
+        return {
+            "enable_addition_randomizer": self.options.enable_addition_randomizer.value,
+            "random_starting_addition": self.options.random_starting_addition.value,
+            "lod_completion_condition": self.options.lod_completion_condition.value,
+            "enable_shop_sanity": self.options.enable_shopsanity.value,
+            "world_version": self.world_version,
+        }

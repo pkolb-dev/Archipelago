@@ -4,26 +4,34 @@ from typing import Dict, TYPE_CHECKING
 
 from worlds.legend_of_dragoon.loc.additions import addition_table
 from worlds.legend_of_dragoon.loc.chests import chests_table
+from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocation
 from worlds.legend_of_dragoon.loc.shops import shop_table
 from .item.item_data import LegendOfDragoonItem
-from .loc.enemies import enemy_table
 from .loc.goods import goods_location_table
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
 
 location_table: Dict[str, LegendOfDragoonLocationData] = {
-    **shop_table,
+    **addition_table,
+    # **chests_table,
+    **events_table,
+    **enemy_table,
+    # **goods_location_table,
+}
+
+all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **addition_table,
     **chests_table,
     **events_table,
     **enemy_table,
     **goods_location_table,
+    **shop_table,
 }
 
-LOCATION_NAME_TO_ID = {name: data.code for name, data in location_table.items()}
+LOCATION_NAME_TO_ID = {name: data.code for name, data in all_location_table.items()}
 
 def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
     return {location_name: LOCATION_NAME_TO_ID[location_name] for location_name in location_names}
@@ -102,8 +110,9 @@ def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     divine_tree = world.get_region("Divine Tree")
     moon_that_never_sets = world.get_region("Moon That Never Sets")
 
+    if world.options.enable_shopsanity:
+        location_table.update(**shop_table)
 
-    # shops
     seles.add_locations(get_locations_by_category_with_ids("Seles"), LegendOfDragoonLocation)
     forest.add_locations(get_locations_by_category_with_ids("Forest"), LegendOfDragoonLocation)
     limestone_cave.add_locations(get_locations_by_category_with_ids("Limestone Cave"), LegendOfDragoonLocation)

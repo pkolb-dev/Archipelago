@@ -40,11 +40,11 @@ def create_all_items(world: LegendOfDragoonWorld):
         if not lod_item.classification.filler:
             itempool.append(lod_item)
 
-    # shops not yet included
     # set up equipment
-    # for lod_item in map(world.create_item, equipment_table):
-    #     if not lod_item.classification.filler:
-    #         itempool.append(lod_item)
+    if world.options.enable_shopsanity:
+        for lod_item in map(world.create_item, equipment_table):
+            if not lod_item.classification.filler:
+                itempool.append(lod_item)
 
     # set up additions
     if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
@@ -53,14 +53,11 @@ def create_all_items(world: LegendOfDragoonWorld):
                 itempool.append(create_item(world, key))
     else:
         for lod_item in map(world.create_item, additions_table):
-            if lod_item not in ["Dart Double Slash", "Lavitz Harpoon", "Rose Whip Smack", "Haschel Double Punch", "Albert Harpoon", "Meru Double Smack", "Kongol Pursuit"]:
-                itempool.append(lod_item)
+            itempool.append(lod_item)
 
-    #TODO: add when shops are included
-    # we need to add at least three to the pool in order to fight faust
-    # if world.options.lod_completion_condition.option_faust:
-    #     itempool.append(create_item(world, "Legend Casque"))
-    #     itempool.append(create_item(world, "Legend Casque"))
+    if world.options.lod_completion_condition.option_faust:
+        itempool.append(create_item(world, "Legend Casque"))
+        itempool.append(create_item(world, "Legend Casque"))
 
     if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
         for addition in progressive_additions_table.keys():
@@ -107,13 +104,13 @@ def create_all_items(world: LegendOfDragoonWorld):
         meru_addition = create_item(world, world.random.choices(meru_additions)[0])
         kongol_addition = create_item(world, world.random.choices(kongol_additions)[0])
 
-        world.push_precollected(dart_addition)
-        world.push_precollected(lavitz_addition)
-        world.push_precollected(rose_addition)
-        world.push_precollected(haschel_addition)
-        world.push_precollected(albert_addition)
-        world.push_precollected(meru_addition)
-        world.push_precollected(kongol_addition)
+        itempool.remove(dart_addition)
+        itempool.remove(lavitz_addition)
+        itempool.remove(rose_addition)
+        itempool.remove(haschel_addition)
+        itempool.remove(albert_addition)
+        itempool.remove(meru_addition)
+        itempool.remove(kongol_addition)
 
         world.push_precollected(dart_addition)
         world.push_precollected(lavitz_addition)
@@ -122,7 +119,6 @@ def create_all_items(world: LegendOfDragoonWorld):
         world.push_precollected(albert_addition)
         world.push_precollected(meru_addition)
         world.push_precollected(kongol_addition)
-
 
     number_of_items = len(itempool)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
@@ -131,7 +127,6 @@ def create_all_items(world: LegendOfDragoonWorld):
     itempool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
 
     world.multiworld.itempool += itempool
-
 
 
 # Make item categories
