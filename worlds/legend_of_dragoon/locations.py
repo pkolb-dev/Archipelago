@@ -151,8 +151,6 @@ def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     # we want hellena prison to have the same items, in case they are needed later, but thats for the mod. not here.
     hellena_prison_01.add_locations(get_locations_by_category_with_ids("Hellena 01"), LegendOfDragoonLocation)
     hellena_prison_02.add_locations(get_locations_by_category_with_ids("Hellena 02"), LegendOfDragoonLocation)
-    kashua_glacier.add_locations(get_locations_by_category_with_ids("Kashua"), LegendOfDragoonLocation)
-    volcano_villude.add_locations(get_locations_by_category_with_ids("Volcano"), LegendOfDragoonLocation)
     volcano_villude.add_locations(get_locations_by_category_with_ids("Volcano Villude"), LegendOfDragoonLocation)
     zenebatos.add_locations(get_locations_by_category_with_ids("Zenebatos"), LegendOfDragoonLocation)
     divine_tree.add_locations(get_locations_by_category_with_ids("Divine Tree"), LegendOfDragoonLocation)
