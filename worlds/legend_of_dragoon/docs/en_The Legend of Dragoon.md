@@ -12,17 +12,20 @@ a config file.
 
 ## What is randomized in this game?
 
-- Chests (TBD)
 - Additions
 - Goods
 - Equipment
 - Items
 
+Planned:
+- Characters
+- Commands (attack/defend/etc)
+- Addition combos
+- & more
+
 ## What Legend of Dragoon items can appear in other players' worlds?
 
-All the things!
+Additions, Items, Equipment, Goods.
 
 # What do other players' items look like in Legend of Dragoon?
-If an item is in the shop it will have an Archipelago logo denoting useful/progression!
-
-otherwise it will be hidden until you pick up the item/open chest/level addition
+Shops will display an Archipelago Logo (colored/gray) denoting item type (progression/useful/filler).
