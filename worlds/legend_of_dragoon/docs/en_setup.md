@@ -4,15 +4,19 @@
 
 - A legally purchased copy of *The Legend of Dragoon.*
   - *note: all 4 discs needed*
+  - *note: only NA non-modified ISOs usable*
 - [Severed Chains](https://legendofdragoon.org/projects/severed-chains/)
-  - *note: requires dev snapshot of 3.0.0 at this time.*
+  - *note: requires latest dev build of 3.0.0 at this time.*
+  - *note: other mods not supported at this time, use at your own risk*
 
 ## Installation via Severed Chains
 
 **You must set up Severed Chains before you can install mods for it.**
 
 - Follow the installation process for Severed Chains. See [here](https://legendofdragoon.org/guides/setup-severed-chains/). 
-- Download the latest release of [Archipelagoon](https://github.com/pkolb-dev/Archipelagoon/releases) and place it in Severed Chains' mod folder.
+- Download the latest release of [Archipelagoon](https://github.com/pkolb-dev/Archipelagoon/releases/latest) and place it in Severed Chains' mod folder.
+- extract the .zip into mods folder
+  - you should see an `archipelagoon` folder AND a .jar file.
 
 ## Updates and New Releases via Severed Chains
 For up-to-date news and release info for Severed Chains, please join the [discord](https://discord.gg/legendofdragoon)
