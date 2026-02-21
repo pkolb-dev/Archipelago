@@ -51,4 +51,6 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Melbu Frahma":                 LegendOfDragoonLocationData("Moon That Never Sets",         108_70046, "Enemy"),
     "Jiango":                       LegendOfDragoonLocationData("Hellena 02",                   108_70047, "Enemy"),
     "Kamuy":                        LegendOfDragoonLocationData("Evergreen Forest",             108_70048, "Enemy"),
+    "Marshland Commander":          LegendOfDragoonLocationData("Marshland",                    108_70049, "Enemy"),
+    "Black Castle Sandora Elite":   LegendOfDragoonLocationData("Black Castle",                 108_70050, "Enemy"),
 }
