@@ -3,6 +3,7 @@ from typing import  List, NamedTuple, Optional, TYPE_CHECKING
 
 import Utils
 from BaseClasses import Region, MultiWorld, CollectionState
+from .options import CompletionCondition
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -16,16 +17,9 @@ def create_and_connect_regions(world: LegendOfDragoonWorld) -> None:
     create_all_regions(world)
     connect_regions(world)
 
-def create_all_regions(world: LegendOfDragoonWorld) -> None:
-    regions = [
-        Region("Menu", world.player, world.multiworld),
-        Region("Dart Additions", world.player, world.multiworld),
-        Region("Lavitz Additions", world.player, world.multiworld),
-        Region("Rose Additions", world.player, world.multiworld),
-        Region("Haschel Additions", world.player, world.multiworld),
-        Region("Albert Additions", world.player, world.multiworld),
-        Region("Meru Additions", world.player, world.multiworld),
-        Region("Kongol Additions", world.player, world.multiworld),
+
+def create_chapter_one_regions(world, regions):
+    regions += [
         Region("Seles", world.player, world.multiworld),
         Region("Forest", world.player, world.multiworld),
         Region("Hellena Prison 01", world.player, world.multiworld),
@@ -42,7 +36,15 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Kazas", world.player, world.multiworld),
         Region("Black Castle", world.player, world.multiworld),
         Region("Black Castle Throne Room", world.player, world.multiworld),
+    ]
 
+
+def create_chapter_two_regions(world, regions):
+    goal = world.options.lod_completion_condition
+    if goal == CompletionCondition.option_chapter_1:
+        return
+
+    regions += [
         Region("Queen Fury", world.player, world.multiworld),
         Region("Phantom Ship", world.player, world.multiworld),
         Region("Fletz", world.player, world.multiworld),
@@ -55,6 +57,14 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Lidiera", world.player, world.multiworld),
         Region("Underwater Cavern", world.player, world.multiworld),
         Region("Fueno", world.player, world.multiworld),
+    ]
+
+
+def create_chapter_three_regions(world, regions):
+    goal = world.options.lod_completion_condition
+    if goal == CompletionCondition.option_chapter_1 or goal == CompletionCondition.option_chapter_2:
+        return
+    regions += [
         Region("Furni", world.player, world.multiworld),
         Region("Evergreen Forest", world.player, world.multiworld),
         Region("Deningrad", world.player, world.multiworld),
@@ -67,6 +77,15 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Snowfield", world.player, world.multiworld),
         Region("Fort Magrad", world.player, world.multiworld),
         Region("Vellweb", world.player, world.multiworld),
+    ]
+
+
+def create_chapter_four_regions(world, regions):
+    goal = world.options.lod_completion_condition
+    if goal != CompletionCondition.option_chapter_4:
+        return
+
+    regions += [
         Region("Death Frontier", world.player, world.multiworld),
         Region("Ulara", world.player, world.multiworld),
         Region("Rouge", world.player, world.multiworld),
@@ -77,17 +96,33 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Moon That Never Sets", world.player, world.multiworld),
     ]
 
+
+def create_all_regions(world: LegendOfDragoonWorld) -> None:
+    regions = [
+        Region("Menu", world.player, world.multiworld),
+        Region("Dart Additions", world.player, world.multiworld),
+        Region("Lavitz Additions", world.player, world.multiworld),
+        Region("Rose Additions", world.player, world.multiworld),
+        Region("Haschel Additions", world.player, world.multiworld),
+        Region("Albert Additions", world.player, world.multiworld),
+    ]
+
+    if CompletionCondition.option_chapter_1 != world.options.lod_completion_condition:
+        regions += [
+            Region("Meru Additions", world.player, world.multiworld),
+            Region("Kongol Additions", world.player, world.multiworld),
+        ]
+
+    create_chapter_one_regions(world, regions)
+    create_chapter_two_regions(world, regions)
+    create_chapter_three_regions(world, regions)
+    create_chapter_four_regions(world, regions)
+
     world.multiworld.regions += regions
 
-def connect_regions(world: LegendOfDragoonWorld) -> None:
+
+def connect_chapter_one_regions(world):
     menu = world.get_region("Menu")
-    dart_additions = world.get_region("Dart Additions")
-    lavitz_additions = world.get_region("Lavitz Additions")
-    rose_additions = world.get_region("Rose Additions")
-    haschel_additions = world.get_region("Haschel Additions")
-    albert_additions = world.get_region("Albert Additions")
-    meru_additions = world.get_region("Meru Additions")
-    kongol_additions = world.get_region("Kongol Additions")
     seles = world.get_region("Seles")
     forest = world.get_region("Forest")
     hellena_prison_01 = world.get_region("Hellena Prison 01")
@@ -105,49 +140,7 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     black_castle = world.get_region("Black Castle")
     black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
-    fletz = world.get_region("Fletz")
-    barrens = world.get_region("Barrens")
-    donau = world.get_region("Donau")
-    fletz_castle = world.get_region("Fletz Castle")
-    valley_of_corrupted_gravity = world.get_region("Valley of Corrupted Gravity")
-    home_of_giganto = world.get_region("Home of Giganto")
-    queen_fury = world.get_region("Queen Fury")
-    phantom_ship = world.get_region("Phantom Ship")
-    lidiera = world.get_region("Lidiera")
-    underwater_cavern = world.get_region("Underwater Cavern")
-    fueno = world.get_region("Fueno")
 
-    furni = world.get_region("Furni")
-    evergreen_forest = world.get_region("Evergreen Forest")
-    deningrad = world.get_region("Deningrad")
-    neet = world.get_region("Neet")
-    wingly_forest = world.get_region("Wingly Forest")
-    forbidden_land = world.get_region("Forbidden Land")
-    mortal_dragon_mountain = world.get_region("Mortal Dragon Mountain")
-    kashua_glacier = world.get_region("Kashua Glacier")
-    tower_of_flanvel = world.get_region("Tower of Flanvel")
-    snowfield = world.get_region("Snowfield")
-    fort_magrad = world.get_region("Fort Magrad")
-    vellweb = world.get_region("Vellweb")
-
-    death_frontier = world.get_region("Death Frontier")
-    ulara = world.get_region("Ulara")
-    rouge = world.get_region("Rouge")
-    aglis = world.get_region("Aglis")
-    zenebatos = world.get_region("Zenebatos")
-    mayfil = world.get_region("Mayfil")
-    divine_tree = world.get_region("Divine Tree")
-    moon_that_never_sets = world.get_region("Moon That Never Sets")
-
-    menu.connect(dart_additions, "Menu to Dart Additions")
-    menu.connect(lavitz_additions, "Menu to Lavitz Additions")
-    menu.connect(rose_additions, "Menu to Rose Additions")
-    menu.connect(haschel_additions, "Menu to Haschel Additions")
-    menu.connect(albert_additions, "Menu to Albert Additions")
-    menu.connect(meru_additions, "Menu to Meru Additions")
-    menu.connect(kongol_additions, "Menu to Kongol Additions")
-
-    # path out disc one
     menu.connect(seles, "Intro to Seles")
     seles.connect(forest, "Seles to Forest")
     forest.connect(seles, "Forest to Seles")
@@ -178,9 +171,27 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     kazas.connect(black_castle, "Kazas to Black Castle")
     black_castle.connect(kazas, "Black Castle to Kazas")
     black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room", lambda state: state.has_all(["Magic Oil", "Blue Stone", "Yellow Stone", "Red Stone"], world.player))
-    black_castle_throne_room.connect(fletz, "Black Castle Throne Room to Fletz")
 
-    # path out disc 2
+
+def connect_chapter_two_regions(world):
+    goal = world.options.lod_completion_condition
+    if goal == CompletionCondition.option_chapter_1:
+        return
+
+    black_castle_throne_room = world.get_region("Black Castle Throne Room")
+    fletz = world.get_region("Fletz")
+    barrens = world.get_region("Barrens")
+    donau = world.get_region("Donau")
+    fletz_castle = world.get_region("Fletz Castle")
+    valley_of_corrupted_gravity = world.get_region("Valley of Corrupted Gravity")
+    home_of_giganto = world.get_region("Home of Giganto")
+    queen_fury = world.get_region("Queen Fury")
+    phantom_ship = world.get_region("Phantom Ship")
+    lidiera = world.get_region("Lidiera")
+    underwater_cavern = world.get_region("Underwater Cavern")
+    fueno = world.get_region("Fueno")
+
+    black_castle_throne_room.connect(fletz, "Black Castle Throne Room to Fletz")
     fletz.connect(barrens, "Fletz to Barrens")
     fletz.connect(fletz_castle, "Fletz to Fletz Castle")
     fletz_castle.connect(fletz, "Fletz Castle to Fletz")
@@ -199,9 +210,28 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     underwater_cavern.connect(fueno, "Underwater Cavern to Fueno")
     fueno.connect(underwater_cavern, "Fueno to Underwater Cavern")
     fueno.connect(queen_fury, "Fueno to Queen Fury", lambda state: state.has("Lenus 2", world.player))
-    donau.connect(furni, "Donau to Furni", lambda state: state.has("Lenus 2", world.player))
 
-    # path out disc 3
+
+def connect_chapter_three_regions(world):
+    goal = world.options.lod_completion_condition
+    if goal == CompletionCondition.option_chapter_1 or goal == CompletionCondition.option_chapter_2:
+        return
+
+    queen_fury = world.get_region("Queen Fury")
+    furni = world.get_region("Furni")
+    evergreen_forest = world.get_region("Evergreen Forest")
+    deningrad = world.get_region("Deningrad")
+    neet = world.get_region("Neet")
+    wingly_forest = world.get_region("Wingly Forest")
+    forbidden_land = world.get_region("Forbidden Land")
+    mortal_dragon_mountain = world.get_region("Mortal Dragon Mountain")
+    kashua_glacier = world.get_region("Kashua Glacier")
+    tower_of_flanvel = world.get_region("Tower of Flanvel")
+    snowfield = world.get_region("Snowfield")
+    fort_magrad = world.get_region("Fort Magrad")
+    vellweb = world.get_region("Vellweb")
+
+    queen_fury.connect(furni, "Queen Fury to Furni", lambda state: state.has("Lenus 2", world.player))
     furni.connect(evergreen_forest, "Furni to Evergreen Forest")
     evergreen_forest.connect(furni, "Evergreen Forest to Furni")
     evergreen_forest.connect(deningrad, "Evergreen Forest to Deningrad")
@@ -224,6 +254,25 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     fort_magrad.connect(snowfield, "Fort Magrad to Snowfield")
     snowfield.connect(vellweb, "Snowfield to Vellweb")
     vellweb.connect(snowfield, "Vellweb to Snowfield")
+
+
+def connect_chapter_four_regions(world):
+    goal = world.options.lod_completion_condition
+    if goal != CompletionCondition.option_chapter_4:
+        return
+
+    queen_fury = world.get_region("Queen Fury")
+    home_of_giganto = world.get_region("Home of Giganto")
+    vellweb = world.get_region("Vellweb")
+    death_frontier = world.get_region("Death Frontier")
+    ulara = world.get_region("Ulara")
+    rouge = world.get_region("Rouge")
+    aglis = world.get_region("Aglis")
+    zenebatos = world.get_region("Zenebatos")
+    mayfil = world.get_region("Mayfil")
+    divine_tree = world.get_region("Divine Tree")
+    moon_that_never_sets = world.get_region("Moon That Never Sets")
+
     vellweb.connect(death_frontier, "Vellweb to Death Frontier")
 
     # path out disc 4
@@ -243,12 +292,37 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     mayfil.connect(divine_tree, "Mayfil to Divine Tree")
     divine_tree.connect(moon_that_never_sets, "Divine Tree to Moon That Never Sets")
 
-def visualize_world(multiworld: "MultiWorld", state: "CollectionState" = None):
-    if not state:
-        state = CollectionState(multiworld, True)
-        for item in multiworld.itempool:
-            state.collect(item, True)
-        state.sweep_for_advancements()
-    Utils.visualize_regions(multiworld.get_region(multiworld.worlds[1].origin_region_name, 1), f"{multiworld.player_name[1]}.puml",
-                            linetype_ortho=False,
-                            regions_to_highlight=state.reachable_regions[1])
+
+def connect_regions(world: LegendOfDragoonWorld) -> None:
+    menu = world.get_region("Menu")
+    dart_additions = world.get_region("Dart Additions")
+    lavitz_additions = world.get_region("Lavitz Additions")
+    rose_additions = world.get_region("Rose Additions")
+    haschel_additions = world.get_region("Haschel Additions")
+    albert_additions = world.get_region("Albert Additions")
+
+
+
+    connect_chapter_one_regions(world)
+    connect_chapter_two_regions(world)
+    connect_chapter_three_regions(world)
+    connect_chapter_four_regions(world)
+
+    menu.connect(dart_additions, "Menu to Dart Additions")
+    menu.connect(lavitz_additions, "Menu to Lavitz Additions")
+    menu.connect(rose_additions, "Menu to Rose Additions")
+    menu.connect(haschel_additions, "Menu to Haschel Additions")
+    menu.connect(albert_additions, "Menu to Albert Additions")
+
+    if world.options.lod_completion_condition != CompletionCondition.option_chapter_1:
+        meru_additions = world.get_region("Meru Additions")
+        kongol_additions = world.get_region("Kongol Additions")
+        menu.connect(meru_additions, "Menu to Meru Additions")
+        menu.connect(kongol_additions, "Menu to Kongol Additions")
+
+
+def visualize_world(world, state: "CollectionState" = None):
+    multiworld = world.multiworld
+    regions = world.get_regions()
+    Utils.visualize_regions(multiworld.get_region("Menu", 1), f"{multiworld.player_name[1]}.puml", show_locations=False, auto_assign_colors=True,
+                            regions_to_highlight=regions)
