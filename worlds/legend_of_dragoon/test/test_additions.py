@@ -1,22 +1,19 @@
 from .bases import LegendOfDragoonTestBase
 
-class TestDefault(LegendOfDragoonTestBase):
-    options = {
-        "enable_addition_randomizer": 4
-    }
 
-class TestProgressive(LegendOfDragoonTestBase):
-    options = {
-        "enable_addition_randomizer": 3,
-    }
+# class TestProgressive(LegendOfDragoonTestBase):
+#     options = {
+#         "addition_randomizer": 3,
+#     }
 
 class TestAdditionSanity(LegendOfDragoonTestBase):
     options = {
-        "enable_addition_randomizer": 4,
+        "addition_randomizer": 1,
     }
 
-class TestRandomizedProgression(LegendOfDragoonTestBase):
+
+class TestRandomizedAdditionSanity(LegendOfDragoonTestBase):
     options = {
-        "enable_addition_randomizer": 3,
+        "addition_randomizer": 1,
         "random_starting_addition": True,
     }

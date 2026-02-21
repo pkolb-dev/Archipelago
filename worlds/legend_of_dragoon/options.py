@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range
 
 
 class AdditionRandomization(Choice):
@@ -17,20 +17,22 @@ class AdditionRandomization(Choice):
     display_name = "Addition Randomization"
 
     # these will be added later.
-    # option_off = 0
+    option_off = 0
     # option_shuffled_character = 1
     # option_shuffled_party = 2
-    option_progressive_character = 3
-    option_addition_sanity = 4
+    # option_progressive_character = 3
+    option_addition_sanity = 1
 
-    default = 4
+    default = 0
+
 
 class Shopsanity(Toggle):
     """
-    Toggles all shop items to be locations. This disables vanilla behavior.
+    Toggles all shop items to be locations. This disables vanilla behavior and makes all items one-time purchases.
     """
     display_name = "Shopsanity"
     default = True
+
 
 class RandomStartingAddition(Toggle):
     """Start each character with a random addition unlocked."""
@@ -41,34 +43,41 @@ class RandomStartingAddition(Toggle):
 class CompletionCondition(Choice):
     """
     Set the goal for completing the game.
+    - Chapter 1: Goal after defeating Dragoon Doel
+    - Chapter 2: Goal after defeating Lenus & Regole
+    - Chapter 3: Goal after defeating Lloyd 2
+    - Chapter 4: Goal after defeating Melbu Frahma
     """
     display_name = "Completion Condition"
-    # option_stardust_count_25 = 0
-    # option_stardust_count_50 = 1 # collect all stardust in the game
-    option_fruegel2 =  2# goal after fruegel 2
-    option_doel = 3 # goal after defeating dragoon doel
-    option_lenus2 = 4# goal after defeating lenus w/ regole
-    option_faust =  5 # goal after defeating Magician Faust
-    option_melbu =  6 # goal after defeating Melbu Frahma
-    default = 3
+    option_chapter_1 = 1
+    option_chapter_2 = 2
+    option_chapter_3 = 3
+    option_chapter_4 = 4
+    default = 1
 
 
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
-    enable_addition_randomizer: AdditionRandomization
+    addition_randomizer: AdditionRandomization
     random_starting_addition: RandomStartingAddition
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
 
-option_groups = [
-    OptionGroup("General", [
-        AdditionRandomization,
-        RandomStartingAddition,
-        CompletionCondition,
-        Shopsanity
-    ], False)
-]
 
+option_groups = [
+    OptionGroup("Goal Requirements", [
+        CompletionCondition,
+    ], False),
+    OptionGroup("Addition Settings", [
+        AdditionRandomization,
+    ]),
+    OptionGroup("Rando Options", [
+        Shopsanity
+    ], False),
+    OptionGroup("Starting Choices", [
+        RandomStartingAddition
+    ])
+]
 option_presets = {
 
 }

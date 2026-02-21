@@ -4,66 +4,61 @@ from typing import Dict, Set, TYPE_CHECKING, List
 
 from BaseClasses import ItemClassification
 from worlds.legend_of_dragoon.item.additions import additions_table, all_additions, progressive_additions_table
-from worlds.legend_of_dragoon.item.consumables import  consumables_table
-from worlds.legend_of_dragoon.item.equipment import  equipment_table
-from worlds.legend_of_dragoon.item.goods import goods_table
+from worlds.legend_of_dragoon.item.consumables import consumables_table
+from worlds.legend_of_dragoon.item.equipment import equipment_table
+from worlds.legend_of_dragoon.item.goods import goods_table, all_goods_table, chapter_one_table, chapter_two_table, \
+    chapter_three_table, chapter_four_table
 from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
 
+
 def get_items_by_category(item_category: str) -> Dict[str, LegendOfDragoonItemData]:
     return {name: data for name, data in lookup_table.items() if data.category == item_category}
+
 
 lookup_table: Dict[str, LegendOfDragoonItemData] = {
     **all_additions,
     **consumables_table,
     **equipment_table,
-    **goods_table,
+    **all_goods_table,
 }
 
 ITEM_NAME_TO_ID = {name: data.code for name, data in lookup_table.items()}
 
+
 def get_random_filler_item_name(world: LegendOfDragoonWorld):
-    filtered_dict = {key: value for key, value in lookup_table.items() if value.classification == ItemClassification.filler}
+    filtered_dict = {key: value for key, value in lookup_table.items() if
+                     value.classification == ItemClassification.filler}
     return world.random.choices([filler for filler in filtered_dict.keys()])[0]
+
 
 def create_item(world: LegendOfDragoonWorld, name: str):
     data = lookup_table[name]
     return LegendOfDragoonItem(name, data.classification, data.code, world.player)
 
-def create_all_items(world: LegendOfDragoonWorld):
-    itempool: List[LegendOfDragoonItem] = []
 
-    # set up goods
-    for lod_item in map(world.create_item, goods_table):
-        if not lod_item.classification.filler:
-            itempool.append(lod_item)
+def setup_additions(world):
+    itempool = []
+    # TODO enable for progressive additions
+    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+    #     for key, value in progressive_additions_table.items():
+    #         for i in range(0, value.quantity - 1):
+    #             itempool.append(create_item(world, key))
+    # else:
+    for lod_item in map(world.create_item, additions_table):
+        itempool.append(lod_item)
 
-    # set up equipment
-    if world.options.enable_shopsanity:
-        for lod_item in map(world.create_item, equipment_table):
-            if not lod_item.classification.filler:
-                itempool.append(lod_item)
+    return itempool
 
-    # set up additions
-    if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
-        for key, value in progressive_additions_table.items():
-            for i in range(0, value.quantity - 1):
-                itempool.append(create_item(world, key))
-    else:
-        for lod_item in map(world.create_item, additions_table):
-            itempool.append(lod_item)
 
-    if world.options.lod_completion_condition.option_faust:
-        itempool.append(create_item(world, "Legend Casque"))
-        itempool.append(create_item(world, "Legend Casque"))
-
-    if world.options.enable_addition_randomizer == world.options.enable_addition_randomizer.option_progressive_character:
-        for addition in progressive_additions_table.keys():
-           progressive_addition = world.create_item(addition)
-           world.push_precollected(progressive_addition)
-    elif not world.options.random_starting_addition:
+def configure_starting_additions(world, itempool):
+    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+    #     for addition in progressive_additions_table.keys():
+    #         progressive_addition = world.create_item(addition)
+    #         world.push_precollected(progressive_addition)
+    if not world.options.random_starting_addition:
         double_slash = world.create_item("Dart Double Slash")
         lavitz_harpoon = world.create_item("Lavitz Harpoon")
         whip_smack = world.create_item("Rose Whip Smack")
@@ -120,13 +115,62 @@ def create_all_items(world: LegendOfDragoonWorld):
         world.push_precollected(meru_addition)
         world.push_precollected(kongol_addition)
 
+
+def setup_equipment(world, itempool):
+    if not world.options.enable_shopsanity:
+        return
+
     number_of_items = len(itempool)
+    number_of_equipment = len(equipment_table)
     number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
 
+    needed_number_of_equipment_items = min(number_of_unfilled_locations - number_of_items, number_of_equipment)
+    for _ in range(needed_number_of_equipment_items):
+        equipment_map = map(world.create_item, equipment_table)
+        itempool.append(world.random.choice(list(equipment_map)))
+
+
+def create_all_items(world: LegendOfDragoonWorld):
+    itempool: List[LegendOfDragoonItem] = []
+
+    # set up goods
+    goods_pool = get_chapter_goods(world)
+    for lod_item in map(world.create_item, goods_pool):
+        if not lod_item.classification.filler:
+            itempool.append(lod_item)
+
+    itempool += setup_additions(world)
+
+    configure_starting_additions(world, itempool)
+
+    setup_equipment(world, itempool)
+
+    number_of_items = len(itempool)
+    number_of_unfilled_locations = len(world.multiworld.get_unfilled_locations(world.player))
     needed_number_of_filler_items = number_of_unfilled_locations - number_of_items
     itempool += [world.create_filler() for _ in range(needed_number_of_filler_items)]
 
     world.multiworld.itempool += itempool
+
+
+def get_chapter_goods(world: LegendOfDragoonWorld) -> Dict[str, LegendOfDragoonItemData]:
+    chapter_tables = [
+        chapter_one_table,
+        chapter_two_table,
+        chapter_three_table,
+        chapter_four_table,
+    ]
+
+    chapter_count = min(
+        world.options.lod_completion_condition.value,
+        len(chapter_tables)
+    )
+
+    chapter_goods: Dict[str, LegendOfDragoonItemData] = {}
+    for table in chapter_tables[:chapter_count]:
+        chapter_goods.update(table)
+
+    return chapter_goods
 
 
 # Make item categories
