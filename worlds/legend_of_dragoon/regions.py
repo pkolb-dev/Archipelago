@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import  List, NamedTuple, Optional, TYPE_CHECKING
+from typing import List, NamedTuple, Optional, TYPE_CHECKING
 
 import Utils
 from BaseClasses import Region, MultiWorld, CollectionState
@@ -7,6 +7,7 @@ from .options import CompletionCondition
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
+
 
 class LegendOfDragoonRegionData(NamedTuple):
     locations: List[str]
@@ -140,15 +141,16 @@ def connect_chapter_one_regions(world):
     black_castle = world.get_region("Black Castle")
     black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
-
     menu.connect(seles, "Intro to Seles")
     seles.connect(forest, "Seles to Forest")
     forest.connect(seles, "Forest to Seles")
     forest.connect(hellena_prison_01, "Forest to Hellena Prison 01")
     forest.connect(prairie, "Forest to Prairie")
     hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest", lambda state: state.has("Fruegel 1", world.player))
-    hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02", lambda state: state.has("Lloyd 1", world.player))
-    hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01", lambda state: state.has("Lloyd 1", world.player))
+    hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02",
+                              lambda state: state.has("Lloyd 1", world.player))
+    hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01",
+                              lambda state: state.has("Lloyd 1", world.player))
     prairie.connect(forest, "Prairie to Forest")
     prairie.connect(limestone_cave, "Prairie to Limestone Cave")
     limestone_cave.connect(prairie, "Limestone Cave to Prairie")
@@ -160,7 +162,8 @@ def connect_chapter_one_regions(world):
     marshland.connect(hoax, "Marshland to Hoax")
     marshland.connect(volcano_villude, "Marshland to Volcano Villude")
     volcano_villude.connect(marshland, "Volcano Villude to Marshland")
-    volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest", lambda state: state.has("Firebird", world.player))
+    volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest",
+                            lambda state: state.has("Firebird", world.player))
     dragons_nest.connect(volcano_villude, "Dragon's Nest to Volcano Villude")
     dragons_nest.connect(lohan, "Dragon's Nest to Lohan")
     lohan.connect(dragons_nest, "Lohan to Dragon's Nest")
@@ -170,7 +173,9 @@ def connect_chapter_one_regions(world):
     kazas.connect(forest, "Kazas to Forest")
     kazas.connect(black_castle, "Kazas to Black Castle")
     black_castle.connect(kazas, "Black Castle to Kazas")
-    black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room", lambda state: state.has_all(["Magic Oil", "Blue Stone", "Yellow Stone", "Red Stone"], world.player))
+    black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room",
+                         lambda state: state.has_all(["Magic Oil", "Blue Stone", "Yellow Stone", "Red Stone"],
+                                                     world.player))
 
 
 def connect_chapter_two_regions(world):
@@ -199,7 +204,8 @@ def connect_chapter_two_regions(world):
     barrens.connect(donau, "Barrens to Donau")
     barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity")
     valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
-    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto", lambda state: state.has("Valley Virage", world.player))
+    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto",
+                                        lambda state: state.has("Valley Virage", world.player))
     home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
     donau.connect(queen_fury, "Donau to Queen Fury")
     queen_fury.connect(donau, "Queen Fury to Donau")
@@ -301,8 +307,6 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     haschel_additions = world.get_region("Haschel Additions")
     albert_additions = world.get_region("Albert Additions")
 
-
-
     connect_chapter_one_regions(world)
     connect_chapter_two_regions(world)
     connect_chapter_three_regions(world)
@@ -324,5 +328,6 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
 def visualize_world(world, state: "CollectionState" = None):
     multiworld = world.multiworld
     regions = world.get_regions()
-    Utils.visualize_regions(multiworld.get_region("Menu", 1), f"{multiworld.player_name[1]}.puml", show_locations=False, auto_assign_colors=True,
+    Utils.visualize_regions(multiworld.get_region("Menu", 1), f"{multiworld.player_name[1]}.puml", show_locations=False,
+                            auto_assign_colors=True,
                             regions_to_highlight=regions)

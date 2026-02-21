@@ -1,5 +1,6 @@
 from .bases import LegendOfDragoonTestBase
 
+
 class TestDefault(LegendOfDragoonTestBase):
     options = {}
 
@@ -15,13 +16,14 @@ class TestLenus2(LegendOfDragoonTestBase):
         "lod_completion_condition": 2,
     }
 
+
 class TestLloyd2(LegendOfDragoonTestBase):
     options = {
         "lod_completion_condition": 3,
     }
 
+
 class TestMelbu(LegendOfDragoonTestBase):
     options = {
         "lod_completion_condition": 4,
     }
-

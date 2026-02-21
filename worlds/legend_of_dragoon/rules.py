@@ -21,6 +21,7 @@ def setup_chapter_two(world):
     set_chapter_two_entrance_rules(world)
     set_chapter_two_rules(world)
 
+
 def setup_chapter_three(world):
     goal = world.options.lod_completion_condition
     if goal == CompletionCondition.option_chapter_1 or goal == CompletionCondition.option_chapter_2:
@@ -29,6 +30,7 @@ def setup_chapter_three(world):
     set_chapter_three_entrance_rules(world)
     set_chapter_three_rules(world)
 
+
 def setup_chapter_four(world):
     goal = world.options.lod_completion_condition
     if goal != CompletionCondition.option_chapter_4:
@@ -36,6 +38,7 @@ def setup_chapter_four(world):
 
     set_chapter_four_entrance_rules(world)
     set_chapter_four_rules(world)
+
 
 def set_all_rules(world: LegendOfDragoonWorld) -> None:
     set_all_entrance_rules(world)
@@ -67,9 +70,9 @@ def set_chapter_one_entrance_rules(world):
     limestone_cave_to_bale = world.get_entrance("Limestone Cave to Bale")
     set_rule(limestone_cave_to_bale, lambda state: state.has("Urobolus", world.player))
 
-
     dragons_nest_to_shrine_of_shirley = world.get_entrance("Dragon's Nest to Shrine of Shirley")
-    set_rule(dragons_nest_to_shrine_of_shirley, lambda state: state.has_all(["Lloyd 1","Life Water", "Water Bottle"], world.player))
+    set_rule(dragons_nest_to_shrine_of_shirley,
+             lambda state: state.has_all(["Lloyd 1", "Life Water", "Water Bottle"], world.player))
 
     forest_to_kazas = world.get_entrance("Forest to Kazas")
     set_rule(forest_to_kazas, lambda state: state.has("Fruegel 2", world.player))
@@ -147,7 +150,6 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     haschel_additions = world.get_entrance("Menu to Haschel Additions")
     albert_additions = world.get_entrance("Menu to Albert Additions")
 
-
     # set_rule(dart_additions, lambda state: state.has("Commander", world.player))
     set_rule(lavitz_additions, lambda state: state.has("Prison Key", world.player))
     set_rule(rose_additions, lambda state: state.has("Kongol 1", world.player))
@@ -157,8 +159,9 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
     if world.options.lod_completion_condition != CompletionCondition.option_chapter_1:
         meru_additions = world.get_entrance("Menu to Meru Additions")
         kongol_additions = world.get_entrance("Menu to Kongol Additions")
-        set_rule(meru_additions, lambda state: state.has_all(["Mappi Steals Orb","Letter from Lynn"], world.player))
+        set_rule(meru_additions, lambda state: state.has_all(["Mappi Steals Orb", "Letter from Lynn"], world.player))
         set_rule(kongol_additions, lambda state: state.has("Gehrich", world.player))
+
 
 def set_chapter_one_rules(world):
     fruegel_1 = world.get_location("Fruegel 1")
@@ -188,6 +191,7 @@ def set_chapter_three_rules(world):
     if goal == CompletionCondition.option_chapter_1 or goal == CompletionCondition.option_chapter_2:
         return
 
+
 def set_chapter_four_rules(world):
     goal = world.options.lod_completion_condition
     if goal != CompletionCondition.option_chapter_4:
@@ -205,6 +209,7 @@ def set_chapter_four_rules(world):
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_starting_rules(world)
     set_addition_progression_rules(world)
+
 
 def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
     blazing_dynamo = world.get_location("Dart - Blazing Dynamo Unlock")
@@ -282,7 +287,6 @@ def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
         ),
     )
 
-
     if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
         return
     perky_step = world.get_location("Meru - Perky Step Unlock")
@@ -314,6 +318,7 @@ def set_addition_starting_rules(world: LegendOfDragoonWorld) -> None:
         ),
     )
 
+
 def set_completion_condition(world: LegendOfDragoonWorld) -> None:
     # set completion conditions
     conditions = world.options.lod_completion_condition
@@ -332,6 +337,7 @@ def set_completion_condition(world: LegendOfDragoonWorld) -> None:
         item = "Melbu Frahma"
 
     world.multiworld.completion_condition[world.player] = lambda state: state.has(item, world.player)
+
 
 def set_addition_progression_rules(world: LegendOfDragoonWorld) -> None:
     dart_burning_rush = world.get_location("Dart - Burning Rush Unlock")
@@ -373,7 +379,6 @@ def set_addition_progression_rules(world: LegendOfDragoonWorld) -> None:
     set_rule(haschel_summon_4_gods, lambda state: state.has("Gehrich", world.player))
 
     set_rule(meru_hammer_spin, lambda state: state.has("Lenus 2", world.player))
-
 
     if CompletionCondition.option_chapter_2 == world.options.lod_completion_condition:
         return

@@ -34,14 +34,17 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
 
 LOCATION_NAME_TO_ID = {name: data.code for name, data in all_location_table.items()}
 
+
 def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
     return {location_name: LOCATION_NAME_TO_ID[location_name] for location_name in location_names}
+
 
 def get_locations_by_category(location_category: str) -> Dict[str, LegendOfDragoonLocationData]:
     return {name: data for name, data in location_table.items() if data.category == location_category}
 
+
 def get_locations_by_category_with_ids(location_category: str) -> Dict[str, int | None]:
-    locs: Dict[str,LegendOfDragoonLocationData] = get_locations_by_category(location_category)
+    locs: Dict[str, LegendOfDragoonLocationData] = get_locations_by_category(location_category)
     return {location_name: locs[location_name].code for location_name in locs}
 
 
@@ -91,6 +94,7 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
     setup_chapter_three(world)
     setup_chapter_four(world)
 
+
 def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     menu = world.get_region("Menu")
 
@@ -139,7 +143,8 @@ def create_chapter_one_locations(world):
     dragons_nest.add_locations(get_locations_by_category_with_ids("Dragon's Nest"), LegendOfDragoonLocation)
     kazas.add_locations(get_locations_by_category_with_ids("Kazas"), LegendOfDragoonLocation)
     black_castle.add_locations(get_locations_by_category_with_ids("Black Castle"), LegendOfDragoonLocation)
-    black_castle_throne_room.add_locations(get_locations_by_category_with_ids("Black Castle Throne Room"), LegendOfDragoonLocation)
+    black_castle_throne_room.add_locations(get_locations_by_category_with_ids("Black Castle Throne Room"),
+                                           LegendOfDragoonLocation)
 
     # we want hellena prison to have the same items, in case they are needed later, but thats for the mod. not here.
     hellena_prison_01.add_locations(get_locations_by_category_with_ids("Hellena 01"), LegendOfDragoonLocation)
@@ -163,7 +168,8 @@ def create_chapter_two_locations(world):
     fletz_castle.add_locations(get_locations_by_category_with_ids("Fletz Castle"), LegendOfDragoonLocation)
     barrens.add_locations(get_locations_by_category_with_ids("Barrens"), LegendOfDragoonLocation)
     donau.add_locations(get_locations_by_category_with_ids("Donau"), LegendOfDragoonLocation)
-    valley_of_corrupted_gravity.add_locations(get_locations_by_category_with_ids("Valley of Corrupted Gravity"), LegendOfDragoonLocation)
+    valley_of_corrupted_gravity.add_locations(get_locations_by_category_with_ids("Valley of Corrupted Gravity"),
+                                              LegendOfDragoonLocation)
     home_of_giganto.add_locations(get_locations_by_category_with_ids("Home of Giganto"), LegendOfDragoonLocation)
     queen_fury.add_locations(get_locations_by_category_with_ids("Queen Fury"), LegendOfDragoonLocation)
     phantom_ship.add_locations(get_locations_by_category_with_ids("Phantom Ship"), LegendOfDragoonLocation)
@@ -191,7 +197,8 @@ def create_chapter_three_locations(world):
     wingly_forest.add_locations(get_locations_by_category_with_ids("Wingly Forest"), LegendOfDragoonLocation)
     forbidden_land.add_locations(get_locations_by_category_with_ids("Forbidden Land"), LegendOfDragoonLocation)
     vellweb.add_locations(get_locations_by_category_with_ids("Vellweb"), LegendOfDragoonLocation)
-    mortal_dragon_mountain.add_locations(get_locations_by_category_with_ids("Mortal Dragon Mountain"), LegendOfDragoonLocation)
+    mortal_dragon_mountain.add_locations(get_locations_by_category_with_ids("Mortal Dragon Mountain"),
+                                         LegendOfDragoonLocation)
     kashua_glacier.add_locations(get_locations_by_category_with_ids("Kashua Glacier"), LegendOfDragoonLocation)
     tower_of_flanvel.add_locations(get_locations_by_category_with_ids("Tower of Flanvel"), LegendOfDragoonLocation)
     snowfield.add_locations(get_locations_by_category_with_ids("Snowfield"), LegendOfDragoonLocation)
@@ -233,18 +240,28 @@ def setup_chapter_one_events(world):
     black_castle = world.get_region("Black Castle")
     black_castle_throne_room = world.get_region("Black Castle Throne Room")
 
-    seles.add_event("Defeat Commander", "Commander", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    hellena_prison_01.add_event("Defeat Fruegel 1", "Fruegel 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    limestone_cave.add_event("Defeat Urobolus", "Urobolus", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    seles.add_event("Defeat Commander", "Commander", location_type=LegendOfDragoonLocation,
+                    item_type=LegendOfDragoonItem)
+    hellena_prison_01.add_event("Defeat Fruegel 1", "Fruegel 1", location_type=LegendOfDragoonLocation,
+                                item_type=LegendOfDragoonItem)
+    limestone_cave.add_event("Defeat Urobolus", "Urobolus", location_type=LegendOfDragoonLocation,
+                             item_type=LegendOfDragoonItem)
     hoax.add_event("Defeat Kongol 1", "Kongol 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    volcano_villude.add_event("Defeat Volcano Virage", "Volcano Virage", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    volcano_villude.add_event("Defeat Firebird", "Firebird", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    dragons_nest.add_event("Defeat Greham", "Greham", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    shrine_of_shirley.add_event("Defeat Shirley", "Shirley", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    volcano_villude.add_event("Defeat Volcano Virage", "Volcano Virage", location_type=LegendOfDragoonLocation,
+                              item_type=LegendOfDragoonItem)
+    volcano_villude.add_event("Defeat Firebird", "Firebird", location_type=LegendOfDragoonLocation,
+                              item_type=LegendOfDragoonItem)
+    dragons_nest.add_event("Defeat Greham", "Greham", location_type=LegendOfDragoonLocation,
+                           item_type=LegendOfDragoonItem)
+    shrine_of_shirley.add_event("Defeat Shirley", "Shirley", location_type=LegendOfDragoonLocation,
+                                item_type=LegendOfDragoonItem)
     lohan.add_event("Lose to Lloyd", "Lloyd 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    hellena_prison_02.add_event("Defeat Fruegel 2", "Fruegel 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    black_castle.add_event("Defeat Kongol 2", "Kongol 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    black_castle_throne_room.add_event("Defeat Dragoon Doel", "Dragoon Doel", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    hellena_prison_02.add_event("Defeat Fruegel 2", "Fruegel 2", location_type=LegendOfDragoonLocation,
+                                item_type=LegendOfDragoonItem)
+    black_castle.add_event("Defeat Kongol 2", "Kongol 2", location_type=LegendOfDragoonLocation,
+                           item_type=LegendOfDragoonItem)
+    black_castle_throne_room.add_event("Defeat Dragoon Doel", "Dragoon Doel", location_type=LegendOfDragoonLocation,
+                                       item_type=LegendOfDragoonItem)
 
 
 def setup_chapter_two_events(world):
@@ -260,12 +277,18 @@ def setup_chapter_two_events(world):
     underwater_cavern = world.get_region("Underwater Cavern")
     fueno = world.get_region("Fueno")
 
-    barrens.add_event("Mappi Steals Orb", "Mappi Steals Orb", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    valley_of_corrupted_gravity.add_event("Defeat Valley Virage", "Valley Virage", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    home_of_giganto.add_event("Defeat Gehrich", "Gehrich", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    fletz_castle.add_event("Defeat Lenus 1", "Lenus 1", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    phantom_ship.add_event("Defeat Ghost Commander", "Ghost Commander", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    underwater_cavern.add_event("Defeat Lenus & Regole", "Lenus 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    barrens.add_event("Mappi Steals Orb", "Mappi Steals Orb", location_type=LegendOfDragoonLocation,
+                      item_type=LegendOfDragoonItem)
+    valley_of_corrupted_gravity.add_event("Defeat Valley Virage", "Valley Virage",
+                                          location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    home_of_giganto.add_event("Defeat Gehrich", "Gehrich", location_type=LegendOfDragoonLocation,
+                              item_type=LegendOfDragoonItem)
+    fletz_castle.add_event("Defeat Lenus 1", "Lenus 1", location_type=LegendOfDragoonLocation,
+                           item_type=LegendOfDragoonItem)
+    phantom_ship.add_event("Defeat Ghost Commander", "Ghost Commander", location_type=LegendOfDragoonLocation,
+                           item_type=LegendOfDragoonItem)
+    underwater_cavern.add_event("Defeat Lenus & Regole", "Lenus 2", location_type=LegendOfDragoonLocation,
+                                item_type=LegendOfDragoonItem)
 
 
 def setup_chapter_three_events(world):
@@ -282,14 +305,22 @@ def setup_chapter_three_events(world):
     fort_magrad = world.get_region("Fort Magrad")
     vellweb = world.get_region("Vellweb")
 
-    evergreen_forest.add_event("Defeat Kamuy", "Kamuy", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    deningrad.add_event("Talk to Ute", "Talk to Ute", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    forbidden_land.add_event("Defeat Kadessa Virage", "Kadessa Virage", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    forbidden_land.add_event("Defeat Grand Jewel", "Grand Jewel", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    mortal_dragon_mountain.add_event("Defeat Divine Dragon", "Divine Dragon", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    kashua_glacier.add_event("Defeat Windigo", "Windigo", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    tower_of_flanvel.add_event("Defeat Lloyd", "Lloyd 2", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    tower_of_flanvel.add_event("Defeat Magician Faust", "Faust", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    evergreen_forest.add_event("Defeat Kamuy", "Kamuy", location_type=LegendOfDragoonLocation,
+                               item_type=LegendOfDragoonItem)
+    deningrad.add_event("Talk to Ute", "Talk to Ute", location_type=LegendOfDragoonLocation,
+                        item_type=LegendOfDragoonItem)
+    forbidden_land.add_event("Defeat Kadessa Virage", "Kadessa Virage", location_type=LegendOfDragoonLocation,
+                             item_type=LegendOfDragoonItem)
+    forbidden_land.add_event("Defeat Grand Jewel", "Grand Jewel", location_type=LegendOfDragoonLocation,
+                             item_type=LegendOfDragoonItem)
+    mortal_dragon_mountain.add_event("Defeat Divine Dragon", "Divine Dragon", location_type=LegendOfDragoonLocation,
+                                     item_type=LegendOfDragoonItem)
+    kashua_glacier.add_event("Defeat Windigo", "Windigo", location_type=LegendOfDragoonLocation,
+                             item_type=LegendOfDragoonItem)
+    tower_of_flanvel.add_event("Defeat Lloyd", "Lloyd 2", location_type=LegendOfDragoonLocation,
+                               item_type=LegendOfDragoonItem)
+    tower_of_flanvel.add_event("Defeat Magician Faust", "Faust", location_type=LegendOfDragoonLocation,
+                               item_type=LegendOfDragoonItem)
     snowfield.add_event("Defeat Polter", "Polter", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
 
 
@@ -303,22 +334,29 @@ def setup_chapter_four_events(world):
     divine_tree = world.get_region("Divine Tree")
     moon_that_never_sets = world.get_region("Moon That Never Sets")
 
-    ulara.add_event("Unlock Ulara Teleporter", "Ulara Teleporter", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    ulara.add_event("Unlock Ulara Teleporter", "Ulara Teleporter", location_type=LegendOfDragoonLocation,
+                    item_type=LegendOfDragoonItem)
     aglis.add_event("Defeat Kraken", "Kraken", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
 
     zenebatos.add_event("Defeat Vector", "Vector", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
     zenebatos.add_event("Defeat Kubila", "Kubila", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    zenebatos.add_event("Defeat Selebus", "Selebus", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    mayfil.add_event("Defeat Feyrbrand", "Feyrbrand", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    zenebatos.add_event("Defeat Selebus", "Selebus", location_type=LegendOfDragoonLocation,
+                        item_type=LegendOfDragoonItem)
+    mayfil.add_event("Defeat Feyrbrand", "Feyrbrand", location_type=LegendOfDragoonLocation,
+                     item_type=LegendOfDragoonItem)
     mayfil.add_event("Defeat Regole", "Regole", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    mayfil.add_event("Defeat Divine Dragon Ghost", "Divine Dragon Ghost", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    mayfil.add_event("Defeat Zackwell", "Zackwell", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    mayfil.add_event("Defeat Divine Dragon Ghost", "Divine Dragon Ghost", location_type=LegendOfDragoonLocation,
+                     item_type=LegendOfDragoonItem)
+    mayfil.add_event("Defeat Zackwell", "Zackwell", location_type=LegendOfDragoonLocation,
+                     item_type=LegendOfDragoonItem)
     divine_tree.add_event("Defeat Imago", "Imago", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    moon_that_never_sets.add_event("Defeat Moon Virage", "Moon Virage", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    moon_that_never_sets.add_event("Defeat Zieg", "Zieg", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    moon_that_never_sets.add_event("Defeat Melbu Frahma", "Melbu Frahma", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
+    moon_that_never_sets.add_event("Defeat Moon Virage", "Moon Virage", location_type=LegendOfDragoonLocation,
+                                   item_type=LegendOfDragoonItem)
+    moon_that_never_sets.add_event("Defeat Zieg", "Zieg", location_type=LegendOfDragoonLocation,
+                                   item_type=LegendOfDragoonItem)
+    moon_that_never_sets.add_event("Defeat Melbu Frahma", "Melbu Frahma", location_type=LegendOfDragoonLocation,
+                                   item_type=LegendOfDragoonItem)
 
 
 def create_events(world: LegendOfDragoonWorld) -> None:
     pass
-

@@ -3,28 +3,28 @@ from typing import Dict
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
 
 dart_additions_table: Dict[str, LegendOfDragoonItemData] = {
-    "Dart Double Slash":    LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30002, IC.progression),
-    "Dart Volcano":         LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30003, IC.progression),
-    "Dart Burning Rush":    LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30004, IC.progression),
-    "Dart Crush Dance":     LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30005, IC.progression),
-    "Dart Madness Hero":    LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30006, IC.progression),
-    "Dart Moon Strike":     LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30007, IC.progression),
-    "Dart Blazing Dynamo":  LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30008, IC.progression),
+    "Dart Double Slash": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30002, IC.progression),
+    "Dart Volcano": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30003, IC.progression),
+    "Dart Burning Rush": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30004, IC.progression),
+    "Dart Crush Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30005, IC.progression),
+    "Dart Madness Hero": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30006, IC.progression),
+    "Dart Moon Strike": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30007, IC.progression),
+    "Dart Blazing Dynamo": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30008, IC.progression),
 }
 
 lavitz_additions_table: Dict[str, LegendOfDragoonItemData] = {
-    "Lavitz Harpoon":               LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30010, IC.progression),
-    "Lavitz Spinning Cane":         LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30011, IC.progression),
-    "Lavitz Rod Typhoon":           LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30012, IC.progression),
-    "Lavitz Gust Of Wind Dance":    LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30013, IC.progression),
-    "Lavitz Flower Storm":          LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30014, IC.progression),
+    "Lavitz Harpoon": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30010, IC.progression),
+    "Lavitz Spinning Cane": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30011, IC.progression),
+    "Lavitz Rod Typhoon": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30012, IC.progression),
+    "Lavitz Gust Of Wind Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30013, IC.progression),
+    "Lavitz Flower Storm": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30014, IC.progression),
 }
 
 rose_additions_table: Dict[str, LegendOfDragoonItemData] = {
-    "Rose Whip Smack":      LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30016, IC.progression),
-    "Rose More More":       LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30017, IC.progression),
-    "Rose Hard Blade":      LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30018, IC.progression),
-    "Rose Demons Dance":    LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30019, IC.progression),
+    "Rose Whip Smack": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30016, IC.progression),
+    "Rose More More": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30017, IC.progression),
+    "Rose Hard Blade": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30018, IC.progression),
+    "Rose Demons Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30019, IC.progression),
 }
 
 haschel_additions_table: Dict[str, LegendOfDragoonItemData] = {
@@ -58,7 +58,7 @@ kongol_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Kongol Bone Crush": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30042, IC.progression),
 }
 
-additions_table:  Dict[str, LegendOfDragoonItemData] = {
+additions_table: Dict[str, LegendOfDragoonItemData] = {
     **dart_additions_table,
     **lavitz_additions_table,
     **rose_additions_table,

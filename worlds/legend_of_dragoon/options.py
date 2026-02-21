@@ -25,12 +25,14 @@ class AdditionRandomization(Choice):
 
     default = 0
 
+
 class Shopsanity(Toggle):
     """
     Toggles all shop items to be locations. This disables vanilla behavior and makes all items one-time purchases.
     """
     display_name = "Shopsanity"
     default = True
+
 
 class RandomStartingAddition(Toggle):
     """Start each character with a random addition unlocked."""
@@ -50,8 +52,9 @@ class CompletionCondition(Choice):
     option_chapter_1 = 1
     option_chapter_2 = 2
     option_chapter_3 = 3
-    option_chapter_4 =  4
+    option_chapter_4 = 4
     default = 1
+
 
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
@@ -59,6 +62,7 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     random_starting_addition: RandomStartingAddition
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
+
 
 option_groups = [
     OptionGroup("Goal Requirements", [

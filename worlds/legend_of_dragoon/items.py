@@ -4,8 +4,8 @@ from typing import Dict, Set, TYPE_CHECKING, List
 
 from BaseClasses import ItemClassification
 from worlds.legend_of_dragoon.item.additions import additions_table, all_additions, progressive_additions_table
-from worlds.legend_of_dragoon.item.consumables import  consumables_table
-from worlds.legend_of_dragoon.item.equipment import  equipment_table
+from worlds.legend_of_dragoon.item.consumables import consumables_table
+from worlds.legend_of_dragoon.item.equipment import equipment_table
 from worlds.legend_of_dragoon.item.goods import goods_table, all_goods_table, chapter_one_table, chapter_two_table, \
     chapter_three_table, chapter_four_table
 from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
@@ -13,8 +13,10 @@ from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
 
+
 def get_items_by_category(item_category: str) -> Dict[str, LegendOfDragoonItemData]:
     return {name: data for name, data in lookup_table.items() if data.category == item_category}
+
 
 lookup_table: Dict[str, LegendOfDragoonItemData] = {
     **all_additions,
@@ -25,9 +27,12 @@ lookup_table: Dict[str, LegendOfDragoonItemData] = {
 
 ITEM_NAME_TO_ID = {name: data.code for name, data in lookup_table.items()}
 
+
 def get_random_filler_item_name(world: LegendOfDragoonWorld):
-    filtered_dict = {key: value for key, value in lookup_table.items() if value.classification == ItemClassification.filler}
+    filtered_dict = {key: value for key, value in lookup_table.items() if
+                     value.classification == ItemClassification.filler}
     return world.random.choices([filler for filler in filtered_dict.keys()])[0]
+
 
 def create_item(world: LegendOfDragoonWorld, name: str):
     data = lookup_table[name]
@@ -128,7 +133,6 @@ def setup_equipment(world, itempool):
 def create_all_items(world: LegendOfDragoonWorld):
     itempool: List[LegendOfDragoonItem] = []
 
-
     # set up goods
     goods_pool = get_chapter_goods(world)
     for lod_item in map(world.create_item, goods_pool):
@@ -148,6 +152,7 @@ def create_all_items(world: LegendOfDragoonWorld):
 
     world.multiworld.itempool += itempool
 
+
 def get_chapter_goods(world: LegendOfDragoonWorld) -> Dict[str, LegendOfDragoonItemData]:
     chapter_tables = [
         chapter_one_table,
@@ -166,6 +171,7 @@ def get_chapter_goods(world: LegendOfDragoonWorld) -> Dict[str, LegendOfDragoonI
         chapter_goods.update(table)
 
     return chapter_goods
+
 
 # Make item categories
 item_name_groups: Dict[str, Set[str]] = {}
