@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Dict, TYPE_CHECKING
 
-from worlds.legend_of_dragoon.loc.additions import addition_table
+from worlds.legend_of_dragoon.loc.additions import all_addition_locations_table, chapter_one_addition_unlock_table, \
+    chapter_two_addition_unlock_table, chapter_three_addition_unlock_table, chapter_four_addition_unlock_table
 from worlds.legend_of_dragoon.loc.chests import chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
@@ -16,7 +17,7 @@ if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
 
 location_table: Dict[str, LegendOfDragoonLocationData] = {
-    **addition_table,
+    **all_addition_locations_table,
     # **chests_table,
     **events_table,
     **enemy_table,
@@ -24,7 +25,7 @@ location_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 all_location_table: Dict[str, LegendOfDragoonLocationData] = {
-    **addition_table,
+    **all_addition_locations_table,
     **chests_table,
     **events_table,
     **enemy_table,
@@ -48,9 +49,22 @@ def get_locations_by_category_with_ids(location_category: str) -> Dict[str, int 
     return {location_name: locs[location_name].code for location_name in locs}
 
 
+def get_locations_by_category_in_chapter(category, table):
+    locs: Dict[str, LegendOfDragoonLocationData] = {name: data for name, data in
+                                                    table.items() if
+                                                    data.category == category}
+    return {location_name: locs[location_name].code for location_name in locs}
+
+
 def setup_chapter_one(world):
     create_chapter_one_locations(world)
     setup_chapter_one_events(world)
+
+    categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert"]
+    for category in categories:
+        region = world.get_region(f"{category} Additions")
+        region.add_locations(get_locations_by_category_in_chapter(category, chapter_one_addition_unlock_table),
+                             LegendOfDragoonLocation)
 
 
 def setup_chapter_two(world):
@@ -60,11 +74,11 @@ def setup_chapter_two(world):
     create_chapter_two_locations(world)
     setup_chapter_two_events(world)
 
-    meru_additions = world.get_region("Meru Additions")
-    kongol_additions = world.get_region("Kongol Additions")
-
-    meru_additions.add_locations(get_locations_by_category_with_ids("Meru"), LegendOfDragoonLocation)
-    kongol_additions.add_locations(get_locations_by_category_with_ids("Kongol"), LegendOfDragoonLocation)
+    categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
+    for category in categories:
+        region = world.get_region(f"{category} Additions")
+        region.add_locations(get_locations_by_category_in_chapter(category, chapter_two_addition_unlock_table),
+                             LegendOfDragoonLocation)
 
 
 def setup_chapter_three(world):
@@ -75,6 +89,12 @@ def setup_chapter_three(world):
     create_chapter_three_locations(world)
     setup_chapter_three_events(world)
 
+    categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
+    for category in categories:
+        region = world.get_region(f"{category} Additions")
+        region.add_locations(get_locations_by_category_in_chapter(category, chapter_three_addition_unlock_table),
+                             LegendOfDragoonLocation)
+
 
 def setup_chapter_four(world):
     goal = world.options.lod_completion_condition
@@ -83,6 +103,11 @@ def setup_chapter_four(world):
 
     create_chapter_four_locations(world)
     setup_chapter_four_events(world)
+    categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
+    for category in categories:
+        region = world.get_region(f"{category} Additions")
+        region.add_locations(get_locations_by_category_in_chapter(category, chapter_four_addition_unlock_table),
+                             LegendOfDragoonLocation)
 
 
 def create_all_locations(world: LegendOfDragoonWorld) -> None:
@@ -96,23 +121,8 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
 
 
 def create_regular_locations(world: LegendOfDragoonWorld) -> None:
-    menu = world.get_region("Menu")
-
-    dart_additions = world.get_region("Dart Additions")
-    lavitz_additions = world.get_region("Lavitz Additions")
-    rose_additions = world.get_region("Rose Additions")
-    haschel_additions = world.get_region("Haschel Additions")
-    albert_additions = world.get_region("Albert Additions")
-
     if world.options.enable_shopsanity:
         location_table.update(**shop_table)
-
-    # additions
-    dart_additions.add_locations(get_locations_by_category_with_ids("Dart"), LegendOfDragoonLocation)
-    lavitz_additions.add_locations(get_locations_by_category_with_ids("Lavitz"), LegendOfDragoonLocation)
-    rose_additions.add_locations(get_locations_by_category_with_ids("Rose"), LegendOfDragoonLocation)
-    haschel_additions.add_locations(get_locations_by_category_with_ids("Haschel"), LegendOfDragoonLocation)
-    albert_additions.add_locations(get_locations_by_category_with_ids("Albert"), LegendOfDragoonLocation)
 
 
 def create_chapter_one_locations(world):
@@ -242,7 +252,8 @@ def setup_chapter_one_events(world):
 
     seles.add_event("Defeat Commander", "Commander", location_type=LegendOfDragoonLocation,
                     item_type=LegendOfDragoonItem)
-    hellena_prison_01.add_event("Defeat Fruegel 1", "Fruegel 1", location_type=LegendOfDragoonLocation,
+    hellena_prison_01.add_event("Defeat Fruegel 1", "Fruegel 1",
+                                location_type=LegendOfDragoonLocation,
                                 item_type=LegendOfDragoonItem)
     limestone_cave.add_event("Defeat Urobolus", "Urobolus", location_type=LegendOfDragoonLocation,
                              item_type=LegendOfDragoonItem)
