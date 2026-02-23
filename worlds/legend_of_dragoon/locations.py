@@ -145,9 +145,11 @@ def create_chapter_one_locations(world):
 
     seles.add_locations(get_locations_by_category_with_ids("Seles"), LegendOfDragoonLocation)
     forest.add_locations(get_locations_by_category_with_ids("Forest"), LegendOfDragoonLocation)
+    prairie.add_locations(get_locations_by_category_with_ids("Prairie"), LegendOfDragoonLocation)
     limestone_cave.add_locations(get_locations_by_category_with_ids("Limestone Cave"), LegendOfDragoonLocation)
     bale.add_locations(get_locations_by_category_with_ids("Bale"), LegendOfDragoonLocation)
     hoax.add_locations(get_locations_by_category_with_ids("Hoax"), LegendOfDragoonLocation)
+    marshland.add_locations(get_locations_by_category_with_ids("Marshland"), LegendOfDragoonLocation)
     lohan.add_locations(get_locations_by_category_with_ids("Lohan"), LegendOfDragoonLocation)
     shrine_of_shirley.add_locations(get_locations_by_category_with_ids("Shrine of Shirley"), LegendOfDragoonLocation)
     dragons_nest.add_locations(get_locations_by_category_with_ids("Dragon's Nest"), LegendOfDragoonLocation)
