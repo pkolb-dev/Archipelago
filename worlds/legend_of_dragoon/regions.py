@@ -171,10 +171,10 @@ def connect_chapter_one_regions(world):
     shrine_of_shirley.connect(dragons_nest, "Shrine of Shirley to Dragon's Nest")
     forest.connect(kazas, "Forest to Kazas")
     kazas.connect(forest, "Kazas to Forest")
-    kazas.connect(black_castle, "Kazas to Black Castle")
+    kazas.connect(black_castle, "Kazas to Black Castle", lambda state: state.has("Magic Oil", world.player))
     black_castle.connect(kazas, "Black Castle to Kazas")
     black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room",
-                         lambda state: state.has_all(["Magic Oil", "Blue Stone", "Yellow Stone", "Red Stone"],
+                         lambda state: state.has_all(["Blue Stone", "Yellow Stone", "Red Stone"],
                                                      world.player))
 
 
