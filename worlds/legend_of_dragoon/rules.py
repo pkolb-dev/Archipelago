@@ -179,16 +179,23 @@ def set_chapter_one_rules(world):
     set_rule(lloyd_1_event, lambda state: state.has("Shirley", world.player))
 
     kongol_2 = world.get_location("Kongol 2")
-    set_rule(kongol_2, lambda state: state.has("Magic Oil", world.player))
+    kongol_2_event = world.get_location("Defeat Kongol 2")
+    set_rule(kongol_2,
+             lambda state: state.has_all(["Red Stone", "Blue Stone", "Yellow Stone"], world.player))
+    set_rule(kongol_2_event,
+             lambda state: state.has_all(["Red Stone", "Blue Stone", "Yellow Stone"], world.player))
 
     doel = world.get_location("Dragoon Doel")
-    set_rule(doel, lambda state: state.has_all(["Kongol 2", "Red Stone", "Blue Stone", "Yellow Stone"], world.player))
+    set_rule(doel, lambda state: state.has("Kongol 2", world.player))
 
 
 def set_chapter_two_rules(world):
     goal = world.options.lod_completion_condition
     if goal == CompletionCondition.option_chapter_1:
         return
+
+    mappi_steals_orb = world.get_location("Mappi Steals Orb")
+    set_rule(mappi_steals_orb, lambda state: state.has("Red Dragoon Spirit", world.player))
 
     ghost_commander = world.get_location("Ghost Commander")
     set_rule(ghost_commander, lambda state: state.has("Key to Ship", world.player))

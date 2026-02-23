@@ -167,6 +167,7 @@ def get_chapter_goods(world: LegendOfDragoonWorld) -> Dict[str, LegendOfDragoonI
     )
 
     chapter_goods: Dict[str, LegendOfDragoonItemData] = {}
+    chapter_goods.update(goods_table)
     for table in chapter_tables[:chapter_count]:
         chapter_goods.update(table)
 
