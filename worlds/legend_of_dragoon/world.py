@@ -49,7 +49,6 @@ class LegendOfDragoonWorld(World):
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return {
             "addition_randomizer": self.options.addition_randomizer.value,
-            "random_starting_addition": self.options.random_starting_addition.value,
             "lod_completion_condition": self.options.lod_completion_condition.value,
             "enable_shop_sanity": self.options.enable_shopsanity.value,
             "world_version": self.world_version,

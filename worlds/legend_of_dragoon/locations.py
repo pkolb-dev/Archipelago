@@ -11,7 +11,9 @@ from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationDa
 from worlds.legend_of_dragoon.loc.shops import shop_table
 from .item.item_data import LegendOfDragoonItem
 from .loc.goods import goods_location_table
-from .options import CompletionCondition
+from .options import CompletionCondition, AdditionRandomization
+
+import re
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -33,6 +35,8 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **shop_table,
 }
 
+regex = r"^([\S]*) - ((\S* *)*)(?: Unlock)"
+
 LOCATION_NAME_TO_ID = {name: data.code for name, data in all_location_table.items()}
 
 
@@ -50,8 +54,7 @@ def get_locations_by_category_with_ids(location_category: str) -> Dict[str, int 
 
 
 def get_locations_by_category_in_chapter(category, table):
-    locs: Dict[str, LegendOfDragoonLocationData] = {name: data for name, data in
-                                                    table.items() if
+    locs: Dict[str, LegendOfDragoonLocationData] = {name: data for name, data in table.items() if
                                                     data.category == category}
     return {location_name: locs[location_name].code for location_name in locs}
 
@@ -63,8 +66,14 @@ def setup_chapter_one(world):
     categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert"]
     for category in categories:
         region = world.get_region(f"{category} Additions")
-        region.add_locations(get_locations_by_category_in_chapter(category, chapter_one_addition_unlock_table),
-                             LegendOfDragoonLocation)
+        locations = get_locations_by_category_in_chapter(category, chapter_one_addition_unlock_table)
+        if world.options.addition_randomizer == AdditionRandomization.option_off:
+            for location in locations:
+                match = re.search(regex, location)
+                region.add_event(location, f"{match.group(1)} {match.group(2)}", location_type=LegendOfDragoonLocation,
+                                 item_type=LegendOfDragoonItem)
+        else:
+            region.add_locations(locations, LegendOfDragoonLocation)
 
 
 def setup_chapter_two(world):
@@ -77,8 +86,16 @@ def setup_chapter_two(world):
     categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
     for category in categories:
         region = world.get_region(f"{category} Additions")
-        region.add_locations(get_locations_by_category_in_chapter(category, chapter_two_addition_unlock_table),
-                             LegendOfDragoonLocation)
+        locations = get_locations_by_category_in_chapter(category, chapter_two_addition_unlock_table)
+        if world.options.addition_randomizer == AdditionRandomization.option_off:
+            for location in locations:
+                match = re.search(regex, location)
+                if not match:
+                    continue
+                region.add_event(location, f"{match.group(1)} {match.group(2)}", location_type=LegendOfDragoonLocation,
+                                 item_type=LegendOfDragoonItem)
+        else:
+            region.add_locations(locations, LegendOfDragoonLocation)
 
 
 def setup_chapter_three(world):
@@ -92,8 +109,14 @@ def setup_chapter_three(world):
     categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
     for category in categories:
         region = world.get_region(f"{category} Additions")
-        region.add_locations(get_locations_by_category_in_chapter(category, chapter_three_addition_unlock_table),
-                             LegendOfDragoonLocation)
+        locations = get_locations_by_category_in_chapter(category, chapter_three_addition_unlock_table)
+        if world.options.addition_randomizer == AdditionRandomization.option_off:
+            for location in locations:
+                match = re.search(regex, location)
+                region.add_event(location, f"{match.group(1)} {match.group(2)}", location_type=LegendOfDragoonLocation,
+                                 item_type=LegendOfDragoonItem)
+        else:
+            region.add_locations(locations, LegendOfDragoonLocation)
 
 
 def setup_chapter_four(world):
@@ -106,8 +129,14 @@ def setup_chapter_four(world):
     categories = ["Dart", "Lavitz", "Rose", "Haschel", "Albert", "Meru", "Kongol"]
     for category in categories:
         region = world.get_region(f"{category} Additions")
-        region.add_locations(get_locations_by_category_in_chapter(category, chapter_four_addition_unlock_table),
-                             LegendOfDragoonLocation)
+        locations = get_locations_by_category_in_chapter(category, chapter_four_addition_unlock_table)
+        if world.options.addition_randomizer == AdditionRandomization.option_off:
+            for location in locations:
+                match = re.search(regex, location)
+                region.add_event(location, f"{match.group(1)} {match.group(2)}", location_type=LegendOfDragoonLocation,
+                                 item_type=LegendOfDragoonItem)
+        else:
+            region.add_locations(locations, LegendOfDragoonLocation)
 
 
 def create_all_locations(world: LegendOfDragoonWorld) -> None:

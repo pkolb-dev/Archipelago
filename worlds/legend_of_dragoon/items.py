@@ -9,6 +9,7 @@ from worlds.legend_of_dragoon.item.equipment import equipment_table
 from worlds.legend_of_dragoon.item.goods import goods_table, all_goods_table, chapter_one_table, chapter_two_table, \
     chapter_three_table, chapter_four_table
 from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
+from .options import AdditionRandomization
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -40,25 +41,33 @@ def create_item(world: LegendOfDragoonWorld, name: str):
 
 
 def setup_additions(world):
+    if world.options.addition_randomizer == AdditionRandomization.option_off:
+        return []
+
     itempool = []
-    # TODO enable for progressive additions
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     for key, value in progressive_additions_table.items():
-    #         for i in range(0, value.quantity - 1):
-    #             itempool.append(create_item(world, key))
-    # else:
-    for lod_item in map(world.create_item, additions_table):
-        itempool.append(lod_item)
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+        for key, value in progressive_additions_table.items():
+            for i in range(value.quantity):
+                itempool.append(create_item(world, key))
+    elif world.options.addition_randomizer == AdditionRandomization.option_addition_sanity:
+        for lod_item in map(world.create_item, additions_table):
+            itempool.append(lod_item)
 
     return itempool
 
 
 def configure_starting_additions(world, itempool):
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     for addition in progressive_additions_table.keys():
-    #         progressive_addition = world.create_item(addition)
-    #         world.push_precollected(progressive_addition)
-    if not world.options.random_starting_addition:
+    if world.options.addition_randomizer == AdditionRandomization.option_off:
+        return
+
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+        for addition in progressive_additions_table.keys():
+            progressive_addition = world.create_item(addition)
+            itempool.remove(progressive_addition)
+            world.push_precollected(progressive_addition)
+        return
+
+    if world.options.addition_randomizer == AdditionRandomization.option_addition_sanity:
         double_slash = world.create_item("Dart Double Slash")
         lavitz_harpoon = world.create_item("Lavitz Harpoon")
         whip_smack = world.create_item("Rose Whip Smack")

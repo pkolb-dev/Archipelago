@@ -1,10 +1,12 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle
 
 
 class AdditionRandomization(Choice):
     """
     Controls how character Additions are unlocked.
+    Off:
+        Additions will not be added to the item pool.
 
     Progressive (Character):
         Progressive addition items are added to the item pool
@@ -13,15 +15,13 @@ class AdditionRandomization(Choice):
     Addition Sanity:
         Each addition unlock is its own item in the item pool
         and can be placed in any world.
+        Starting additions are randomly chosen.
     """
     display_name = "Addition Randomization"
 
-    # these will be added later.
     option_off = 0
-    # option_shuffled_character = 1
-    # option_shuffled_party = 2
-    # option_progressive_character = 3
     option_addition_sanity = 1
+    option_progressive_character = 2
 
     default = 0
 
@@ -32,12 +32,6 @@ class Shopsanity(Toggle):
     """
     display_name = "Shopsanity"
     default = True
-
-
-class RandomStartingAddition(Toggle):
-    """Start each character with a random addition unlocked."""
-    display_name = "Random Starting Addition"
-    rich_text_doc = True
 
 
 class CompletionCondition(Choice):
@@ -59,7 +53,6 @@ class CompletionCondition(Choice):
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
     addition_randomizer: AdditionRandomization
-    random_starting_addition: RandomStartingAddition
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
 
@@ -74,9 +67,8 @@ option_groups = [
     OptionGroup("Rando Options", [
         Shopsanity
     ], False),
-    OptionGroup("Starting Choices", [
-        RandomStartingAddition
-    ])
+    # OptionGroup("Starting Choices", [
+    # ])
 ]
 option_presets = {
 

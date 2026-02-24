@@ -20,7 +20,7 @@ rose_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 lavitz_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
     "Lavitz - Spinning Cane Unlock": LegendOfDragoonLocationData("Lavitz", 108_60021, "Addition"),
     "Lavitz - Rod Typhoon Unlock": LegendOfDragoonLocationData("Lavitz", 108_60022, "Addition"),
-    "Lavitz - Gust of Wind Dance Unlock": LegendOfDragoonLocationData("Lavitz", 108_60023, "Addition"),
+    "Lavitz - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Lavitz", 108_60023, "Addition"),
     "Lavitz - Blossom Storm Unlock": LegendOfDragoonLocationData("Lavitz", 108_60024, "Addition"),
 }
 
@@ -35,7 +35,7 @@ haschel_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 albert_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
     "Albert - Spinning Cane Unlock": LegendOfDragoonLocationData("Albert", 108_60031, "Addition"),
     "Albert - Rod Typhoon Unlock": LegendOfDragoonLocationData("Albert", 108_60032, "Addition"),
-    "Albert - Gust of Wind Dance Unlock": LegendOfDragoonLocationData("Albert", 108_60033, "Addition"),
+    "Albert - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Albert", 108_60033, "Addition"),
     "Albert - Blossom Storm Unlock": LegendOfDragoonLocationData("Albert", 108_60034, "Addition"),
 }
 
@@ -68,11 +68,11 @@ chapter_one_addition_unlock_table: Dict[str, LegendOfDragoonLocationData] = {
     "Rose - More and More Unlock": LegendOfDragoonLocationData("Rose", 108_60011, "Addition"),
     "Lavitz - Spinning Cane Unlock": LegendOfDragoonLocationData("Lavitz", 108_60021, "Addition"),
     "Lavitz - Rod Typhoon Unlock": LegendOfDragoonLocationData("Lavitz", 108_60022, "Addition"),
-    "Lavitz - Gust of Wind Dance Unlock": LegendOfDragoonLocationData("Lavitz", 108_60023, "Addition"),
+    "Lavitz - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Lavitz", 108_60023, "Addition"),
     "Lavitz - Blossom Storm Unlock": LegendOfDragoonLocationData("Lavitz", 108_60024, "Addition"),
     "Albert - Spinning Cane Unlock": LegendOfDragoonLocationData("Albert", 108_60031, "Addition"),
     "Albert - Rod Typhoon Unlock": LegendOfDragoonLocationData("Albert", 108_60032, "Addition"),
-    "Albert - Gust of Wind Dance Unlock": LegendOfDragoonLocationData("Albert", 108_60033, "Addition"),
+    "Albert - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Albert", 108_60033, "Addition"),
     "Albert - Blossom Storm Unlock": LegendOfDragoonLocationData("Albert", 108_60034, "Addition"),
     "Haschel - Flurry of Styx Unlock": LegendOfDragoonLocationData("Haschel", 108_60041, "Addition"),
 }
