@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from worlds.generic.Rules import set_rule
-from .options import CompletionCondition
+from .options import CompletionCondition, AdditionRandomization
 from .regions import visualize_world
 
 if TYPE_CHECKING:
@@ -252,12 +252,12 @@ def set_chapter_one_addition_unlock_rules(world):
     rose_more_more = world.get_location("Rose - More and More Unlock")
     lavitz_spinning_cane = world.get_location("Lavitz - Spinning Cane Unlock")
     lavitz_rod_typhoon = world.get_location("Lavitz - Rod Typhoon Unlock")
-    lavitz_gust_of_wind_dance = world.get_location("Lavitz - Gust of Wind Dance Unlock")
-    lavitz_blossom_storm = world.get_location("Lavitz - Blossom Storm Unlock")
+    lavitz_gust_of_wind_dance = world.get_location("Lavitz - Gust Of Wind Dance Unlock")
+    lavitz_blossom_storm = world.get_location("Lavitz - Flower Storm Unlock")
     albert_spinning_cane = world.get_location("Albert - Spinning Cane Unlock")
     albert_rod_typhoon = world.get_location("Albert - Rod Typhoon Unlock")
-    albert_gust_of_wind_dance = world.get_location("Albert - Gust of Wind Dance Unlock")
-    albert_blossom_storm = world.get_location("Albert - Blossom Storm Unlock")
+    albert_gust_of_wind_dance = world.get_location("Albert - Gust Of Wind Dance Unlock")
+    albert_blossom_storm = world.get_location("Albert - Flower Storm Unlock")
     haschel_flurry_of_styx = world.get_location("Haschel - Flurry of Styx Unlock")
 
     set_rule(dart_burning_rush, lambda state: state.has("Kongol 1", world.player))
@@ -271,33 +271,32 @@ def set_chapter_one_addition_unlock_rules(world):
     set_rule(albert_gust_of_wind_dance, lambda state: state.has("Shirley", world.player))
     set_rule(haschel_flurry_of_styx, lambda state: state.has("Dragoon Doel", world.player))
 
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     set_rule(lavitz_blossom_storm, lambda state: state.has("Lavitz Progressive Addition", world.player, 4))
-    #     set_rule(albert_blossom_storm, lambda state: state.has("Albert Progressive Addition", world.player, 4))
-    # else:
-
-    set_rule(
-        lavitz_blossom_storm,
-        lambda state: (
-            state.has_all((
-                "Lavitz Harpoon",
-                "Lavitz Spinning Cane",
-                "Lavitz Rod Typhoon",
-                "Lavitz Gust Of Wind Dance",
-            ), world.player)
-        ),
-    )
-    set_rule(
-        albert_blossom_storm,
-        lambda state: (
-            state.has_all((
-                "Albert Harpoon",
-                "Albert Spinning Cane",
-                "Albert Rod Typhoon",
-                "Albert Gust Of Wind Dance",
-            ), world.player)
-        ),
-    )
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+        set_rule(lavitz_blossom_storm, lambda state: state.has("Lavitz Progressive Addition", world.player, 4))
+        set_rule(albert_blossom_storm, lambda state: state.has("Albert Progressive Addition", world.player, 4))
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+        set_rule(
+            lavitz_blossom_storm,
+            lambda state: (
+                state.has_all((
+                    "Lavitz Harpoon",
+                    "Lavitz Spinning Cane",
+                    "Lavitz Rod Typhoon",
+                    "Lavitz Gust Of Wind Dance",
+                ), world.player)
+            ),
+        )
+        set_rule(
+            albert_blossom_storm,
+            lambda state: (
+                state.has_all((
+                    "Albert Harpoon",
+                    "Albert Spinning Cane",
+                    "Albert Rod Typhoon",
+                    "Albert Gust Of Wind Dance",
+                ), world.player)
+            ),
+        )
 
 
 def set_chapter_two_addition_unlock_rules(world):
@@ -313,19 +312,19 @@ def set_chapter_two_addition_unlock_rules(world):
     set_rule(haschel_summon_4_gods, lambda state: state.has("Gehrich", world.player))
     set_rule(meru_hammer_spin, lambda state: state.has("Lenus 2", world.player))
 
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     set_rule(demons_dance, lambda state: state.has("Rose Progressive Addition", world.player, 3))
-    # else:
-    set_rule(
-        demons_dance,
-        lambda state: (
-            state.has_all((
-                "Rose Whip Smack",
-                "Rose More More",
-                "Rose Hard Blade",
-            ), world.player)
-        ),
-    )
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+        set_rule(demons_dance, lambda state: state.has("Rose Progressive Addition", world.player, 3))
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+        set_rule(
+            demons_dance,
+            lambda state: (
+                state.has_all((
+                    "Rose Whip Smack",
+                    "Rose More More",
+                    "Rose Hard Blade",
+                ), world.player)
+            ),
+        )
 
 
 def set_chapter_three_addition_unlock_rules(world):
@@ -348,31 +347,31 @@ def set_chapter_three_addition_unlock_rules(world):
 
     set_rule(kongol_inferno, lambda state: state.has("Divine Dragon", world.player))
 
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     set_rule(omni_sweep, lambda state: state.has("Haschel Progressive Addition", world.player, 5))
-    #     set_rule(bone_crush, lambda state: state.has("Kongol Progressive Addition", world.player, 2))
-    # else:
-    set_rule(
-        omni_sweep,
-        lambda state: (
-            state.has_all((
-                "Haschel Double Punch",
-                "Haschel Ferry Of Styx",
-                "Haschel Summon 4 Gods",
-                "Haschel Five Ring Shattering",
-                "Haschel Hex Hammer",
-            ), world.player)
-        ),
-    )
-    set_rule(
-        bone_crush,
-        lambda state: (
-            state.has_all((
-                "Kongol Pursuit",
-                "Kongol Inferno",
-            ), world.player)
-        ),
-    )
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+        set_rule(omni_sweep, lambda state: state.has("Haschel Progressive Addition", world.player, 5))
+        set_rule(bone_crush, lambda state: state.has("Kongol Progressive Addition", world.player, 2))
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+        set_rule(
+            omni_sweep,
+            lambda state: (
+                state.has_all((
+                    "Haschel Double Punch",
+                    "Haschel Ferry Of Styx",
+                    "Haschel Summon 4 Gods",
+                    "Haschel Five Ring Shattering",
+                    "Haschel Hex Hammer",
+                ), world.player)
+            ),
+        )
+        set_rule(
+            bone_crush,
+            lambda state: (
+                state.has_all((
+                    "Kongol Pursuit",
+                    "Kongol Inferno",
+                ), world.player)
+            ),
+        )
 
 
 def set_chapter_four_addition_unlock_rules(world):
@@ -387,34 +386,34 @@ def set_chapter_four_addition_unlock_rules(world):
     set_rule(dart_moon_strike, lambda state: state.has("Lloyd 2", world.player))
     set_rule(meru_cats_cradle, lambda state: state.has("Kraken", world.player))
 
-    # if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
-    #     set_rule(blazing_dynamo, lambda state: state.has("Dart Progressive Addition", world.player, 6))
-    #     set_rule(perky_step, lambda state: state.has("Meru Progressive Addition", world.player, 4))
-    # else:
-    set_rule(
-        blazing_dynamo,
-        lambda state: (
-            state.has_all((
-                "Dart Double Slash",
-                "Dart Volcano",
-                "Dart Burning Rush",
-                "Dart Crush Dance",
-                "Dart Madness Hero",
-                "Dart Moon Strike",
-            ), world.player)
-        ),
-    )
-    set_rule(
-        perky_step,
-        lambda state: (
-            state.has_all((
-                "Meru Double Smack",
-                "Meru Hammer Spin",
-                "Meru Cool Boogie",
-                "Meru Cats Cradle",
-            ), world.player)
-        ),
-    )
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+        set_rule(blazing_dynamo, lambda state: state.has("Dart Progressive Addition", world.player, 6))
+        set_rule(perky_step, lambda state: state.has("Meru Progressive Addition", world.player, 4))
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+        set_rule(
+            blazing_dynamo,
+            lambda state: (
+                state.has_all((
+                    "Dart Double Slash",
+                    "Dart Volcano",
+                    "Dart Burning Rush",
+                    "Dart Crush Dance",
+                    "Dart Madness Hero",
+                    "Dart Moon Strike",
+                ), world.player)
+            ),
+        )
+        set_rule(
+            perky_step,
+            lambda state: (
+                state.has_all((
+                    "Meru Double Smack",
+                    "Meru Hammer Spin",
+                    "Meru Cool Boogie",
+                    "Meru Cats Cradle",
+                ), world.player)
+            ),
+        )
 
 
 def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:

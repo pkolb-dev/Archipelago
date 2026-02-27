@@ -1,6 +1,7 @@
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
+from ..options import CompletionCondition
 
 dart_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Dart Double Slash": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30002, IC.progression),
@@ -58,7 +59,17 @@ kongol_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Kongol Bone Crush": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30042, IC.progression),
 }
 
-additions_table: Dict[str, LegendOfDragoonItemData] = {
+all_character_addition_items: Dict[str, Dict[str, LegendOfDragoonItemData]] = {
+    "Dart": dart_additions_table,
+    "Lavitz": lavitz_additions_table,
+    "Rose": rose_additions_table,
+    "Haschel": haschel_additions_table,
+    "Albert": albert_additions_table,
+    "Meru": meru_additions_table,
+    "Kongol": kongol_additions_table,
+}
+
+all_addition_items: Dict[str, LegendOfDragoonItemData] = {
     **dart_additions_table,
     **lavitz_additions_table,
     **rose_additions_table,
@@ -78,7 +89,77 @@ progressive_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Kongol Progressive Addition": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30039, IC.progression, 3),
 }
 
-all_additions: Dict[str, LegendOfDragoonItemData] = {
-    **additions_table,
-    **progressive_additions_table,
+
+def get_active_characters(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
+    """Return the character addition tables for the current completion goal."""
+    characters = all_character_addition_items.copy()
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
+        characters.pop("Meru")
+        characters.pop("Kongol")
+
+    return characters
+
+
+chapter_addition_order: dict[int, list[str]] = {
+    1: [
+        "Dart Double Slash",
+        "Dart Volcano",
+        "Dart Burning Rush",
+        "Dart Crush Dance",
+        "Rose Whip Smack",
+        "Rose More More",
+        "Lavitz Harpoon",
+        "Lavitz Spinning Cane",
+        "Lavitz Rod Typhoon",
+        "Lavitz Gust Of Wind Dance",
+        "Lavitz Flower Storm",
+        "Albert Harpoon",
+        "Albert Spinning Cane",
+        "Albert Rod Typhoon",
+        "Albert Gust Of Wind Dance",
+        "Albert Flower Storm",
+        "Haschel Double Punch",
+        "Haschel Ferry Of Styx"
+    ],
+    2: [
+        "Rose Hard Blade",
+        "Rose Demons Dance",
+        "Haschel Summon 4 Gods",
+        "Meru Double Smack",
+        "Meru Hammer Spin",
+        "Kongol Pursuit"
+    ],
+    3: [
+        "Dart Madness Hero",
+        "Haschel Five Ring Shattering",
+        "Haschel Hex Hammer",
+        "Haschel Omni Sweep",
+        "Meru Cool Boogie",
+        "Kongol Inferno",
+        "Kongol Bone Crush",
+    ],
+    4: [
+        "Dart Moon Strike",
+        "Dart Blazing Dynamo",
+        "Meru Cats Cradle",
+        "Meru Perky Step",
+    ],
 }
+
+
+def build_chapter_addition_item_table(chapter: int) -> Dict[str, LegendOfDragoonItemData]:
+    """Return a dict of additions for a specific chapter."""
+    active_names = chapter_addition_order.get(chapter, [])
+    table: Dict[str, LegendOfDragoonItemData] = {}
+    for char, char_table in all_character_addition_items.items():
+        for name, item_data in char_table.items():
+            if name in active_names:
+                table[name] = item_data
+    return table
+
+
+chapter_one_addition_item_table = build_chapter_addition_item_table(1)
+chapter_two_addition_item_table = build_chapter_addition_item_table(2)
+chapter_three_addition_item_table = build_chapter_addition_item_table(3)
+chapter_four_addition_item_table = build_chapter_addition_item_table(4)

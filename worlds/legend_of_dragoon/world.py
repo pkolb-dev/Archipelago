@@ -5,7 +5,10 @@ from BaseClasses import CollectionState, MultiWorld
 from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world, options as lod_options
 from .game_id import lod_name
+from .item.additions import dart_additions_table, lavitz_additions_table, rose_additions_table, haschel_additions_table, \
+    albert_additions_table, meru_additions_table, kongol_additions_table
 from .item.item_data import LegendOfDragoonItem
+from .options import CompletionCondition
 
 
 class LegendOfDragoonWorld(World):
@@ -49,7 +52,6 @@ class LegendOfDragoonWorld(World):
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return {
             "addition_randomizer": self.options.addition_randomizer.value,
-            "random_starting_addition": self.options.random_starting_addition.value,
             "lod_completion_condition": self.options.lod_completion_condition.value,
             "enable_shop_sanity": self.options.enable_shopsanity.value,
             "world_version": self.world_version,
