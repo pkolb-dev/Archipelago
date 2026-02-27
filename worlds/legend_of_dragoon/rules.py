@@ -137,7 +137,8 @@ def set_chapter_four_entrance_rules(world):
     set_rule(aglis_to_zenebatos, lambda state: state.has("Kraken", world.player))
 
     zenebatos_to_mayfil = world.get_entrance("Zenebatos to Mayfil")
-    set_rule(zenebatos_to_mayfil, lambda state: state.has("Law Output", world.player))
+    set_rule(zenebatos_to_mayfil,
+             lambda state: state.has_all(["Law Making License", "Law Launching License"], world.player))
 
     mayfil_to_divine_tree = world.get_entrance("Mayfil to Divine Tree")
     set_rule(mayfil_to_divine_tree, lambda state: state.has("Zackwell", world.player))
@@ -216,9 +217,9 @@ def set_chapter_four_rules(world):
     selebus = world.get_location("Defeat Selebus")
     vector = world.get_location("Defeat Vector")
 
-    set_rule(kubila, lambda state: state.has("Law Output", world.player))
-    set_rule(selebus, lambda state: state.has("Law Output", world.player))
-    set_rule(vector, lambda state: state.has("Law Output", world.player))
+    set_rule(kubila, lambda state: state.has_all(["Law Making License", "Law Launching License"], world.player))
+    set_rule(selebus, lambda state: state.has_all(["Law Making License", "Law Launching License"], world.player))
+    set_rule(vector, lambda state: state.has_all(["Law Making License", "Law Launching License"], world.player))
 
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
