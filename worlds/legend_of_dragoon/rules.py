@@ -253,11 +253,11 @@ def set_chapter_one_addition_unlock_rules(world):
     lavitz_spinning_cane = world.get_location("Lavitz - Spinning Cane Unlock")
     lavitz_rod_typhoon = world.get_location("Lavitz - Rod Typhoon Unlock")
     lavitz_gust_of_wind_dance = world.get_location("Lavitz - Gust Of Wind Dance Unlock")
-    lavitz_blossom_storm = world.get_location("Lavitz - Blossom Storm Unlock")
+    lavitz_blossom_storm = world.get_location("Lavitz - Flower Storm Unlock")
     albert_spinning_cane = world.get_location("Albert - Spinning Cane Unlock")
     albert_rod_typhoon = world.get_location("Albert - Rod Typhoon Unlock")
     albert_gust_of_wind_dance = world.get_location("Albert - Gust Of Wind Dance Unlock")
-    albert_blossom_storm = world.get_location("Albert - Blossom Storm Unlock")
+    albert_blossom_storm = world.get_location("Albert - Flower Storm Unlock")
     haschel_flurry_of_styx = world.get_location("Haschel - Flurry of Styx Unlock")
 
     set_rule(dart_burning_rush, lambda state: state.has("Kongol 1", world.player))

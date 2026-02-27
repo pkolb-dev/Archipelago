@@ -4,21 +4,17 @@ from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification
 
 goods_table: Dict[str, LegendOfDragoonItemData] = {
     "Red Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20001, IC.progression),
-    "Blue Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20002, IC.progression),
     "Jade Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20003, IC.progression),
-    "Gold Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20004, IC.progression),
     "Violet Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20005, IC.progression),
     "Silver Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20006, IC.progression),
     "Dark Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20007, IC.progression),
-    "Divine Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20008, IC.progression),
-    # "Gold Dragoon Spirit 2": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20034, IC.useful),
     # "Shiny Bag":             LegendOfDragoonItemData(ItemCategory.GOOD, 108_20014, IC.progression),
     # "Magic Shiny Bag":       LegendOfDragoonItemData(ItemCategory.GOOD, 108_20035, IC.progression),
 }
 
 chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
-    "War Bulletin": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20009, IC.filler),
-    "Fathers Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20010, IC.filler),
+    # "War Bulletin": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20009, IC.filler),
+    # "Fathers Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20010, IC.filler),
     "Prison Key": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20011, IC.progression),
     "Axe from the Shack": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20012, IC.progression),
     "Good Spirits": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20013, IC.progression),
@@ -36,6 +32,9 @@ chapter_two_table: Dict[str, LegendOfDragoonItemData] = {
     "Pass for Valley": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20022, IC.progression),
     "Kates Bouquet": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20023, IC.useful),
     "Key to Ship": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20024, IC.progression),
+    "Gold Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20004, IC.progression),
+    # "Gold Dragoon Spirit 2": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20034, IC.useful),
+    "Blue Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20002, IC.progression),
 }
 
 chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
@@ -53,6 +52,7 @@ chapter_four_table: Dict[str, LegendOfDragoonItemData] = {
     "Law Output": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
     # "Omega Bomb":            LegendOfDragoonItemData(ItemCategory.GOOD, 108_20030, IC.progression),
     # "Omega Master":          LegendOfDragoonItemData(ItemCategory.GOOD, 108_20031, IC.progression),
+    "Divine Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20008, IC.progression),
 }
 
 all_goods_table: Dict[str, LegendOfDragoonItemData] = {
