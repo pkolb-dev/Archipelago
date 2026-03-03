@@ -105,11 +105,10 @@ def configure_starting_additions(world, itempool):
     if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
         for character_name in active_characters.keys():
             progressive_name = f"{character_name} Progressive Addition"
-            if progressive_name in allowed_additions:
-                item = world.create_item(progressive_name)
-                if item in itempool:
-                    itempool.remove(item)
-                    world.push_precollected(item)
+            progressive_item = world.create_item(progressive_name)
+            if progressive_item in itempool:
+                itempool.remove(progressive_item)
+                world.push_precollected(progressive_item)
         return
 
     if world.options.addition_randomizer == AdditionRandomization.option_addition_sanity:
