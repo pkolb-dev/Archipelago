@@ -144,15 +144,16 @@ class TestProgressiveAdditionsChapter1(LegendOfDragoonTestBase):
         total_progressive_additions = len(dart_progressive_additions) + len(lavitz_progressive_additions) + len(
             rose_progressive_additions) + len(haschel_progressive_additions) + len(albert_progressive_additions) + len(
             meru_progressive_additions) + len(kongol_progressive_additions)
-
-        self.assertEqual(len(dart_progressive_additions), 4)
-        self.assertEqual(len(lavitz_progressive_additions), 5)
-        self.assertEqual(len(rose_progressive_additions), 2)
-        self.assertEqual(len(haschel_progressive_additions), 2)
-        self.assertEqual(len(albert_progressive_additions), 5)
-        self.assertEqual(len(meru_progressive_additions), 0)
-        self.assertEqual(len(kongol_progressive_additions), 0)
-        self.assertEqual(total_progressive_additions, len(items.keys()))
+        precollected_items = len(self.multiworld.precollected_items[self.player])
+        self.assertEqual(5, precollected_items)
+        self.assertEqual(3, len(dart_progressive_additions))
+        self.assertEqual(4, len(lavitz_progressive_additions))
+        self.assertEqual(1, len(rose_progressive_additions))
+        self.assertEqual(1, len(haschel_progressive_additions))
+        self.assertEqual(4, len(albert_progressive_additions))
+        self.assertEqual(0, len(meru_progressive_additions))
+        self.assertEqual(0, len(kongol_progressive_additions))
+        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
 
 
 class TestProgressiveAdditionsChapter2(LegendOfDragoonTestBase):
@@ -182,14 +183,17 @@ class TestProgressiveAdditionsChapter2(LegendOfDragoonTestBase):
             rose_progressive_additions) + len(haschel_progressive_additions) + len(albert_progressive_additions) + len(
             meru_progressive_additions) + len(kongol_progressive_additions)
 
-        self.assertEqual(len(dart_progressive_additions), 4)
-        self.assertEqual(len(lavitz_progressive_additions), 5)
-        self.assertEqual(len(rose_progressive_additions), 4)
-        self.assertEqual(len(haschel_progressive_additions), 3)
-        self.assertEqual(len(albert_progressive_additions), 5)
-        self.assertEqual(len(meru_progressive_additions), 2)
-        self.assertEqual(len(kongol_progressive_additions), 1)
-        self.assertEqual(total_progressive_additions, len(items.keys()))
+        precollected_items = len(self.multiworld.precollected_items[self.player])
+        self.assertEqual(7, precollected_items)
+        self.assertEqual(3, len(dart_progressive_additions))
+        self.assertEqual(4, len(lavitz_progressive_additions))
+        self.assertEqual(3, len(rose_progressive_additions))
+        self.assertEqual(2, len(haschel_progressive_additions))
+        self.assertEqual(4, len(albert_progressive_additions))
+        self.assertEqual(1, len(meru_progressive_additions))
+        self.assertEqual(0, len(kongol_progressive_additions))
+
+        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
 
 
 class TestProgressiveAdditionsChapter3(LegendOfDragoonTestBase):
@@ -220,14 +224,16 @@ class TestProgressiveAdditionsChapter3(LegendOfDragoonTestBase):
             rose_progressive_additions) + len(haschel_progressive_additions) + len(albert_progressive_additions) + len(
             meru_progressive_additions) + len(kongol_progressive_additions)
 
-        self.assertEqual(len(dart_progressive_additions), 5)
-        self.assertEqual(len(lavitz_progressive_additions), 5)
-        self.assertEqual(len(rose_progressive_additions), 4)
-        self.assertEqual(len(haschel_progressive_additions), 6)
-        self.assertEqual(len(albert_progressive_additions), 5)
-        self.assertEqual(len(meru_progressive_additions), 3)
-        self.assertEqual(len(kongol_progressive_additions), 3)
-        self.assertEqual(total_progressive_additions, len(items.keys()))
+        precollected_items = len(self.multiworld.precollected_items[self.player])
+        self.assertEqual(7, precollected_items)
+        self.assertEqual(4, len(dart_progressive_additions))
+        self.assertEqual(4, len(lavitz_progressive_additions))
+        self.assertEqual(3, len(rose_progressive_additions))
+        self.assertEqual(5, len(haschel_progressive_additions))
+        self.assertEqual(4, len(albert_progressive_additions))
+        self.assertEqual(2, len(meru_progressive_additions))
+        self.assertEqual(2, len(kongol_progressive_additions))
+        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
 
 
 class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
@@ -259,11 +265,14 @@ class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
             rose_progressive_additions) + len(haschel_progressive_additions) + len(albert_progressive_additions) + len(
             meru_progressive_additions) + len(kongol_progressive_additions)
 
-        self.assertEqual(len(dart_progressive_additions), 7)
-        self.assertEqual(len(lavitz_progressive_additions), 5)
-        self.assertEqual(len(rose_progressive_additions), 4)
-        self.assertEqual(len(haschel_progressive_additions), 6)
-        self.assertEqual(len(albert_progressive_additions), 5)
-        self.assertEqual(len(meru_progressive_additions), 5)
-        self.assertEqual(len(kongol_progressive_additions), 3)
-        self.assertEqual(total_progressive_additions, len(items.keys()))
+        precollected_items = len(self.multiworld.precollected_items[self.player])
+        self.assertEqual(7, precollected_items)
+        self.assertEqual(6, len(dart_progressive_additions))
+        self.assertEqual(4, len(lavitz_progressive_additions))
+        self.assertEqual(3, len(rose_progressive_additions))
+        self.assertEqual(5, len(haschel_progressive_additions))
+        self.assertEqual(4, len(albert_progressive_additions))
+        self.assertEqual(4, len(meru_progressive_additions))
+        self.assertEqual(2, len(kongol_progressive_additions))
+
+        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
