@@ -176,6 +176,17 @@ def set_chapter_one_rules(world):
     urobolus_event = world.get_location("Defeat Urobolus")
     set_rule(urobolus_event, lambda state: state.has("Fruegel 1", world.player))
 
+    gorgaga = world.get_location("Gorgaga")
+    serfius = world.get_location("Serfius")
+    atlow = world.get_location("Atlow")
+    danton = world.get_location("Danton")
+    lloyd_1 = world.get_location("Lloyd 1")
+    set_rule(gorgaga, lambda state: state.has("Shirley", world.player))
+    set_rule(serfius, lambda state: state.has("Shirley", world.player))
+    set_rule(atlow, lambda state: state.has("Shirley", world.player))
+    set_rule(danton, lambda state: state.has("Shirley", world.player))
+    set_rule(lloyd_1, lambda state: state.has("Shirley", world.player))
+
     lloyd_1_event = world.get_location("Lose to Lloyd")
     set_rule(lloyd_1_event, lambda state: state.has("Shirley", world.player))
 
@@ -186,8 +197,10 @@ def set_chapter_one_rules(world):
     set_rule(kongol_2_event,
              lambda state: state.has_all(["Red Stone", "Blue Stone", "Yellow Stone"], world.player))
 
+    doel_event = world.get_location("Defeat Dragoon Doel")
     doel = world.get_location("Dragoon Doel")
     set_rule(doel, lambda state: state.has("Kongol 2", world.player))
+    set_rule(doel_event, lambda state: state.has("Kongol 2", world.player))
 
 
 def set_chapter_two_rules(world):
