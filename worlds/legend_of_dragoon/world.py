@@ -2,6 +2,7 @@ from typing import Mapping, Any
 
 import Utils
 from BaseClasses import CollectionState, MultiWorld
+from rule_builder.cached_world import CachedRuleBuilderWorld
 from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world, options as lod_options
 from .game_id import lod_name
@@ -11,7 +12,7 @@ from .item.item_data import LegendOfDragoonItem
 from .options import CompletionCondition
 
 
-class LegendOfDragoonWorld(World):
+class LegendOfDragoonWorld(CachedRuleBuilderWorld):
     """
     The Legend of Dragoon is a role-playing game developed and published by Sony Computer Entertainment for the video game console PlayStation.
     It was first released in Japan on December 2, 1999, in North America on June 11, 2000, and on January 19, 2001 in Europe.
