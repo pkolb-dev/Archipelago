@@ -3,6 +3,7 @@ from typing import List, NamedTuple, Optional, TYPE_CHECKING
 
 import Utils
 from BaseClasses import Region, MultiWorld, CollectionState
+from rule_builder.rules import Has, HasAll
 from .options import CompletionCondition
 
 if TYPE_CHECKING:
@@ -146,24 +147,24 @@ def connect_chapter_one_regions(world):
     forest.connect(seles, "Forest to Seles")
     forest.connect(hellena_prison_01, "Forest to Hellena Prison 01")
     forest.connect(prairie, "Forest to Prairie")
-    hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest", lambda state: state.has("Fruegel 1", world.player))
+    hellena_prison_01.connect(forest, "Hellena Prison 01 to Forest", Has("Fruegel 1"))
     hellena_prison_01.connect(hellena_prison_02, "Hellena Prison 01 to 02",
-                              lambda state: state.has("Lloyd 1", world.player))
+                              Has("Lloyd 1"))
     hellena_prison_02.connect(hellena_prison_01, "Hellena Prison 02 to 01",
-                              lambda state: state.has("Lloyd 1", world.player))
+                              Has("Lloyd 1"))
     prairie.connect(forest, "Prairie to Forest")
     prairie.connect(limestone_cave, "Prairie to Limestone Cave")
     limestone_cave.connect(prairie, "Limestone Cave to Prairie")
-    limestone_cave.connect(bale, "Limestone Cave to Bale", lambda state: state.has("Urobolus", world.player))
+    limestone_cave.connect(bale, "Limestone Cave to Bale", Has("Urobolus"))
     bale.connect(limestone_cave, "Bale to Limestone Cave")
     bale.connect(hoax, "Bale to Hoax")
     hoax.connect(bale, "Hoax to Bale")
-    hoax.connect(marshland, "Hoax to Marshland", lambda state: state.has("Kongol 1", world.player))
+    hoax.connect(marshland, "Hoax to Marshland", Has("Kongol 1"))
     marshland.connect(hoax, "Marshland to Hoax")
     marshland.connect(volcano_villude, "Marshland to Volcano Villude")
     volcano_villude.connect(marshland, "Volcano Villude to Marshland")
     volcano_villude.connect(dragons_nest, "Volcano Villude to Dragon's Nest",
-                            lambda state: state.has("Firebird", world.player))
+                            Has("Firebird"))
     dragons_nest.connect(volcano_villude, "Dragon's Nest to Volcano Villude")
     dragons_nest.connect(lohan, "Dragon's Nest to Lohan")
     lohan.connect(dragons_nest, "Lohan to Dragon's Nest")
@@ -171,11 +172,10 @@ def connect_chapter_one_regions(world):
     shrine_of_shirley.connect(dragons_nest, "Shrine of Shirley to Dragon's Nest")
     forest.connect(kazas, "Forest to Kazas")
     kazas.connect(forest, "Kazas to Forest")
-    kazas.connect(black_castle, "Kazas to Black Castle", lambda state: state.has("Magic Oil", world.player))
+    kazas.connect(black_castle, "Kazas to Black Castle", Has("Magic Oil"))
     black_castle.connect(kazas, "Black Castle to Kazas")
     black_castle.connect(black_castle_throne_room, "Black Castle to Black Castle Throne Room",
-                         lambda state: state.has_all(["Blue Stone", "Yellow Stone", "Red Stone"],
-                                                     world.player))
+                         HasAll("Blue Stone", "Yellow Stone", "Red Stone"))
 
 
 def connect_chapter_two_regions(world):
@@ -205,7 +205,7 @@ def connect_chapter_two_regions(world):
     barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity")
     valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
     valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto",
-                                        lambda state: state.has("Valley Virage", world.player))
+                                        Has("Valley Virage"))
     home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
     donau.connect(queen_fury, "Donau to Queen Fury")
     queen_fury.connect(donau, "Queen Fury to Donau")
@@ -215,7 +215,7 @@ def connect_chapter_two_regions(world):
     underwater_cavern.connect(lidiera, "Underwater Cavern to Lidiera")
     underwater_cavern.connect(fueno, "Underwater Cavern to Fueno")
     fueno.connect(underwater_cavern, "Fueno to Underwater Cavern")
-    fueno.connect(queen_fury, "Fueno to Queen Fury", lambda state: state.has("Lenus 2", world.player))
+    fueno.connect(queen_fury, "Fueno to Queen Fury", Has("Lenus 2"))
 
 
 def connect_chapter_three_regions(world):
@@ -237,7 +237,7 @@ def connect_chapter_three_regions(world):
     fort_magrad = world.get_region("Fort Magrad")
     vellweb = world.get_region("Vellweb")
 
-    queen_fury.connect(furni, "Queen Fury to Furni", lambda state: state.has("Lenus 2", world.player))
+    queen_fury.connect(furni, "Queen Fury to Furni", Has("Lenus 2"))
     furni.connect(evergreen_forest, "Furni to Evergreen Forest")
     evergreen_forest.connect(furni, "Evergreen Forest to Furni")
     evergreen_forest.connect(deningrad, "Evergreen Forest to Deningrad")
