@@ -8,7 +8,7 @@ from worlds.legend_of_dragoon.loc.chests import chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocation
-from worlds.legend_of_dragoon.loc.shops import shop_table
+from worlds.legend_of_dragoon.loc.shops import shop_table, get_all_shops
 from .item.item_data import LegendOfDragoonItem
 from .loc.goods import goods_location_table
 from .options import CompletionCondition, AdditionRandomization
@@ -24,7 +24,7 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **events_table,
     **enemy_table,
     **goods_location_table,
-    **shop_table,
+    **get_all_shops(),
 }
 
 dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
@@ -32,8 +32,6 @@ dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **events_table,
     **chests_table,
 }
-
-LOCATION_NAME_TO_ID = {name: data.code for name, data in all_location_table.items()}
 
 
 def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
@@ -137,8 +135,63 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
 
 
 def create_regular_locations(world: LegendOfDragoonWorld) -> None:
-    if world.options.enable_shopsanity:
-        dynamic_location_table.update(**shop_table)
+    configureShopsanity(world)
+
+
+def configureShopsanity(world: LegendOfDragoonWorld) -> None:
+    if not world.options.enable_shopsanity.value:
+        return
+    # now we go through each shop and add the number of locations per options.
+    create_shop_location(world.options.bale_equipment_shop_slots.value, "Bale Equipment Shop")
+    create_shop_location(world.options.serdio_item_shop_slots.value, "Bale Item Shop")
+    create_shop_location(world.options.lohan_equipment_shop_slots.value, "Lohan Equipment Shop")
+    create_shop_location(world.options.lohan_item_shop_slots.value, "Lohan Item Shop")
+    create_shop_location(world.options.kazas_equipment_shop_slots.value, "Kazas Equipment Shop")
+    create_shop_location(world.options.kazas_fort_item_shop_slots.value, "Kazas Fort Item Shop")
+    create_shop_location(world.options.fletz_equipment_shop_slots.value, "Fletz Equipment Shop")
+    create_shop_location(world.options.fletz_item_shop_slots.value, "Fletz Item Shop")
+    create_shop_location(world.options.donau_equipment_shop_slots.value, "Donau Equipment Shop")
+    create_shop_location(world.options.donau_item_shop_slots.value, "Donau Item Shop")
+    create_shop_location(world.options.queen_fury_equipment_shop_slots.value, "Queen Fury Equipment Shop")
+    create_shop_location(world.options.queen_fury_item_shop_slots.value, "Queen Fury Item Shop")
+    create_shop_location(world.options.fueno_equipment_shop_slots.value, "Fueno Equipment Shop")
+    create_shop_location(world.options.fueno_item_shop_slots.value, "Fueno Item Shop")
+    create_shop_location(world.options.furni_equipment_shop_slots.value, "Furni Equipment Shop")
+    create_shop_location(world.options.furni_item_shop_slots.value, "Furni Item Shop")
+    create_shop_location(world.options.deningrad_equipment_shop_slots.value, "Deningrad Equipment Shop")
+    create_shop_location(world.options.deningrad_item_shop_slots.value, "Deningrad Item Shop")
+    create_shop_location(world.options.wingly_forest_equipment_shop_slots.value, "Wingly Forest Equipment Shop")
+    create_shop_location(world.options.wingly_forest_item_shop_slots.value, "Wingly Forest Item Shop")
+    create_shop_location(world.options.vellweb_equipment_shop_slots.value, "Vellweb Equipment Shop")
+    create_shop_location(world.options.vellweb_item_shop_slots.value, "Vellweb Item Shop")
+    create_shop_location(world.options.ulara_equipment_shop_slots.value, "Ulara Equipment Shop")
+    create_shop_location(world.options.ulara_item_shop_slots.value, "Ulara Item Shop")
+    create_shop_location(world.options.rouge_equipment_shop_slots.value, "Rouge Equipment Shop")
+    create_shop_location(world.options.rouge_item_shop_slots.value, "Rouge Item Shop")
+    create_shop_location(world.options.moon_equipment_shop_slots.value, "Moon Equipment Shop")
+    create_shop_location(world.options.moon_item_shop_slots.value, "Moon Item Shop")
+    create_shop_location(world.options.hellena_01_item_shop_slots.value, "Hellena 01 Item Shop")
+    create_shop_location(world.options.kashua_equipment_shop_slots.value, "Kashua Equipment Shop")
+    create_shop_location(world.options.kashua_item_shop_slots.value, "Kashua Item Shop")
+    create_shop_location(world.options.fletz_accessory_shop_slots.value, "Fletz Accessory Shop")
+    create_shop_location(world.options.forest_item_shop_slots.value, "Forest Item Shop")
+    create_shop_location(world.options.kazas_fort_equipment_shop_slots.value, "Kazas Fort Equipment Shop")
+    create_shop_location(world.options.volcano_item_shop_slots.value, "Volcano Item Shop")
+    create_shop_location(world.options.zenebatos_equipment_shop_slots.value, "Zenebatos Equipment Shop")
+    create_shop_location(world.options.zenebatos_item_shop_slots.value, "Zenebatos Item Shop")
+    create_shop_location(world.options.hellena_02_item_shop_slots.value, "Hellena 02 Item Shop")
+    create_shop_location(world.options.black_castle_item_shop_slots.value, "Black Castle Item Shop")
+
+
+def create_shop_location(number_of_slots: int, key: str) -> None:
+    base_data = shop_table[key]
+    if base_data.code is None:
+        return
+
+    for number in range(number_of_slots):
+        complete_name = key + " - Slot " + str(number + 1)
+        updated_data = LegendOfDragoonLocationData(base_data.category, base_data.code + number + 1, base_data.type)
+        dynamic_location_table[complete_name] = updated_data
 
 
 def create_chapter_one_locations(world):
@@ -388,3 +441,6 @@ def setup_chapter_four_events(world):
 
 def create_events(world: LegendOfDragoonWorld) -> None:
     pass
+
+
+LOCATION_NAME_TO_ID = {name: data.code for name, data in all_location_table.items()}
