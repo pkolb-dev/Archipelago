@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, DeathLink
 
 
 class AdditionRandomization(Choice):
@@ -428,12 +428,17 @@ class CompletionCondition(Choice):
     default = 1
 
 
+class LegendOfDragoonDeathLink(DeathLink):
+    __doc__ = DeathLink.__doc__ + "\n\n    Note: this will set every character's HP value to 0 instead of game over when receiving a deathlink trigger."
+
+
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
     addition_randomizer: AdditionRandomization
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
     allow_repeat_consumables: AllowRepeatConsumables
+    death_link: LegendOfDragoonDeathLink
     minimum_shop_price: MinimumShopPrice
     maximum_shop_price: MaximumShopPrice
     bale_equipment_shop_slots: BaleEquipmentShopSlots
@@ -485,7 +490,8 @@ option_groups = [
         AdditionRandomization,
     ]),
     OptionGroup("Rando Options", [
-        AllowRepeatConsumables
+        AllowRepeatConsumables,
+        LegendOfDragoonDeathLink,
     ], False),
     OptionGroup("Shopsanity", [
         Shopsanity,

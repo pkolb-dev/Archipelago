@@ -59,6 +59,7 @@ class LegendOfDragoonWorld(CachedRuleBuilderWorld):
             "maximum_shop_price": self.options.maximum_shop_price.value,
             "minimum_shop_price": self.options.minimum_shop_price.value,
             "allow_repeat_consumables": self.options.allow_repeat_consumables.value,
+            "death_link": self.options.death_link.value,
             "bale_equipment_shop_slots": self.options.bale_equipment_shop_slots.value,
             "serdio_item_shop_slots": self.options.serdio_item_shop_slots.value,
             "lohan_equipment_shop_slots": self.options.lohan_equipment_shop_slots.value,
