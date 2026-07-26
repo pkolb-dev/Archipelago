@@ -20,3 +20,4 @@ class ItemCategory:
     GOOD = "Good"
     ADDITION = "Addition"
     EVENT = "Event"
+    SPELL = "Spell"

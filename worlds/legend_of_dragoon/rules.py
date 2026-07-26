@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from worlds.generic.Rules import set_rule
-from rule_builder.rules import Has, HasAll, Rule
+from rule_builder.rules import Has, HasAll
 from .options import CompletionCondition, AdditionRandomization
 from .regions import visualize_world
 
@@ -147,7 +146,7 @@ def set_chapter_four_entrance_rules(world):
     world.set_rule(divine_tree_to_moon_that_never_sets, Has("Imago"))
 
 
-def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
+def set_addition_entrance_rules(world) -> None:
     dart_additions = world.get_entrance("Menu to Dart Additions")
     lavitz_additions = world.get_entrance("Menu to Lavitz Additions")
     rose_additions = world.get_entrance("Menu to Rose Additions")
@@ -165,6 +164,42 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
         kongol_additions = world.get_entrance("Menu to Kongol Additions")
         world.set_rule(meru_additions, HasAll("Mappi Steals Orb", "Letter from Lynn"))
         world.set_rule(kongol_additions, Has("Gehrich"))
+
+
+def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
+    dart_spells = world.get_entrance("Menu to Dart Spells")
+    lavitz_spells = world.get_entrance("Menu to Lavitz Spells")
+    shana_spells = world.get_entrance("Menu to Shana Spells")
+    rose_spells = world.get_entrance("Menu to Rose Spells")
+    haschel_spells = world.get_entrance("Menu to Haschel Spells")
+    albert_spells = world.get_entrance("Menu to Albert Spells")
+
+    world.set_rule(dart_spells, HasAll("Red Dragoon Spirit"))
+    world.set_rule(lavitz_spells, HasAll("Prison Key", "Jade Dragoon Spirit"))
+    world.set_rule(shana_spells, HasAll("Prison Key", "Silver Dragoon Spirit"))
+    world.set_rule(rose_spells, HasAll("Kongol 1", "Dark Dragoon Spirit"))
+    world.set_rule(haschel_spells, HasAll("Lloyd 1", "Violet Dragoon Spirit"))
+    world.set_rule(albert_spells, HasAll("Fruegel 2", "Jade Dragoon Spirit"))
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
+        return
+
+    meru_spells = world.get_entrance("Menu to Meru Spells")
+    kongol_spells = world.get_entrance("Menu to Kongol Spells")
+
+    world.set_rule(meru_spells, HasAll("Mappi Steals Orb", "Letter from Lynn", ""))
+    world.set_rule(kongol_spells, HasAll("Gehrich", "Gold Dragoon Spirit"))
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
+        return
+
+    miranda_spells = world.get_entrance("Menu to Miranda Spells")
+    world.set_rule(miranda_spells, HasAll("Talk to Ute", "Silver Dragoon Spirit"))
+
+
+def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
+    set_addition_entrance_rules(world)
+    set_spell_entrance_rules(world)
 
 
 def set_chapter_one_rules(world):
@@ -237,6 +272,7 @@ def set_chapter_four_rules(world):
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_unlock_rules(world)
+    set_magic_unlock_rules(world)
 
 
 def set_completion_condition(world: LegendOfDragoonWorld) -> None:
@@ -408,3 +444,12 @@ def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:
     set_chapter_two_addition_unlock_rules(world)
     set_chapter_three_addition_unlock_rules(world)
     set_chapter_four_addition_unlock_rules(world)
+
+
+def set_magic_unlock_rules(world: LegendOfDragoonWorld) -> None:
+    # look at options and populate rules
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
+        return
+
+    pass

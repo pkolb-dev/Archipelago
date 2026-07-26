@@ -24,6 +24,10 @@ lavitz_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
     "Lavitz - Flower Storm Unlock": LegendOfDragoonLocationData("Lavitz", 108_60024, "Addition"),
 }
 
+shana_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
+    # none
+}
+
 haschel_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
     "Haschel - Flurry of Styx Unlock": LegendOfDragoonLocationData("Haschel", 108_60041, "Addition"),
     "Haschel - Summon 4 Gods Unlock": LegendOfDragoonLocationData("Haschel", 108_60042, "Addition"),
@@ -51,24 +55,32 @@ kongol_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
     "Kongol - Bone Crush Unlock": LegendOfDragoonLocationData("Kongol", 108_60062, "Addition"),
 }
 
+miranda_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
+    # none
+}
+
 all_addition_locations_table: Dict[str, LegendOfDragoonLocationData] = {
     **dart_addition_unlocks_table,
     **rose_addition_unlocks_table,
     **lavitz_addition_unlocks_table,
+    **shana_addition_unlocks_table,
     **albert_addition_unlocks_table,
     **haschel_addition_unlocks_table,
     **meru_addition_unlocks_table,
     **kongol_addition_unlocks_table,
+    **miranda_addition_unlocks_table,
 }
 
 all_character_unlocks_table: Dict[str, Dict[str, LegendOfDragoonLocationData]] = {
     "Dart": dart_addition_unlocks_table,
     "Lavitz": lavitz_addition_unlocks_table,
     "Rose": rose_addition_unlocks_table,
+    "Shana": shana_addition_unlocks_table,
     "Haschel": haschel_addition_unlocks_table,
     "Albert": albert_addition_unlocks_table,
     "Meru": meru_addition_unlocks_table,
     "Kongol": kongol_addition_unlocks_table,
+    "Miranda": miranda_addition_unlocks_table,
 }
 
 chapter_unlock_order: dict[int, list[str]] = {
