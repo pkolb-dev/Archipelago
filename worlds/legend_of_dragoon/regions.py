@@ -103,16 +103,25 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
     regions = [
         Region("Menu", world.player, world.multiworld),
         Region("Dart Additions", world.player, world.multiworld),
+        Region("Dart Spells", world.player, world.multiworld),
         Region("Lavitz Additions", world.player, world.multiworld),
+        Region("Lavitz Spells", world.player, world.multiworld),
+        Region("Shana Spells", world.player, world.multiworld),
         Region("Rose Additions", world.player, world.multiworld),
+        Region("Rose Spells", world.player, world.multiworld),
         Region("Haschel Additions", world.player, world.multiworld),
+        Region("Haschel Spells", world.player, world.multiworld),
         Region("Albert Additions", world.player, world.multiworld),
+        Region("Albert Spells", world.player, world.multiworld),
     ]
 
     if CompletionCondition.option_chapter_1 != world.options.lod_completion_condition:
         regions += [
             Region("Meru Additions", world.player, world.multiworld),
+            Region("Meru Spells", world.player, world.multiworld),
             Region("Kongol Additions", world.player, world.multiworld),
+            Region("Kongol Spells", world.player, world.multiworld),
+            Region("Miranda Spells", world.player, world.multiworld),
         ]
 
     create_chapter_one_regions(world, regions)
@@ -307,6 +316,13 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     haschel_additions = world.get_region("Haschel Additions")
     albert_additions = world.get_region("Albert Additions")
 
+    dart_spells = world.get_region("Dart Spells")
+    lavitz_spells = world.get_region("Lavitz Spells")
+    shana_spells = world.get_region("Shana Spells")
+    rose_spells = world.get_region("Rose Spells")
+    haschel_spells = world.get_region("Haschel Spells")
+    albert_spells = world.get_region("Albert Spells")
+
     connect_chapter_one_regions(world)
     connect_chapter_two_regions(world)
     connect_chapter_three_regions(world)
@@ -318,11 +334,24 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     menu.connect(haschel_additions, "Menu to Haschel Additions")
     menu.connect(albert_additions, "Menu to Albert Additions")
 
+    menu.connect(dart_spells, "Menu to Dart Spells")
+    menu.connect(lavitz_spells, "Menu to Lavitz Spells")
+    menu.connect(shana_spells, "Menu to Shana Spells")
+    menu.connect(rose_spells, "Menu to Rose Spells")
+    menu.connect(haschel_spells, "Menu to Haschel Spells")
+    menu.connect(albert_spells, "Menu to Albert Spells")
+
     if world.options.lod_completion_condition != CompletionCondition.option_chapter_1:
         meru_additions = world.get_region("Meru Additions")
         kongol_additions = world.get_region("Kongol Additions")
+        meru_spells = world.get_region("Meru Spells")
+        kongol_spells = world.get_region("Kongol Spells")
+        miranda_spells = world.get_region("Miranda Spells")
         menu.connect(meru_additions, "Menu to Meru Additions")
         menu.connect(kongol_additions, "Menu to Kongol Additions")
+        menu.connect(meru_spells, "Menu to Meru Spells")
+        menu.connect(kongol_spells, "Menu to Kongol Spells")
+        menu.connect(miranda_spells, "Menu to Miranda Spells")
 
 
 def visualize_world(world, state: "CollectionState" = None):

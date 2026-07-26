@@ -11,6 +11,7 @@ from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationDa
 from worlds.legend_of_dragoon.loc.shops import shop_table, get_all_shops
 from .item.item_data import LegendOfDragoonItem
 from .loc.goods import goods_location_table
+from .loc.magic import all_magic_locations_table, all_character_magic_unlocks_table
 from .options import CompletionCondition, AdditionRandomization
 
 import re
@@ -25,6 +26,7 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **enemy_table,
     **goods_location_table,
     **get_all_shops(),
+    **all_magic_locations_table,
 }
 
 dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
@@ -135,10 +137,57 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
 
 
 def create_regular_locations(world: LegendOfDragoonWorld) -> None:
-    configureShopsanity(world)
+    configure_shopsanity(world)
+    configure_magicsanity(world)
 
 
-def configureShopsanity(world: LegendOfDragoonWorld) -> None:
+def create_magic_location(number_of_slots: int, character_key: str) -> None:
+    character_data: Dict[str, LegendOfDragoonLocationData] = all_character_magic_unlocks_table[character_key]
+
+    for number in range(number_of_slots):
+        # locations start from level 1
+        location_key = f"{character_key} - Magic Level {number + 1} Unlock"
+        location_data = character_data.get(location_key)
+        if location_data is None:
+            continue
+        dynamic_location_table[location_key] = location_data
+
+
+def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
+    create_magic_location(world.options.dart_magic_slots.value, "Dart")
+    create_magic_location(world.options.dart_magic_slots.value, "Lavitz")
+    create_magic_location(world.options.dart_magic_slots.value, "Shana")
+    create_magic_location(world.options.dart_magic_slots.value, "Rose")
+    create_magic_location(world.options.dart_magic_slots.value, "Haschel")
+    create_magic_location(world.options.dart_magic_slots.value, "Albert")
+    create_magic_location(world.options.dart_magic_slots.value, "Meru")
+    create_magic_location(world.options.dart_magic_slots.value, "Kongol")
+    create_magic_location(world.options.dart_magic_slots.value, "Miranda")
+
+    dart_spells = world.get_region("Dart Spells")
+    lavitz_spells = world.get_region("Lavitz Spells")
+    shana_spells = world.get_region("Shana Spells")
+    rose_spells = world.get_region("Rose Spells")
+    haschel_spells = world.get_region("Haschel Spells")
+    albert_spells = world.get_region("Albert Spells")
+
+    dart_spells.add_locations(get_locations_by_category_with_ids("Dart"))
+    lavitz_spells.add_locations(get_locations_by_category_with_ids("Lavitz"))
+    shana_spells.add_locations(get_locations_by_category_with_ids("Shana"))
+    rose_spells.add_locations(get_locations_by_category_with_ids("Rose"))
+    haschel_spells.add_locations(get_locations_by_category_with_ids("Haschel"))
+    albert_spells.add_locations(get_locations_by_category_with_ids("Albert"))
+
+    if CompletionCondition.option_chapter_1 != world.options.lod_completion_condition:
+        meru_spells = world.get_region("Meru Spells")
+        kongol_spells = world.get_region("Kongol Spells")
+        miranda_spells = world.get_region("Miranda Spells")
+        meru_spells.add_locations(get_locations_by_category_with_ids("Meru"))
+        kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"))
+        miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
+
+
+def configure_shopsanity(world: LegendOfDragoonWorld) -> None:
     if not world.options.enable_shopsanity.value:
         return
     # now we go through each shop and add the number of locations per options.

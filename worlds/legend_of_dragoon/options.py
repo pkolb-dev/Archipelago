@@ -26,6 +26,25 @@ class AdditionRandomization(Choice):
     default = 0
 
 
+class DragoonMagicRandomization(Choice):
+    """
+    Controls how Dragoon Magic are unlocked.
+
+    Progressive (Character):
+        Progressive dragoon magic is added to the item pool
+        and unlock spells for their respective character.
+
+    Shuffled:
+        Each magic spell is its own item in the item pool.
+    """
+    display_name = "Dragoon Magic Randomization"
+
+    option_progressive = 0
+    option_shuffled = 1
+
+    default = 0
+
+
 class Shopsanity(Toggle):
     """
     Toggles all shop items to be locations. This disables vanilla behavior and makes all items one-time purchases.
@@ -412,6 +431,96 @@ class AllowRepeatConsumables(Toggle):
     default = True
 
 
+class DartDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Dart Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class LavitzDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Lavitz Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class ShanaDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Shana Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class RoseDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Rose Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class HaschelDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Haschel Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class AlbertDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Albert Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class MeruDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Meru Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class KongolDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Kongol Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
+class MirandaDragoonMagicLocations(Range):
+    """
+    Number of magic locations to include in the playthrough.
+    """
+    display_name = "Miranda Dragoon Magic Locations"
+    default = 2
+    range_end = 4
+    range_start = 0
+
+
 class CompletionCondition(Choice):
     """
     Set the goal for completing the game.
@@ -435,6 +544,7 @@ class LegendOfDragoonDeathLink(DeathLink):
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
     addition_randomizer: AdditionRandomization
+    magic_randomizer: DragoonMagicRandomization
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
     allow_repeat_consumables: AllowRepeatConsumables
@@ -480,6 +590,15 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     zenebatos_item_shop_slots: ZenebatosItemShopSlots
     hellena_02_item_shop_slots: Hellena02ItemShopSlots
     black_castle_item_shop_slots: BlackCastleItemShopSlots
+    dart_magic_slots: DartDragoonMagicLocations
+    lavitz_magic_slots: LavitzDragoonMagicLocations
+    shana_magic_slots: ShanaDragoonMagicLocations
+    rose_magic_slots: RoseDragoonMagicLocations
+    haschel_magic_slots: HaschelDragoonMagicLocations
+    albert_magic_slots: AlbertDragoonMagicLocations
+    meru_magic_slots: MeruDragoonMagicLocations
+    kongol_magic_slots: KongolDragoonMagicLocations
+    miranda_magic_slots: MirandaDragoonMagicLocations
 
 
 option_groups = [
@@ -493,6 +612,18 @@ option_groups = [
         AllowRepeatConsumables,
         LegendOfDragoonDeathLink,
     ], False),
+    OptionGroup("Dragoon Magic Settings", [
+        DragoonMagicRandomization,
+        DartDragoonMagicLocations,
+        LavitzDragoonMagicLocations,
+        ShanaDragoonMagicLocations,
+        RoseDragoonMagicLocations,
+        HaschelDragoonMagicLocations,
+        AlbertDragoonMagicLocations,
+        MeruDragoonMagicLocations,
+        KongolDragoonMagicLocations,
+        MirandaDragoonMagicLocations,
+    ]),
     OptionGroup("Shopsanity", [
         Shopsanity,
         MinimumShopPrice,

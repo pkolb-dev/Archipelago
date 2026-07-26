@@ -1,6 +1,8 @@
 from typing import Dict, TYPE_CHECKING
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
+from .spells import all_character_spell_items
+from ..loc.additions import shana_addition_unlocks_table
 from ..options import CompletionCondition
 
 dart_additions_table: Dict[str, LegendOfDragoonItemData] = {
@@ -20,6 +22,8 @@ lavitz_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Lavitz Gust Of Wind Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30013, IC.progression),
     "Lavitz Flower Storm": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30014, IC.progression),
 }
+
+shana_additions_table: Dict[str, LegendOfDragoonItemData] = {}
 
 rose_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Rose Whip Smack": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30016, IC.progression),
@@ -59,6 +63,8 @@ kongol_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Kongol Bone Crush": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30042, IC.progression),
 }
 
+miranda_additions_table: Dict[str, LegendOfDragoonItemData] = {}
+
 all_character_addition_items: Dict[str, Dict[str, LegendOfDragoonItemData]] = {
     "Dart": dart_additions_table,
     "Lavitz": lavitz_additions_table,
@@ -90,13 +96,27 @@ progressive_additions_table: Dict[str, LegendOfDragoonItemData] = {
 }
 
 
-def get_active_characters(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
+def get_active_characters_additions(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
     """Return the character addition tables for the current completion goal."""
     characters = all_character_addition_items.copy()
 
     if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
         characters.pop("Meru")
         characters.pop("Kongol")
+
+    return characters
+
+
+def get_active_characters_spells(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
+    """Return the character addition tables for the current completion goal."""
+    characters = all_character_spell_items.copy()
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
+        characters.pop("Meru")
+        characters.pop("Kongol")
+        characters.pop("Miranda")
+    elif world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
+        characters.pop("Miranda")
 
     return characters
 

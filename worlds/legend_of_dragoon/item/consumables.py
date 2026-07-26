@@ -11,7 +11,7 @@ consumables_table: Dict[str, LegendOfDragoonItemData] = {
     "Healing Rain": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00005, IC.filler),
     "Moon Serenade": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00006, IC.filler),
     "Sun Rhapsody": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00007, IC.filler),
-    "Spirit Potion": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00008, IC.filler),
+    "Spirit Potion": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00008, IC.useful),
     "Body Purifier": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00009, IC.filler),
     "Depetrifier": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00010, IC.filler),
     "Mind Purifier": LegendOfDragoonItemData(ItemCategory.CONSUMABLE, 108_00011, IC.filler),
