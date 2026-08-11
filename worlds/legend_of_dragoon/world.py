@@ -53,6 +53,7 @@ class LegendOfDragoonWorld(CachedRuleBuilderWorld):
         # If you need access to the player's chosen options on the client side, there is a helper for that.
         return {
             "addition_randomizer": self.options.addition_randomizer.value,
+            "magic_randomizer": self.options.magic_randomizer.value,
             "lod_completion_condition": self.options.lod_completion_condition.value,
             "enable_shop_sanity": self.options.enable_shopsanity.value,
             "world_version": self.world_version,
