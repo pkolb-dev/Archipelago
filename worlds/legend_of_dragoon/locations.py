@@ -475,10 +475,6 @@ def setup_chapter_four_events(world):
                     item_type=LegendOfDragoonItem)
     aglis.add_event("Defeat Kraken", "Kraken", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
 
-    zenebatos.add_event("Defeat Vector", "Vector", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    zenebatos.add_event("Defeat Kubila", "Kubila", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)
-    zenebatos.add_event("Defeat Selebus", "Selebus", location_type=LegendOfDragoonLocation,
-                        item_type=LegendOfDragoonItem)
     mayfil.add_event("Defeat Feyrbrand", "Feyrbrand", location_type=LegendOfDragoonLocation,
                      item_type=LegendOfDragoonItem)
     mayfil.add_event("Defeat Regole", "Regole", location_type=LegendOfDragoonLocation, item_type=LegendOfDragoonItem)

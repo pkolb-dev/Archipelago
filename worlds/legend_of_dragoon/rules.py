@@ -261,13 +261,8 @@ def set_chapter_four_rules(world):
     if goal != CompletionCondition.option_chapter_4:
         return
 
-    kubila = world.get_location("Defeat Kubila")
-    selebus = world.get_location("Defeat Selebus")
-    vector = world.get_location("Defeat Vector")
-
-    world.set_rule(kubila, HasAll("Law Making License", "Law Launching License"))
-    world.set_rule(selebus, HasAll("Law Making License", "Law Launching License"))
-    world.set_rule(vector, HasAll("Law Making License", "Law Launching License"))
+    k_s_v = world.get_location("Kubila, Vector, and Selebus")
+    world.set_rule(k_s_v, HasAll("Law Making License", "Law Launching License"))
 
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
