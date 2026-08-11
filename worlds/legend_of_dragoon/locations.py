@@ -146,7 +146,7 @@ def create_magic_location(number_of_slots: int, character_key: str) -> None:
 
     for number in range(number_of_slots):
         # locations start from level 1
-        location_key = f"{character_key} - Magic Level {number + 1} Unlock"
+        location_key = f"{character_key} - Magic Level {number + 2} Unlock"
         location_data = character_data.get(location_key)
         if location_data is None:
             continue
@@ -178,13 +178,20 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
     haschel_spells.add_locations(get_locations_by_category_with_ids("Haschel"))
     albert_spells.add_locations(get_locations_by_category_with_ids("Albert"))
 
-    if CompletionCondition.option_chapter_1 != world.options.lod_completion_condition:
-        meru_spells = world.get_region("Meru Spells")
-        kongol_spells = world.get_region("Kongol Spells")
-        miranda_spells = world.get_region("Miranda Spells")
-        meru_spells.add_locations(get_locations_by_category_with_ids("Meru"))
-        kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"))
-        miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
+        return
+
+    meru_spells = world.get_region("Meru Spells")
+    kongol_spells = world.get_region("Kongol Spells")
+
+    meru_spells.add_locations(get_locations_by_category_with_ids("Meru"))
+    kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"))
+
+    if world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
+        return
+
+    miranda_spells = world.get_region("Miranda Spells")
+    miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
 
 
 def configure_shopsanity(world: LegendOfDragoonWorld) -> None:
