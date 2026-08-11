@@ -37,7 +37,38 @@ Simply load your save that you used prior and enter your connection info! Done!
 
 Below will be a list of recommended options to enhance your Archipelagoon experience:
 
-*TBA*
+Gameplay
+
+- Addition Mode
+    - normal
+- Automatic Dragoon Addition
+    - on
+- Battle Gold Gain
+    - 200%
+- Battle XP Gain
+    - on
+- Extended Dragoon Actions
+    - on
+- Inventory Size
+    - 108
+- Item Stack Size
+    - 32
+- Save Anywhere
+    - on
+- Secondary Character XP Gain
+    - 100%
+- Unlock Party
+    - on
+
+User Interface
+
+- Automatic Text Advance
+    - on
+- Automatic Text Delay (seconds)
+    - 0.00
+- Quick Text
+    - always
+    - instant
 
 ## Troubleshooting
 
