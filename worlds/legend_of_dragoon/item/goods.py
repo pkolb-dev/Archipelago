@@ -17,7 +17,7 @@ chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
     # "Fathers Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20010, IC.filler),
     "Prison Key": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20011, IC.progression),
     "Axe from the Shack": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20012, IC.progression),
-    "Good Spirits": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20013, IC.progression),
+    "Good Spirits": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20013, IC.useful),
     "Water Bottle": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20015, IC.progression),
     "Life Water": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20016, IC.progression),
     "Magic Oil": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20017, IC.progression),

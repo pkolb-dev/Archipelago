@@ -187,7 +187,7 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     meru_spells = world.get_entrance("Menu to Meru Spells")
     kongol_spells = world.get_entrance("Menu to Kongol Spells")
 
-    world.set_rule(meru_spells, HasAll("Mappi Steals Orb", "Letter from Lynn", ""))
+    world.set_rule(meru_spells, HasAll("Mappi Steals Orb", "Letter from Lynn", "Blue Dragoon Spirit"))
     world.set_rule(kongol_spells, HasAll("Gehrich", "Gold Dragoon Spirit"))
 
     if world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
@@ -261,18 +261,12 @@ def set_chapter_four_rules(world):
     if goal != CompletionCondition.option_chapter_4:
         return
 
-    kubila = world.get_location("Defeat Kubila")
-    selebus = world.get_location("Defeat Selebus")
-    vector = world.get_location("Defeat Vector")
-
-    world.set_rule(kubila, HasAll("Law Making License", "Law Launching License"))
-    world.set_rule(selebus, HasAll("Law Making License", "Law Launching License"))
-    world.set_rule(vector, HasAll("Law Making License", "Law Launching License"))
+    k_s_v = world.get_location("Kubila, Vector, and Selebus")
+    world.set_rule(k_s_v, HasAll("Law Making License", "Law Launching License"))
 
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_unlock_rules(world)
-    set_magic_unlock_rules(world)
 
 
 def set_completion_condition(world: LegendOfDragoonWorld) -> None:
@@ -354,7 +348,7 @@ def set_chapter_two_addition_unlock_rules(world):
     meru_hammer_spin = world.get_location("Meru - Hammer Spin Unlock")
     demons_dance = world.get_location("Rose - Demon's Dance Unlock")
 
-    world.set_rule(rose_hard_blade, Has("Key to Ship"))
+    world.set_rule(rose_hard_blade, Has("Gehrich and Mappi"))
     world.set_rule(haschel_summon_4_gods, Has("Gehrich"))
     world.set_rule(meru_hammer_spin, Has("Lenus 2"))
 
@@ -444,12 +438,3 @@ def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:
     set_chapter_two_addition_unlock_rules(world)
     set_chapter_three_addition_unlock_rules(world)
     set_chapter_four_addition_unlock_rules(world)
-
-
-def set_magic_unlock_rules(world: LegendOfDragoonWorld) -> None:
-    # look at options and populate rules
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
-        return
-
-    pass
