@@ -33,6 +33,7 @@ dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **enemy_table,
     **events_table,
     **chests_table,
+    **goods_location_table,
 }
 
 
