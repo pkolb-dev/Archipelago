@@ -38,7 +38,6 @@ chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
 }
 
 chapter_four_table: Dict[str, LegendOfDragoonItemData] = {
-    # Law Maker and Law Output will cause softlocking in zenebatos if given incorrectly.
     "Law Making License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20032, IC.progression),
     "Law Launching License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
 }
