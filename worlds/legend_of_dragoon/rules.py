@@ -174,7 +174,7 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     haschel_spells = world.get_entrance("Menu to Haschel Spells")
     albert_spells = world.get_entrance("Menu to Albert Spells")
 
-    world.set_rule(dart_spells, HasAll("Red Dragoon Spirit"))
+    world.set_rule(dart_spells, Has("Dart Progressive Spirit", 2))
     world.set_rule(lavitz_spells, HasAll("Prison Key", "Jade Dragoon Spirit"))
     world.set_rule(shana_spells, HasAll("Prison Key", "Silver Dragoon Spirit"))
     world.set_rule(rose_spells, HasAll("Kongol 1", "Dark Dragoon Spirit"))
@@ -242,9 +242,6 @@ def set_chapter_two_rules(world):
     goal = world.options.lod_completion_condition
     if goal == CompletionCondition.option_chapter_1:
         return
-
-    mappi_steals_orb = world.get_location("Mappi Steals Orb")
-    world.set_rule(mappi_steals_orb, Has("Red Dragoon Spirit"))
 
     ghost_commander = world.get_location("Ghost Commander")
     world.set_rule(ghost_commander, Has("Key to Ship"))

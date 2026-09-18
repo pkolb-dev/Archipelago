@@ -2,19 +2,11 @@ from typing import Dict
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
 
-goods_table: Dict[str, LegendOfDragoonItemData] = {
-    "Red Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20001, IC.progression),
+chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
     "Jade Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20003, IC.progression),
     "Violet Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20005, IC.progression),
     "Silver Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20006, IC.progression),
     "Dark Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20007, IC.progression),
-    # "Shiny Bag":             LegendOfDragoonItemData(ItemCategory.GOOD, 108_20014, IC.progression),
-    # "Magic Shiny Bag":       LegendOfDragoonItemData(ItemCategory.GOOD, 108_20035, IC.progression),
-}
-
-chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
-    # "War Bulletin": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20009, IC.filler),
-    # "Fathers Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20010, IC.filler),
     "Prison Key": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20011, IC.progression),
     "Axe from the Shack": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20012, IC.progression),
     "Good Spirits": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20013, IC.useful),
@@ -33,7 +25,6 @@ chapter_two_table: Dict[str, LegendOfDragoonItemData] = {
     "Kates Bouquet": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20023, IC.useful),
     "Key to Ship": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20024, IC.progression),
     "Gold Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20004, IC.progression),
-    # "Gold Dragoon Spirit 2": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20034, IC.useful),
     "Blue Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20002, IC.progression),
 }
 
@@ -41,24 +32,23 @@ chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
     "Boat License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20025, IC.progression),
     "Dragon Blocker": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20026, IC.progression),
     "Vanishing Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20036, IC.progression),
-    # "Moon Gem":              LegendOfDragoonItemData(ItemCategory.GOOD, 108_20027, IC.progression),
-    # "Moon Dagger":           LegendOfDragoonItemData(ItemCategory.GOOD, 108_20028, IC.progression),
-    # "Moon Mirror":           LegendOfDragoonItemData(ItemCategory.GOOD, 108_20029, IC.progression),
+    "Moon Gem": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20027, IC.useful),
+    "Moon Dagger": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20028, IC.useful),
+    "Moon Mirror": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20029, IC.useful),
 }
 
 chapter_four_table: Dict[str, LegendOfDragoonItemData] = {
     # Law Maker and Law Output will cause softlocking in zenebatos if given incorrectly.
-    # "Law Maker":             LegendOfDragoonItemData(ItemCategory.GOOD, 108_20032, IC.progression),
-    # "Law Output": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
     "Law Making License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20032, IC.progression),
     "Law Launching License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
-    # "Omega Bomb":            LegendOfDragoonItemData(ItemCategory.GOOD, 108_20030, IC.progression),
-    # "Omega Master":          LegendOfDragoonItemData(ItemCategory.GOOD, 108_20031, IC.progression),
-    "Divine Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20008, IC.progression),
+}
+
+progressive_spirit_table: Dict[str, LegendOfDragoonItemData] = {
+    "Dart Progressive Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20040, IC.progression)
 }
 
 all_goods_table: Dict[str, LegendOfDragoonItemData] = {
-    **goods_table,
+    **progressive_spirit_table,
     **chapter_one_table,
     **chapter_two_table,
     **chapter_three_table,
