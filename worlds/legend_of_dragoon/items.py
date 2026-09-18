@@ -10,7 +10,6 @@ from worlds.legend_of_dragoon.item.consumables import consumables_table
 from worlds.legend_of_dragoon.item.equipment import equipment_table
 from worlds.legend_of_dragoon.item.goods import all_goods_table, chapter_one_table, chapter_two_table, \
     chapter_three_table, chapter_four_table
-from worlds.legend_of_dragoon.item.item_data import LegendOfDragoonItemData
 from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
 from .item.spells import progressive_spells_table, all_spell_items
 from .options import AdditionRandomization, DragoonMagicRandomization, CompletionCondition
@@ -159,7 +158,7 @@ def setup_equipment(world, itempool):
         itempool.append(world.random.choice(list(equipment_map)))
 
 
-def get_goods(world):
+def get_goods(world) -> list[LegendOfDragoonItem]:
     itempool: list[LegendOfDragoonItem] = [world.create_item("Dart Progressive Spirit"),
                                            world.create_item("Dart Progressive Spirit")]
 
