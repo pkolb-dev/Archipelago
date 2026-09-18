@@ -2,7 +2,6 @@ from typing import Dict
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
 
-# kept for posterity, some logic reads this for a count of chapters. will rework.
 chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
     "Jade Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20003, IC.progression),
     "Violet Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20005, IC.progression),
