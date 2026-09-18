@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import dict_keys
 from typing import Dict, Set, TYPE_CHECKING, List
 
 from BaseClasses import ItemClassification
