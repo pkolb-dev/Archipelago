@@ -160,13 +160,13 @@ def setup_equipment(world, itempool):
 
 def get_goods(world) -> list[LegendOfDragoonItem]:
     itempool: list[LegendOfDragoonItem] = [world.create_item("Dart Progressive Spirit"),
+                                           world.create_item("Dart Progressive Spirit"),
                                            world.create_item("Dart Progressive Spirit")]
 
     goods_list: list[str] = get_chapter_goods(world)
 
     for good_name in goods_list:
         itempool.append(world.create_item(good_name))
-    itempool.append(world.create_item("Dart Progressive Spirit"))
 
     return itempool
 
