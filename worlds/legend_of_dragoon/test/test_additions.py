@@ -3,59 +3,7 @@ from ..item.additions import chapter_one_addition_item_table, all_addition_items
     chapter_three_addition_item_table, chapter_four_addition_item_table
 
 
-class TestOptionOffChapter1(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 1,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter2(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 2,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter3(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 3,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter4(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 4,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestAdditionSanityChapter1(LegendOfDragoonTestBase):
+class TestShuffledChapter1(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 1,
@@ -67,7 +15,7 @@ class TestAdditionSanityChapter1(LegendOfDragoonTestBase):
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter2(LegendOfDragoonTestBase):
+class TestShuffledChapter2(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 2,
@@ -83,7 +31,7 @@ class TestAdditionSanityChapter2(LegendOfDragoonTestBase):
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter3(LegendOfDragoonTestBase):
+class TestShuffledChapter3(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 3,
@@ -100,7 +48,7 @@ class TestAdditionSanityChapter3(LegendOfDragoonTestBase):
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter4(LegendOfDragoonTestBase):
+class TestShuffledChapter4(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 4,
