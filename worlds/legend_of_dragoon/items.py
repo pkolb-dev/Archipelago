@@ -47,9 +47,6 @@ def create_item(world: LegendOfDragoonWorld, name: str):
 
 
 def setup_additions(world) -> list[LegendOfDragoonItem]:
-    if world.options.addition_randomizer == AdditionRandomization.option_off:
-        return []
-
     active_characters = get_active_characters_additions(world)
     itempool = []
 
@@ -65,14 +62,14 @@ def setup_additions(world) -> list[LegendOfDragoonItem]:
     for table in chapter_tables[:chapter_count]:
         allowed_additions.update(table.keys())
 
-    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for [character_name, table] in active_characters.items():
             for addition_name in table.keys():
                 if addition_name in allowed_additions:
                     progressive_name = f"{character_name} Progressive Addition"
                     itempool.append(world.create_item(progressive_name))
 
-    elif world.options.addition_randomizer == AdditionRandomization.option_addition_sanity:
+    elif world.options.addition_randomizer == AdditionRandomization.option_shuffled:
         for table in active_characters.values():
             for addition_name in table.keys():
                 if addition_name in allowed_additions:
@@ -111,18 +108,7 @@ def configure_starting_additions(world, itempool):
     for table in chapter_tables[:chapter_count]:
         allowed_additions.update(table.keys())
 
-    if world.options.addition_randomizer == AdditionRandomization.option_off:
-        # Give each character their base addition if it's in allowed chapters
-        for table in active_characters.values():
-            base_addition_name = next(iter(table))
-            if base_addition_name in allowed_additions:
-                item = world.create_item(base_addition_name)
-                if item in itempool:
-                    itempool.remove(item)
-                    world.push_precollected(item)
-        return
-
-    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for character_name in active_characters.keys():
             progressive_name = f"{character_name} Progressive Addition"
             progressive_item = world.create_item(progressive_name)
@@ -131,7 +117,7 @@ def configure_starting_additions(world, itempool):
                 world.push_precollected(progressive_item)
         return
 
-    if world.options.addition_randomizer == AdditionRandomization.option_addition_sanity:
+    if world.options.addition_randomizer == AdditionRandomization.option_shuffled:
         for table in active_characters.values():
             # Filter additions by allowed chapters
             valid_additions = [name for name in table if name in allowed_additions]
