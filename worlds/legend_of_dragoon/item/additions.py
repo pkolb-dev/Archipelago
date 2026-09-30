@@ -2,7 +2,6 @@ from typing import Dict, TYPE_CHECKING
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
 from .spells import all_character_spell_items
-from ..loc.additions import shana_addition_unlocks_table
 from ..options import CompletionCondition
 
 dart_additions_table: Dict[str, LegendOfDragoonItemData] = {
