@@ -85,6 +85,51 @@ all_character_unlocks_table: Dict[str, list[str]] = {
     "Miranda": miranda_additions_table,
 }
 
+chapter_additions: dict[int, list[str]] = {
+    1: [
+        "Dart - Double Slash"
+        "Dart - Volcano",
+        "Dart - Burning Rush",
+        "Dart - Crush Dance",
+        "Rose - Whip Smack",
+        "Rose - More and More",
+        "Lavitz - Harpoon",
+        "Lavitz - Spinning Cane",
+        "Lavitz - Rod Typhoon",
+        "Lavitz - Gust Of Wind Dance",
+        "Lavitz - Flower Storm",
+        "Albert - Harpoon",
+        "Albert - Spinning Cane",
+        "Albert - Rod Typhoon",
+        "Albert - Gust Of Wind Dance",
+        "Albert - Flower Storm",
+        "Haschel - Double Punch",
+        "Haschel - Flurry of Styx",
+    ],
+    2: [
+        "Rose - Hard Blade",
+        "Rose - Demon's Dance",
+        "Haschel - Summon 4 Gods",
+        "Meru - Double Smack",
+        "Meru - Hammer Spin",
+    ],
+    3: [
+        "Dart - Madness Hero",
+        "Haschel - 5-Ring Shattering",
+        "Haschel - Hex Hammer",
+        "Haschel - Omni-Sweep",
+        "Meru - Cool Boogie",
+        "Kongol - Pursuit",
+        "Kongol - Inferno",
+        "Kongol - Bone Crush",
+    ],
+    4: [
+        "Dart - Moon Strike",
+        "Dart - Blazing Dynamo",
+        "Meru - Cat's Cradle",
+        "Meru - Perky Step",
+    ],
+}
 chapter_unlock_order: dict[int, list[str]] = {
     1: [
         "Dart - Volcano Unlock",
@@ -152,11 +197,12 @@ all_addition_locations_table = get_all_addition_locations()
 
 
 def build_chapter_unlock_table(chapter: int) -> Dict[str, LegendOfDragoonLocationInfo]:
-    active_names = chapter_unlock_order.get(chapter, [])
+    active_names = chapter_additions.get(chapter, [])
     table = {}
     for loc_key, loc_data in all_addition_locations_table.items():
-        if loc_key in active_names:
-            table[loc_key] = loc_data
+        for name in active_names:
+            if name in loc_key:
+                table[loc_key] = loc_data
     return table
 
 
