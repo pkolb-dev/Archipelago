@@ -174,7 +174,7 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     haschel_spells = world.get_entrance("Menu to Haschel Spells")
     albert_spells = world.get_entrance("Menu to Albert Spells")
 
-    world.set_rule(dart_spells, HasAll("Red Dragoon Spirit"))
+    world.set_rule(dart_spells, Has("Dart Progressive Spirit", 2))
     world.set_rule(lavitz_spells, HasAll("Prison Key", "Jade Dragoon Spirit"))
     world.set_rule(shana_spells, HasAll("Prison Key", "Silver Dragoon Spirit"))
     world.set_rule(rose_spells, HasAll("Kongol 1", "Dark Dragoon Spirit"))
@@ -242,9 +242,6 @@ def set_chapter_two_rules(world):
     goal = world.options.lod_completion_condition
     if goal == CompletionCondition.option_chapter_1:
         return
-
-    mappi_steals_orb = world.get_location("Mappi Steals Orb")
-    world.set_rule(mappi_steals_orb, Has("Red Dragoon Spirit"))
 
     ghost_commander = world.get_location("Ghost Commander")
     world.set_rule(ghost_commander, Has("Key to Ship"))
@@ -315,10 +312,10 @@ def set_chapter_one_addition_unlock_rules(world):
     world.set_rule(albert_gust_of_wind_dance, Has("Shirley"))
     world.set_rule(haschel_flurry_of_styx, Has("Dragoon Doel"))
 
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
         world.set_rule(lavitz_blossom_storm, Has("Lavitz Progressive Addition", 4))
         world.set_rule(albert_blossom_storm, Has("Albert Progressive Addition", 4))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
         world.set_rule(
             lavitz_blossom_storm,
             HasAll(
@@ -352,9 +349,9 @@ def set_chapter_two_addition_unlock_rules(world):
     world.set_rule(haschel_summon_4_gods, Has("Gehrich"))
     world.set_rule(meru_hammer_spin, Has("Lenus 2"))
 
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
         world.set_rule(demons_dance, Has("Rose Progressive Addition", 3))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
         world.set_rule(
             demons_dance,
             HasAll(
@@ -385,10 +382,10 @@ def set_chapter_three_addition_unlock_rules(world):
 
     world.set_rule(kongol_inferno, Has("Divine Dragon"))
 
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive_character:
+    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
         world.set_rule(omni_sweep, Has("Haschel Progressive Addition", 5))
         world.set_rule(bone_crush, Has("Kongol Progressive Addition", 2))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
         world.set_rule(
             omni_sweep,
             HasAll(
@@ -421,10 +418,10 @@ def set_chapter_four_addition_unlock_rules(world):
     world.set_rule(dart_moon_strike, Has("Lloyd 2"))
     world.set_rule(meru_cats_cradle, Has("Kraken"))
 
-    if world.options.addition_randomizer == AdditionRandomization.option_progressive_character:
+    if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         world.set_rule(blazing_dynamo, Has("Dart Progressive Addition", 6))
         world.set_rule(perky_step, Has("Meru Progressive Addition", 4))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_addition_sanity:
+    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
         world.set_rule(blazing_dynamo,
                        HasAll("Dart Double Slash", "Dart Volcano", "Dart Burning Rush", "Dart Crush Dance",
                               "Dart Madness Hero", "Dart Moon Strike"))

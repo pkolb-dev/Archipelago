@@ -33,6 +33,7 @@ dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **enemy_table,
     **events_table,
     **chests_table,
+    **goods_location_table,
 }
 
 
@@ -111,16 +112,7 @@ def setup_addition_locations(world):
             region = world.get_region(f"{category} Additions")
             locations = get_locations_by_category_in_chapter(category, table)
 
-            if world.options.addition_randomizer == AdditionRandomization.option_off:
-                for location in locations:
-                    match = re.search(regex, location)
-                    if match:
-                        event_item = f"{match.group(1)} {match.group(2)}".strip()
-                        region.add_event(location, event_item,
-                                         location_type=LegendOfDragoonLocation,
-                                         item_type=LegendOfDragoonItem)
-            else:
-                region.add_locations(locations, LegendOfDragoonLocation)
+            region.add_locations(locations, LegendOfDragoonLocation)
     pass
 
 

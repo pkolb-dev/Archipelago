@@ -5,32 +5,28 @@ from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, De
 class AdditionRandomization(Choice):
     """
     Controls how character Additions are unlocked.
-    Off:
-        Additions will not be added to the item pool.
-
-    Progressive (Character):
-        Progressive addition items are added to the item pool
-        and unlock additions for their respective character.
-
-    Addition Sanity:
+   Shuffled:
         Each addition unlock is its own item in the item pool
         and can be placed in any world.
         Starting additions are randomly chosen.
+
+    Progressive:
+        Progressive addition items are added to the item pool
+        and unlock additions for their respective character.
     """
     display_name = "Addition Randomization"
 
-    option_off = 0
-    option_addition_sanity = 1
-    option_progressive_character = 2
+    option_shuffled = 1
+    option_progressive = 2
 
-    default = 0
+    default = 2
 
 
 class DragoonMagicRandomization(Choice):
     """
     Controls how Dragoon Magic are unlocked.
 
-    Progressive (Character):
+    Progressive:
         Progressive dragoon magic is added to the item pool
         and unlock spells for their respective character.
 
@@ -384,6 +380,8 @@ class ForestItemShopSlots(Range):
 class VolcanoItemShopSlots(Range):
     """
     For each slot, add a location to the shop
+    WARNING:
+        This is a missable location!
     """
     display_name = "Volcano Item Shop Slots"
     default = 10
@@ -537,10 +535,6 @@ class CompletionCondition(Choice):
     default = 1
 
 
-class LegendOfDragoonDeathLink(DeathLink):
-    __doc__ = DeathLink.__doc__ + "\n\n    Note: this will set every character's HP value to 0 instead of game over when receiving a deathlink trigger."
-
-
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
     addition_randomizer: AdditionRandomization
@@ -548,7 +542,7 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
     allow_repeat_consumables: AllowRepeatConsumables
-    death_link: LegendOfDragoonDeathLink
+    death_link: DeathLink
     minimum_shop_price: MinimumShopPrice
     maximum_shop_price: MaximumShopPrice
     bale_equipment_shop_slots: BaleEquipmentShopSlots
@@ -610,7 +604,7 @@ option_groups = [
     ]),
     OptionGroup("Rando Options", [
         AllowRepeatConsumables,
-        LegendOfDragoonDeathLink,
+        DeathLink,
     ], False),
     OptionGroup("Dragoon Magic Settings", [
         DragoonMagicRandomization,
