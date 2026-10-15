@@ -35,4 +35,5 @@ goods_location_table: Dict[str, LegendOfDragoonLocationData] = {
     "Law Output": LegendOfDragoonLocationData("Zenebatos", 108_80033, "Good"),
     "Vanishing Stone": LegendOfDragoonLocationData("Rouge", 108_80036, "Good"),
     "Lavitzs Picture": LegendOfDragoonLocationData("Bale", 108_80037, "Good"),
+    "Chaos Divine Dragoon Spirit": LegendOfDragoonLocationData("Flanvel", 108_80038, "Good"),
 }

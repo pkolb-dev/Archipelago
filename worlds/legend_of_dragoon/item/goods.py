@@ -17,6 +17,9 @@ chapter_one_table: Dict[str, LegendOfDragoonItemData] = {
     "Blue Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20019, IC.progression),
     "Red Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20020, IC.progression),
     "Lavitzs Picture": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20037, IC.useful),
+    "Chaos Divine Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20030, IC.progression),
+    "Gold Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20004, IC.progression),
+    "Blue Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20002, IC.progression),
 }
 
 chapter_two_table: Dict[str, LegendOfDragoonItemData] = {
@@ -24,8 +27,6 @@ chapter_two_table: Dict[str, LegendOfDragoonItemData] = {
     "Pass for Valley": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20022, IC.progression),
     "Kates Bouquet": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20023, IC.useful),
     "Key to Ship": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20024, IC.progression),
-    "Gold Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20004, IC.progression),
-    "Blue Dragoon Spirit": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20002, IC.progression),
 }
 
 chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
