@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from rule_builder.rules import Has, HasAll
+from .loc.additions import all_character_unlocks_table
 from .options import CompletionCondition, AdditionRandomization
 from .regions import visualize_world
 
@@ -152,18 +153,16 @@ def set_addition_entrance_rules(world) -> None:
     rose_additions = world.get_entrance("Menu to Rose Additions")
     haschel_additions = world.get_entrance("Menu to Haschel Additions")
     albert_additions = world.get_entrance("Menu to Albert Additions")
+    meru_additions = world.get_entrance("Menu to Meru Additions")
+    kongol_additions = world.get_entrance("Menu to Kongol Additions")
 
-    # world.set_rule(dart_additions, Has("Commander"))
-    world.set_rule(lavitz_additions, Has("Prison Key"))
-    world.set_rule(rose_additions, Has("Kongol 1"))
-    world.set_rule(haschel_additions, Has("Lloyd 1"))
-    world.set_rule(albert_additions, Has("Fruegel 2"))
-
-    if world.options.lod_completion_condition != CompletionCondition.option_chapter_1:
-        meru_additions = world.get_entrance("Menu to Meru Additions")
-        kongol_additions = world.get_entrance("Menu to Kongol Additions")
-        world.set_rule(meru_additions, HasAll("Mappi Steals Orb", "Letter from Lynn"))
-        world.set_rule(kongol_additions, Has("Gehrich"))
+    world.set_rule(dart_additions, Has("Dart"))
+    world.set_rule(lavitz_additions, Has("Lavitz"))
+    world.set_rule(rose_additions, Has("Rose"))
+    world.set_rule(haschel_additions, Has("Haschel"))
+    world.set_rule(albert_additions, Has("Albert"))
+    world.set_rule(meru_additions, Has("Meru"))
+    world.set_rule(kongol_additions, Has("Kongol"))
 
 
 def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
@@ -173,28 +172,21 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     rose_spells = world.get_entrance("Menu to Rose Spells")
     haschel_spells = world.get_entrance("Menu to Haschel Spells")
     albert_spells = world.get_entrance("Menu to Albert Spells")
-
-    world.set_rule(dart_spells, Has("Dart Progressive Spirit", 2))
-    world.set_rule(lavitz_spells, HasAll("Prison Key", "Jade Dragoon Spirit"))
-    world.set_rule(shana_spells, HasAll("Prison Key", "Silver Dragoon Spirit"))
-    world.set_rule(rose_spells, HasAll("Kongol 1", "Dark Dragoon Spirit"))
-    world.set_rule(haschel_spells, HasAll("Lloyd 1", "Violet Dragoon Spirit"))
-    world.set_rule(albert_spells, HasAll("Fruegel 2", "Jade Dragoon Spirit"))
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
-        return
-
     meru_spells = world.get_entrance("Menu to Meru Spells")
     kongol_spells = world.get_entrance("Menu to Kongol Spells")
-
-    world.set_rule(meru_spells, HasAll("Mappi Steals Orb", "Letter from Lynn", "Blue Dragoon Spirit"))
-    world.set_rule(kongol_spells, HasAll("Gehrich", "Gold Dragoon Spirit"))
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
-        return
-
     miranda_spells = world.get_entrance("Menu to Miranda Spells")
-    world.set_rule(miranda_spells, HasAll("Talk to Ute", "Silver Dragoon Spirit"))
+    lloyd_spells = world.get_entrance("Menu to Lloyd Spells")
+
+    world.set_rule(dart_spells, Has("Dart") | Has("Dart Progressive Spirit", 2))
+    world.set_rule(lavitz_spells, HasAll("Lavitz", "Jade Dragoon Spirit"))
+    world.set_rule(shana_spells, HasAll("Shana", "Silver Dragoon Spirit"))
+    world.set_rule(rose_spells, HasAll("Rose", "Dark Dragoon Spirit"))
+    world.set_rule(haschel_spells, HasAll("Haschel", "Violet Dragoon Spirit"))
+    world.set_rule(albert_spells, HasAll("Albert", "Jade Dragoon Spirit"))
+    world.set_rule(meru_spells, HasAll("Meru", "Blue Dragoon Spirit"))
+    world.set_rule(kongol_spells, HasAll("Kongol", "Gold Dragoon Spirit"))
+    world.set_rule(miranda_spells, HasAll("Miranda", "Silver Dragoon Spirit"))
+    world.set_rule(lloyd_spells, HasAll("Lloyd", "Chaos Divine Dragoon Spirit"))
 
 
 def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
@@ -264,6 +256,7 @@ def set_chapter_four_rules(world):
 
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
     set_addition_unlock_rules(world)
+    set_addition_level_rules(world)
 
 
 def set_completion_condition(world: LegendOfDragoonWorld) -> None:
@@ -428,6 +421,15 @@ def set_chapter_four_addition_unlock_rules(world):
 
         world.set_rule(perky_step,
                        HasAll("Meru Double Smack", "Meru Hammer Spin", "Meru Cool Boogie", "Meru Cats Cradle"))
+
+
+def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:
+    for character, additions in all_character_unlocks_table.items():
+        for addition in additions:
+            for level in range(1, 5):
+                loc = world.get_location(f"{character} - {addition} Level {level + 1}")
+                world.set_rule(loc, Has(f"{character} {addition}") | Has(f"{character} Progressive Addition",
+                                                                         count=additions.index(addition) + 1))
 
 
 def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:

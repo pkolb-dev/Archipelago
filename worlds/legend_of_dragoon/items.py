@@ -3,15 +3,15 @@ from __future__ import annotations
 from typing import Dict, Set, TYPE_CHECKING, List
 
 from BaseClasses import ItemClassification
-from worlds.legend_of_dragoon.item.additions import progressive_additions_table, get_active_characters_additions, \
-    all_addition_items, chapter_two_addition_item_table, chapter_one_addition_item_table, \
-    chapter_three_addition_item_table, chapter_four_addition_item_table, get_active_characters_spells
+from worlds.legend_of_dragoon.item.additions import progressive_additions_table, \
+    all_addition_items, all_character_addition_items, addition_item_table
 from worlds.legend_of_dragoon.item.consumables import consumables_table
 from worlds.legend_of_dragoon.item.equipment import equipment_table
 from worlds.legend_of_dragoon.item.goods import all_goods_table, chapter_one_table, chapter_two_table, \
     chapter_three_table, chapter_four_table
+from .item.characters import characters_table
 from .item.item_data import LegendOfDragoonItemData, LegendOfDragoonItem
-from .item.spells import progressive_spells_table, all_spell_items
+from .item.spells import progressive_spells_table, all_spell_items, all_character_spell_items
 from .options import AdditionRandomization, DragoonMagicRandomization, CompletionCondition
 
 if TYPE_CHECKING:
@@ -30,6 +30,7 @@ lookup_table: Dict[str, LegendOfDragoonItemData] = {
     **consumables_table,
     **equipment_table,
     **all_goods_table,
+    **characters_table,
 }
 
 ITEM_NAME_TO_ID = {name: data.code for name, data in lookup_table.items()}
@@ -47,20 +48,12 @@ def create_item(world: LegendOfDragoonWorld, name: str):
 
 
 def setup_additions(world) -> list[LegendOfDragoonItem]:
-    active_characters = get_active_characters_additions(world)
+    active_characters = all_character_addition_items.copy()
     itempool = []
 
     # Determine allowed additions based on chapters
     allowed_additions = set()
-    chapter_tables = [
-        chapter_one_addition_item_table,
-        chapter_two_addition_item_table,
-        chapter_three_addition_item_table,
-        chapter_four_addition_item_table,
-    ]
-    chapter_count = min(world.options.lod_completion_condition.value, len(chapter_tables))
-    for table in chapter_tables[:chapter_count]:
-        allowed_additions.update(table.keys())
+    allowed_additions.update(addition_item_table.keys())
 
     if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for [character_name, table] in active_characters.items():
@@ -79,34 +72,43 @@ def setup_additions(world) -> list[LegendOfDragoonItem]:
 
 
 def setup_spells(world: LegendOfDragoonWorld) -> list[LegendOfDragoonItem]:
-    active_characters = get_active_characters_spells(world)
+    active_characters = all_character_spell_items.copy()
     itempool = []
     option_value = world.options.magic_randomizer
     if option_value == DragoonMagicRandomization.option_shuffled:
         for table in active_characters.values():
             for spell_name in table.keys():
                 itempool.append(world.create_item(spell_name))
+
+        if world.options.enable_lloyd:
+            lloyd_spell = world.create_item("Lloyd Running Slash")
+            itempool.remove(lloyd_spell)
+            world.push_precollected(lloyd_spell)
     elif option_value == DragoonMagicRandomization.option_progressive:
         for [character_name, table] in active_characters.items():
             for _spell_name in table.keys():
                 progressive_name = f"{character_name} Progressive Spell"
                 itempool.append(world.create_item(progressive_name))
+        if world.options.enable_lloyd:
+            lloyd_spell = world.create_item("Lloyd Progressive Spell")
+            itempool.remove(lloyd_spell)
+            world.push_precollected(lloyd_spell)
 
     return itempool
 
 
+def configure_starting_character(world, itempool):
+    character_name = world.options.starting_character.value
+    character_item = world.create_item(character_name)
+    if character_item in itempool:
+        itempool.remove(character_item)
+        world.push_precollected(character_item)
+
+
 def configure_starting_additions(world, itempool):
-    active_characters = get_active_characters_additions(world)
-    chapter_tables = [
-        chapter_one_addition_item_table,
-        chapter_two_addition_item_table,
-        chapter_three_addition_item_table,
-        chapter_four_addition_item_table,
-    ]
-    chapter_count = min(world.options.lod_completion_condition.value, len(chapter_tables))
+    active_characters = all_character_addition_items.copy()
     allowed_additions = set()
-    for table in chapter_tables[:chapter_count]:
-        allowed_additions.update(table.keys())
+    allowed_additions.update(addition_item_table.keys())
 
     if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for character_name in active_characters.keys():
@@ -152,7 +154,19 @@ def get_goods(world) -> list[LegendOfDragoonItem]:
     goods_list: list[str] = get_chapter_goods(world)
 
     for good_name in goods_list:
+        if not world.options.enable_lloyd and good_name == "Chaos Divine Dragoon Spirit":
+            continue
         itempool.append(world.create_item(good_name))
+
+    return itempool
+
+
+def get_characters(world) -> list[LegendOfDragoonItem]:
+    itempool: List[LegendOfDragoonItem] = []
+    for char_name in characters_table.keys():
+        if not world.options.enable_lloyd and char_name == "Lloyd":
+            continue
+        itempool.append(world.create_item(char_name))
 
     return itempool
 
@@ -163,6 +177,9 @@ def create_all_items(world: LegendOfDragoonWorld):
     itempool += get_goods(world)
     itempool += setup_additions(world)
     itempool += setup_spells(world)
+    itempool += get_characters(world)
+
+    configure_starting_character(world, itempool)
 
     configure_starting_additions(world, itempool)
 

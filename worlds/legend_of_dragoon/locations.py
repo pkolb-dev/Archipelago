@@ -3,7 +3,8 @@ from __future__ import annotations
 from typing import Dict, TYPE_CHECKING
 
 from worlds.legend_of_dragoon.loc.additions import all_addition_locations_table, chapter_one_addition_unlock_table, \
-    chapter_two_addition_unlock_table, chapter_three_addition_unlock_table, chapter_four_addition_unlock_table
+    chapter_two_addition_unlock_table, chapter_three_addition_unlock_table, chapter_four_addition_unlock_table, \
+    all_character_unlocks_table
 from worlds.legend_of_dragoon.loc.chests import chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
@@ -12,9 +13,7 @@ from worlds.legend_of_dragoon.loc.shops import shop_table, get_all_shops
 from .item.item_data import LegendOfDragoonItem
 from .loc.goods import goods_location_table
 from .loc.magic import all_magic_locations_table, all_character_magic_unlocks_table
-from .options import CompletionCondition, AdditionRandomization
-
-import re
+from .options import CompletionCondition
 
 if TYPE_CHECKING:
     from .world import LegendOfDragoonWorld
@@ -87,7 +86,7 @@ def setup_chapter_four(world):
     setup_chapter_four_events(world)
 
 
-def setup_addition_locations(world):
+def setup_addition_unlock_locations(world) -> None:
     # add guards
     chapter_tables = {
         1: chapter_one_addition_unlock_table,
@@ -95,8 +94,6 @@ def setup_addition_locations(world):
         3: chapter_three_addition_unlock_table,
         4: chapter_four_addition_unlock_table,
     }
-
-    regex = r"^([\S]*) - ((\S* *)*)(?: Unlock)"
 
     for chapter, table in chapter_tables.items():
         categories = {data.category for data in table.values()}
@@ -113,7 +110,22 @@ def setup_addition_locations(world):
             locations = get_locations_by_category_in_chapter(category, table)
 
             region.add_locations(locations, LegendOfDragoonLocation)
-    pass
+
+
+def setup_addition_mastery_locations(world) -> None:
+    for character, additions in all_character_unlocks_table.items():
+        if character in ["Shana", "Miranda"]:
+            continue
+        region = world.get_region(f"{character} Additions")
+
+        locations = {loc: data for loc, data in all_addition_locations_table.items() if
+                     character in loc and "Level" in loc}
+        region.add_locations(locations, LegendOfDragoonLocation)
+
+
+def setup_addition_locations(world):
+    setup_addition_unlock_locations(world)
+    setup_addition_mastery_locations(world)
 
 
 def create_all_locations(world: LegendOfDragoonWorld) -> None:
@@ -146,15 +158,15 @@ def create_magic_location(number_of_slots: int, character_key: str) -> None:
 
 
 def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
-    create_magic_location(world.options.dart_magic_slots.value, "Dart")
-    create_magic_location(world.options.dart_magic_slots.value, "Lavitz")
-    create_magic_location(world.options.dart_magic_slots.value, "Shana")
-    create_magic_location(world.options.dart_magic_slots.value, "Rose")
-    create_magic_location(world.options.dart_magic_slots.value, "Haschel")
-    create_magic_location(world.options.dart_magic_slots.value, "Albert")
-    create_magic_location(world.options.dart_magic_slots.value, "Meru")
-    create_magic_location(world.options.dart_magic_slots.value, "Kongol")
-    create_magic_location(world.options.dart_magic_slots.value, "Miranda")
+    create_magic_location(world.options.magic_slots.value, "Dart")
+    create_magic_location(world.options.magic_slots.value, "Lavitz")
+    create_magic_location(world.options.magic_slots.value, "Shana")
+    create_magic_location(world.options.magic_slots.value, "Rose")
+    create_magic_location(world.options.magic_slots.value, "Haschel")
+    create_magic_location(world.options.magic_slots.value, "Albert")
+    create_magic_location(world.options.magic_slots.value, "Meru")
+    create_magic_location(world.options.magic_slots.value, "Kongol")
+    create_magic_location(world.options.magic_slots.value, "Miranda")
 
     dart_spells = world.get_region("Dart Spells")
     lavitz_spells = world.get_region("Lavitz Spells")
@@ -162,6 +174,9 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
     rose_spells = world.get_region("Rose Spells")
     haschel_spells = world.get_region("Haschel Spells")
     albert_spells = world.get_region("Albert Spells")
+    meru_spells = world.get_region("Meru Spells")
+    kongol_spells = world.get_region("Kongol Spells")
+    miranda_spells = world.get_region("Miranda Spells")
 
     dart_spells.add_locations(get_locations_by_category_with_ids("Dart"))
     lavitz_spells.add_locations(get_locations_by_category_with_ids("Lavitz"))
@@ -169,21 +184,14 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
     rose_spells.add_locations(get_locations_by_category_with_ids("Rose"))
     haschel_spells.add_locations(get_locations_by_category_with_ids("Haschel"))
     albert_spells.add_locations(get_locations_by_category_with_ids("Albert"))
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
-        return
-
-    meru_spells = world.get_region("Meru Spells")
-    kongol_spells = world.get_region("Kongol Spells")
-
     meru_spells.add_locations(get_locations_by_category_with_ids("Meru"))
     kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"))
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
-        return
-
-    miranda_spells = world.get_region("Miranda Spells")
     miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
+
+    if world.options.enable_lloyd:
+        create_magic_location(world.options.magic_slots.value, "Lloyd")
+        lloyd_spells = world.get_region("Lloyd Spells")
+        lloyd_spells.add_locations(get_locations_by_category_with_ids("Lloyd"))
 
 
 def configure_shopsanity(world: LegendOfDragoonWorld) -> None:

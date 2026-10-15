@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, DeathLink
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, DeathLink, TextChoice
 
 
 class AdditionRandomization(Choice):
@@ -429,94 +429,42 @@ class AllowRepeatConsumables(Toggle):
     default = True
 
 
-class DartDragoonMagicLocations(Range):
+class DragoonMagicLocations(Range):
     """
     Number of magic locations to include in the playthrough.
     """
-    display_name = "Dart Dragoon Magic Locations"
+    display_name = "Dragoon Magic Locations"
     default = 2
     range_end = 4
-    range_start = 0
+    range_start = 1
 
 
-class LavitzDragoonMagicLocations(Range):
+class EnableLloyd(Toggle):
     """
-    Number of magic locations to include in the playthrough.
+    Allow Lloyd to be part of the multiworld
+    This requires the Lloyd Mod to be downloaded and included in the mods folder
     """
-    display_name = "Lavitz Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
+    display_name = "Enable Lloyd"
+    default = False
 
 
-class ShanaDragoonMagicLocations(Range):
+class StartingCharacter(TextChoice):
     """
-    Number of magic locations to include in the playthrough.
+    Choose which character to start with
+    Lloyd requires "Enable Lloyd" checked.
     """
-    display_name = "Shana Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class RoseDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Rose Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class HaschelDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Haschel Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class AlbertDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Albert Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class MeruDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Meru Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class KongolDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Kongol Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class MirandaDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Miranda Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
+    display_name = "Starting Character"
+    option_dart = "Dart"
+    option_lavitz = "Lavitz"
+    option_shana = "Shana"
+    option_rose = "Rose"
+    option_haschel = "Haschel"
+    option_albert = "Albert"
+    option_meru = "Meru"
+    option_kongol = "Kongol"
+    option_miranda = "Miranda"
+    option_lloyd = "Lloyd"
+    default = "Dart"
 
 
 class CompletionCondition(Choice):
@@ -584,15 +532,9 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     zenebatos_item_shop_slots: ZenebatosItemShopSlots
     hellena_02_item_shop_slots: Hellena02ItemShopSlots
     black_castle_item_shop_slots: BlackCastleItemShopSlots
-    dart_magic_slots: DartDragoonMagicLocations
-    lavitz_magic_slots: LavitzDragoonMagicLocations
-    shana_magic_slots: ShanaDragoonMagicLocations
-    rose_magic_slots: RoseDragoonMagicLocations
-    haschel_magic_slots: HaschelDragoonMagicLocations
-    albert_magic_slots: AlbertDragoonMagicLocations
-    meru_magic_slots: MeruDragoonMagicLocations
-    kongol_magic_slots: KongolDragoonMagicLocations
-    miranda_magic_slots: MirandaDragoonMagicLocations
+    magic_slots: DragoonMagicLocations
+    starting_character: StartingCharacter
+    enable_lloyd: EnableLloyd
 
 
 option_groups = [
@@ -608,15 +550,7 @@ option_groups = [
     ], False),
     OptionGroup("Dragoon Magic Settings", [
         DragoonMagicRandomization,
-        DartDragoonMagicLocations,
-        LavitzDragoonMagicLocations,
-        ShanaDragoonMagicLocations,
-        RoseDragoonMagicLocations,
-        HaschelDragoonMagicLocations,
-        AlbertDragoonMagicLocations,
-        MeruDragoonMagicLocations,
-        KongolDragoonMagicLocations,
-        MirandaDragoonMagicLocations,
+        DragoonMagicLocations,
     ]),
     OptionGroup("Shopsanity", [
         Shopsanity,
@@ -661,9 +595,10 @@ option_groups = [
         ZenebatosEquipmentShopSlots,
         ZenebatosItemShopSlots,
         BlackCastleItemShopSlots,
-    ], False)
-    # OptionGroup("Starting Choices", [
-    # ])
+    ], False),
+    OptionGroup("Starting Choices", [
+        StartingCharacter
+    ])
 ]
 option_presets = {
 

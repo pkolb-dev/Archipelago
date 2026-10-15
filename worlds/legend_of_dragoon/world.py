@@ -1,15 +1,10 @@
 from typing import Mapping, Any
 
-import Utils
-from BaseClasses import CollectionState, MultiWorld
+from Options import OptionError
 from rule_builder.cached_world import CachedRuleBuilderWorld
-from worlds.AutoWorld import World
 from . import items, locations, regions, rules, web_world, options as lod_options
 from .game_id import lod_name
-from .item.additions import dart_additions_table, lavitz_additions_table, rose_additions_table, haschel_additions_table, \
-    albert_additions_table, meru_additions_table, kongol_additions_table
 from .item.item_data import LegendOfDragoonItem
-from .options import CompletionCondition
 
 
 class LegendOfDragoonWorld(CachedRuleBuilderWorld):
@@ -101,3 +96,7 @@ class LegendOfDragoonWorld(CachedRuleBuilderWorld):
             "hellena_02_item_shop_slots": self.options.hellena_02_item_shop_slots.value,
             "black_castle_item_shop_slots": self.options.black_castle_item_shop_slots.value,
         }
+
+    def generate_early(self) -> None:
+        if self.options.starting_character == lod_options.StartingCharacter.option_lloyd and not self.options.enable_lloyd:
+            raise OptionError(f"{self.player_name}: Cannot pick Lloyd as starting character if not enabled")

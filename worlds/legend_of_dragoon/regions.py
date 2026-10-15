@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import List, NamedTuple, Optional, TYPE_CHECKING
 
 import Utils
-from BaseClasses import Region, MultiWorld, CollectionState
+from BaseClasses import Region, CollectionState
 from rule_builder.rules import Has, HasAll
 from .options import CompletionCondition
 
@@ -113,16 +113,15 @@ def create_all_regions(world: LegendOfDragoonWorld) -> None:
         Region("Haschel Spells", world.player, world.multiworld),
         Region("Albert Additions", world.player, world.multiworld),
         Region("Albert Spells", world.player, world.multiworld),
+        Region("Meru Additions", world.player, world.multiworld),
+        Region("Meru Spells", world.player, world.multiworld),
+        Region("Kongol Additions", world.player, world.multiworld),
+        Region("Kongol Spells", world.player, world.multiworld),
+        Region("Miranda Spells", world.player, world.multiworld),
     ]
 
-    if CompletionCondition.option_chapter_1 != world.options.lod_completion_condition:
-        regions += [
-            Region("Meru Additions", world.player, world.multiworld),
-            Region("Meru Spells", world.player, world.multiworld),
-            Region("Kongol Additions", world.player, world.multiworld),
-            Region("Kongol Spells", world.player, world.multiworld),
-            Region("Miranda Spells", world.player, world.multiworld),
-        ]
+    if world.options.enable_lloyd:
+        regions.append(Region("Lloyd Spells", world.player, world.multiworld))
 
     create_chapter_one_regions(world, regions)
     create_chapter_two_regions(world, regions)
@@ -315,6 +314,8 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     rose_additions = world.get_region("Rose Additions")
     haschel_additions = world.get_region("Haschel Additions")
     albert_additions = world.get_region("Albert Additions")
+    meru_additions = world.get_region("Meru Additions")
+    kongol_additions = world.get_region("Kongol Additions")
 
     dart_spells = world.get_region("Dart Spells")
     lavitz_spells = world.get_region("Lavitz Spells")
@@ -322,6 +323,9 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     rose_spells = world.get_region("Rose Spells")
     haschel_spells = world.get_region("Haschel Spells")
     albert_spells = world.get_region("Albert Spells")
+    meru_spells = world.get_region("Meru Spells")
+    kongol_spells = world.get_region("Kongol Spells")
+    miranda_spells = world.get_region("Miranda Spells")
 
     connect_chapter_one_regions(world)
     connect_chapter_two_regions(world)
@@ -333,6 +337,8 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     menu.connect(rose_additions, "Menu to Rose Additions")
     menu.connect(haschel_additions, "Menu to Haschel Additions")
     menu.connect(albert_additions, "Menu to Albert Additions")
+    menu.connect(meru_additions, "Menu to Meru Additions")
+    menu.connect(kongol_additions, "Menu to Kongol Additions")
 
     menu.connect(dart_spells, "Menu to Dart Spells")
     menu.connect(lavitz_spells, "Menu to Lavitz Spells")
@@ -340,23 +346,19 @@ def connect_regions(world: LegendOfDragoonWorld) -> None:
     menu.connect(rose_spells, "Menu to Rose Spells")
     menu.connect(haschel_spells, "Menu to Haschel Spells")
     menu.connect(albert_spells, "Menu to Albert Spells")
+    menu.connect(meru_spells, "Menu to Meru Spells")
+    menu.connect(kongol_spells, "Menu to Kongol Spells")
+    menu.connect(miranda_spells, "Menu to Miranda Spells")
 
-    if world.options.lod_completion_condition != CompletionCondition.option_chapter_1:
-        meru_additions = world.get_region("Meru Additions")
-        kongol_additions = world.get_region("Kongol Additions")
-        meru_spells = world.get_region("Meru Spells")
-        kongol_spells = world.get_region("Kongol Spells")
-        miranda_spells = world.get_region("Miranda Spells")
-        menu.connect(meru_additions, "Menu to Meru Additions")
-        menu.connect(kongol_additions, "Menu to Kongol Additions")
-        menu.connect(meru_spells, "Menu to Meru Spells")
-        menu.connect(kongol_spells, "Menu to Kongol Spells")
-        menu.connect(miranda_spells, "Menu to Miranda Spells")
+    if world.options.enable_lloyd:
+        lloyd_spells = world.get_region("Lloyd Spells")
+        menu.connect(lloyd_spells, "Menu to Lloyd Spells")
 
 
 def visualize_world(world, state: "CollectionState" = None):
     multiworld = world.multiworld
     regions = world.get_regions()
-    Utils.visualize_regions(multiworld.get_region("Menu", 1), f"{multiworld.player_name[1]}.puml", show_locations=False,
+    Utils.visualize_regions(multiworld.get_region("Menu", 1), f"{multiworld.player_name[1]}.puml", show_locations=True,
                             auto_assign_colors=True,
-                            regions_to_highlight=regions)
+                            regions_to_highlight=regions,
+                            detail_other_regions=True)
