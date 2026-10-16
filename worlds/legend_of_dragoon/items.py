@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Set, TYPE_CHECKING, List
+from typing import Dict, TYPE_CHECKING, List
 
 from BaseClasses import ItemClassification
 from worlds.legend_of_dragoon.item.additions import progressive_additions_table, \
@@ -51,9 +51,7 @@ def setup_additions(world) -> list[LegendOfDragoonItem]:
     active_characters = all_character_addition_items.copy()
     itempool = []
 
-    # Determine allowed additions based on chapters
-    allowed_additions = set()
-    allowed_additions.update(addition_item_table.keys())
+    allowed_additions = addition_item_table.keys()
 
     if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for [character_name, table] in active_characters.items():
@@ -107,8 +105,7 @@ def configure_starting_character(world, itempool):
 
 def configure_starting_additions(world, itempool):
     active_characters = all_character_addition_items.copy()
-    allowed_additions = set()
-    allowed_additions.update(addition_item_table.keys())
+    allowed_additions = addition_item_table.keys()
 
     if world.options.addition_randomizer == AdditionRandomization.option_progressive:
         for character_name in active_characters.keys():
@@ -119,7 +116,7 @@ def configure_starting_additions(world, itempool):
                 world.push_precollected(progressive_item)
         return
 
-    if world.options.addition_randomizer == AdditionRandomization.option_shuffled:
+    elif world.options.addition_randomizer == AdditionRandomization.option_shuffled:
         for table in active_characters.values():
             # Filter additions by allowed chapters
             valid_additions = [name for name in table if name in allowed_additions]
@@ -214,9 +211,7 @@ def get_chapter_goods(world: LegendOfDragoonWorld) -> list[str]:
 
 
 # Make item categories
-item_name_groups: Dict[str, Set[str]] = {}
+item_name_groups: Dict[str, str] = {}
 for item in lookup_table.keys():
     category = lookup_table[item].category
-    if category not in item_name_groups.keys():
-        item_name_groups[category] = set()
-    item_name_groups[category].add(item)
+    item_name_groups[category] = item
