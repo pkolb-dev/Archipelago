@@ -2,7 +2,6 @@ from typing import Dict, TYPE_CHECKING
 
 from .item_data import LegendOfDragoonItemData, ItemCategory, ItemClassification as IC
 from .spells import all_character_spell_items
-from ..loc.additions import shana_addition_unlocks_table
 from ..options import CompletionCondition
 
 dart_additions_table: Dict[str, LegendOfDragoonItemData] = {
@@ -27,18 +26,18 @@ shana_additions_table: Dict[str, LegendOfDragoonItemData] = {}
 
 rose_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Rose Whip Smack": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30016, IC.progression),
-    "Rose More More": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30017, IC.progression),
+    "Rose More and More": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30017, IC.progression),
     "Rose Hard Blade": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30018, IC.progression),
-    "Rose Demons Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30019, IC.progression),
+    "Rose Demon's Dance": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30019, IC.progression),
 }
 
 haschel_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Haschel Double Punch": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30021, IC.progression),
-    "Haschel Ferry Of Styx": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30022, IC.progression),
+    "Haschel Flurry of Styx": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30022, IC.progression),
     "Haschel Summon 4 Gods": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30023, IC.progression),
-    "Haschel Five Ring Shattering": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30024, IC.progression),
+    "Haschel 5-Ring Shattering": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30024, IC.progression),
     "Haschel Hex Hammer": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30025, IC.progression),
-    "Haschel Omni Sweep": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30026, IC.progression),
+    "Haschel Omni-Sweep": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30026, IC.progression),
 }
 
 albert_additions_table: Dict[str, LegendOfDragoonItemData] = {
@@ -53,7 +52,7 @@ meru_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Meru Double Smack": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30034, IC.progression),
     "Meru Hammer Spin": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30035, IC.progression),
     "Meru Cool Boogie": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30036, IC.progression),
-    "Meru Cats Cradle": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30037, IC.progression),
+    "Meru Cat's Cradle": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30037, IC.progression),
     "Meru Perky Step": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30038, IC.progression),
 }
 
@@ -94,32 +93,6 @@ progressive_additions_table: Dict[str, LegendOfDragoonItemData] = {
     "Meru Progressive Addition": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30033, IC.progression, 5),
     "Kongol Progressive Addition": LegendOfDragoonItemData(ItemCategory.ADDITION, 108_30039, IC.progression, 3),
 }
-
-
-def get_active_characters_additions(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
-    """Return the character addition tables for the current completion goal."""
-    characters = all_character_addition_items.copy()
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
-        characters.pop("Meru")
-        characters.pop("Kongol")
-
-    return characters
-
-
-def get_active_characters_spells(world) -> Dict[str, Dict[str, LegendOfDragoonItemData]]:
-    """Return the character addition tables for the current completion goal."""
-    characters = all_character_spell_items.copy()
-
-    if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
-        characters.pop("Meru")
-        characters.pop("Kongol")
-        characters.pop("Miranda")
-    elif world.options.lod_completion_condition == CompletionCondition.option_chapter_2:
-        characters.pop("Miranda")
-
-    return characters
-
 
 chapter_addition_order: dict[int, list[str]] = {
     1: [
@@ -168,9 +141,9 @@ chapter_addition_order: dict[int, list[str]] = {
 }
 
 
-def build_chapter_addition_item_table(chapter: int) -> Dict[str, LegendOfDragoonItemData]:
+def build_addition_item_table() -> Dict[str, LegendOfDragoonItemData]:
     """Return a dict of additions for a specific chapter."""
-    active_names = chapter_addition_order.get(chapter, [])
+    active_names = all_addition_items.copy()
     table: Dict[str, LegendOfDragoonItemData] = {}
     for char, char_table in all_character_addition_items.items():
         for name, item_data in char_table.items():
@@ -179,7 +152,4 @@ def build_chapter_addition_item_table(chapter: int) -> Dict[str, LegendOfDragoon
     return table
 
 
-chapter_one_addition_item_table = build_chapter_addition_item_table(1)
-chapter_two_addition_item_table = build_chapter_addition_item_table(2)
-chapter_three_addition_item_table = build_chapter_addition_item_table(3)
-chapter_four_addition_item_table = build_chapter_addition_item_table(4)
+addition_item_table = build_addition_item_table()

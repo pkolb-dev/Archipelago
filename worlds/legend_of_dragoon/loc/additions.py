@@ -1,86 +1,88 @@
 from typing import Dict
+from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocationInfo
 
-from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData
+dart_additions_table = dict.fromkeys([
+    "Double Slash",
+    "Volcano",
+    "Burning Rush",
+    "Crush Dance",
+    "Madness Hero",
+    "Moon Strike",
+    "Blazing Dynamo",
+])
 
-dart_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Dart - Volcano Unlock": LegendOfDragoonLocationData("Dart", 108_60001, "Addition"),
-    "Dart - Burning Rush Unlock": LegendOfDragoonLocationData("Dart", 108_60002, "Addition"),
-    "Dart - Crush Dance Unlock": LegendOfDragoonLocationData("Dart", 108_60003, "Addition"),
-    "Dart - Madness Hero Unlock": LegendOfDragoonLocationData("Dart", 108_60004, "Addition"),
-    "Dart - Moon Strike Unlock": LegendOfDragoonLocationData("Dart", 108_60005, "Addition"),
-    "Dart - Blazing Dynamo Unlock": LegendOfDragoonLocationData("Dart", 108_60006, "Addition"),
-}
+rose_additions_table = dict.fromkeys([
+    "Whip Smack",
+    "More and More",
+    "Hard Blade",
+    "Demon's Dance"
+])
 
-rose_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Rose - More and More Unlock": LegendOfDragoonLocationData("Rose", 108_60011, "Addition"),
-    "Rose - Hard Blade Unlock": LegendOfDragoonLocationData("Rose", 108_60012, "Addition"),
-    "Rose - Demon's Dance Unlock": LegendOfDragoonLocationData("Rose", 108_60013, "Addition"),
-}
+lavitz_additions_table = dict.fromkeys([
+    "Harpoon",
+    "Spinning Cane",
+    "Rod Typhoon",
+    "Gust Of Wind Dance",
+    "Flower Storm"
+])
 
-lavitz_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Lavitz - Spinning Cane Unlock": LegendOfDragoonLocationData("Lavitz", 108_60021, "Addition"),
-    "Lavitz - Rod Typhoon Unlock": LegendOfDragoonLocationData("Lavitz", 108_60022, "Addition"),
-    "Lavitz - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Lavitz", 108_60023, "Addition"),
-    "Lavitz - Flower Storm Unlock": LegendOfDragoonLocationData("Lavitz", 108_60024, "Addition"),
-}
+shana_additions_table: Dict[str, str] = {}
 
-shana_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    # none
-}
+haschel_additions_table = dict.fromkeys([
+    "Double Punch",
+    "Flurry of Styx",
+    "Summon 4 Gods",
+    "5-Ring Shattering",
+    "Hex Hammer",
+    "Omni-Sweep"
+])
 
-haschel_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Haschel - Flurry of Styx Unlock": LegendOfDragoonLocationData("Haschel", 108_60041, "Addition"),
-    "Haschel - Summon 4 Gods Unlock": LegendOfDragoonLocationData("Haschel", 108_60042, "Addition"),
-    "Haschel - 5-Ring Shattering Unlock": LegendOfDragoonLocationData("Haschel", 108_60043, "Addition"),
-    "Haschel - Hex Hammer Unlock": LegendOfDragoonLocationData("Haschel", 108_60044, "Addition"),
-    "Haschel - Omni-Sweep Unlock": LegendOfDragoonLocationData("Haschel", 108_60045, "Addition"),
-}
+albert_additions_table = dict.fromkeys([
+    "Harpoon",
+    "Spinning Cane",
+    "Rod Typhoon",
+    "Gust Of Wind Dance",
+    "Flower Storm"
+])
 
-albert_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Albert - Spinning Cane Unlock": LegendOfDragoonLocationData("Albert", 108_60031, "Addition"),
-    "Albert - Rod Typhoon Unlock": LegendOfDragoonLocationData("Albert", 108_60032, "Addition"),
-    "Albert - Gust Of Wind Dance Unlock": LegendOfDragoonLocationData("Albert", 108_60033, "Addition"),
-    "Albert - Flower Storm Unlock": LegendOfDragoonLocationData("Albert", 108_60034, "Addition"),
-}
+meru_additions_table = dict.fromkeys([
+    "Double Smack",
+    "Hammer Spin",
+    "Cool Boogie",
+    "Cat's Cradle",
+    "Perky Step"
+])
 
-meru_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Meru - Hammer Spin Unlock": LegendOfDragoonLocationData("Meru", 108_60051, "Addition"),
-    "Meru - Cool Boogie Unlock": LegendOfDragoonLocationData("Meru", 108_60052, "Addition"),
-    "Meru - Cat's Cradle Unlock": LegendOfDragoonLocationData("Meru", 108_60053, "Addition"),
-    "Meru - Perky Step Unlock": LegendOfDragoonLocationData("Meru", 108_60054, "Addition"),
-}
+kongol_additions_table = dict.fromkeys([
+    "Pursuit",
+    "Inferno",
+    "Bone Crush"
+])
 
-kongol_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Kongol - Inferno Unlock": LegendOfDragoonLocationData("Kongol", 108_60061, "Addition"),
-    "Kongol - Bone Crush Unlock": LegendOfDragoonLocationData("Kongol", 108_60062, "Addition"),
-}
+miranda_additions_table = dict.fromkeys([])
 
-miranda_addition_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    # none
-}
+starting_additions = dict.fromkeys([
+    dart_additions_table.get("Double Slash"),
+    lavitz_additions_table.get("Harpoon"),
+    rose_additions_table.get("Whip Smack"),
+    # shana_additions_table[0],
+    haschel_additions_table.get("Double Punch"),
+    albert_additions_table.get("Harpoon"),
+    meru_additions_table.get("Double Smack"),
+    kongol_additions_table.get("Pursuit"),
+    # miranda_additions_table[0],
+])
 
-all_addition_locations_table: Dict[str, LegendOfDragoonLocationData] = {
-    **dart_addition_unlocks_table,
-    **rose_addition_unlocks_table,
-    **lavitz_addition_unlocks_table,
-    **shana_addition_unlocks_table,
-    **albert_addition_unlocks_table,
-    **haschel_addition_unlocks_table,
-    **meru_addition_unlocks_table,
-    **kongol_addition_unlocks_table,
-    **miranda_addition_unlocks_table,
-}
-
-all_character_unlocks_table: Dict[str, Dict[str, LegendOfDragoonLocationData]] = {
-    "Dart": dart_addition_unlocks_table,
-    "Lavitz": lavitz_addition_unlocks_table,
-    "Rose": rose_addition_unlocks_table,
-    "Shana": shana_addition_unlocks_table,
-    "Haschel": haschel_addition_unlocks_table,
-    "Albert": albert_addition_unlocks_table,
-    "Meru": meru_addition_unlocks_table,
-    "Kongol": kongol_addition_unlocks_table,
-    "Miranda": miranda_addition_unlocks_table,
+all_character_unlocks_table = {
+    "Dart": dart_additions_table.keys(),
+    "Lavitz": lavitz_additions_table.keys(),
+    "Rose": rose_additions_table.keys(),
+    "Shana": shana_additions_table.keys(),
+    "Haschel": haschel_additions_table.keys(),
+    "Albert": albert_additions_table.keys(),
+    "Meru": meru_additions_table.keys(),
+    "Kongol": kongol_additions_table.keys(),
+    "Miranda": miranda_additions_table.keys(),
 }
 
 chapter_unlock_order: dict[int, list[str]] = {
@@ -123,13 +125,39 @@ chapter_unlock_order: dict[int, list[str]] = {
 }
 
 
-def build_chapter_unlock_table(chapter: int) -> Dict[str, LegendOfDragoonLocationData]:
+def get_all_addition_locations() -> Dict[str, LegendOfDragoonLocationData]:
+    base_id: int = 108_60000
+
+    unlock_locations: list[LegendOfDragoonLocationInfo] = []
+    addition_mastery_locations: list[LegendOfDragoonLocationInfo] = []
+    for character, additions in all_character_unlocks_table.items():
+        for addition in additions:
+            for level in range(1, 5):
+                addition_mastery_locations.append(
+                    LegendOfDragoonLocationInfo(f"{character} - {addition} Level {level + 1}", character))
+            if addition in starting_additions:
+                continue
+            unlock_locations.append(LegendOfDragoonLocationInfo(f"{character} - {addition} Unlock", character))
+
+    all_locs = {}
+    i: int = base_id
+    for location in unlock_locations + addition_mastery_locations:
+        all_locs.update({location.key: LegendOfDragoonLocationData(location.region, i, "Addition")})
+        i += 1
+
+    return all_locs
+
+
+all_addition_locations_table = get_all_addition_locations()
+
+
+def build_chapter_unlock_table(chapter: int) -> Dict[str, LegendOfDragoonLocationInfo]:
     active_names = chapter_unlock_order.get(chapter, [])
     table = {}
-    for char, char_table in all_character_unlocks_table.items():
-        for name, loc_data in char_table.items():
-            if name in active_names:
-                table[name] = loc_data
+    for loc_key, loc_data in all_addition_locations_table.items():
+        for name in active_names:
+            if name in loc_key:
+                table[loc_key] = loc_data
     return table
 
 
