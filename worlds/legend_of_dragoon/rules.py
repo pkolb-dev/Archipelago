@@ -175,7 +175,6 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     meru_spells = world.get_entrance("Menu to Meru Spells")
     kongol_spells = world.get_entrance("Menu to Kongol Spells")
     miranda_spells = world.get_entrance("Menu to Miranda Spells")
-    lloyd_spells = world.get_entrance("Menu to Lloyd Spells")
 
     world.set_rule(dart_spells, Has("Dart") | Has("Dart Progressive Spirit", 2))
     world.set_rule(lavitz_spells, HasAll("Lavitz", "Jade Dragoon Spirit"))
@@ -186,7 +185,10 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     world.set_rule(meru_spells, HasAll("Meru", "Blue Dragoon Spirit"))
     world.set_rule(kongol_spells, HasAll("Kongol", "Gold Dragoon Spirit"))
     world.set_rule(miranda_spells, HasAll("Miranda", "Silver Dragoon Spirit"))
-    world.set_rule(lloyd_spells, HasAll("Lloyd", "Chaos Divine Dragoon Spirit"))
+
+    if world.options.enable_lloyd:
+        lloyd_spells = world.get_entrance("Menu to Lloyd Spells")
+        world.set_rule(lloyd_spells, HasAll("Lloyd", "Chaos Divine Dragoon Spirit"))
 
 
 def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
@@ -338,7 +340,7 @@ def set_chapter_two_addition_unlock_rules(world):
     meru_hammer_spin = world.get_location("Meru - Hammer Spin Unlock")
     demons_dance = world.get_location("Rose - Demon's Dance Unlock")
 
-    world.set_rule(rose_hard_blade, Has("Gehrich and Mappi"))
+    world.set_rule(rose_hard_blade, Has("Gehrich"))
     world.set_rule(haschel_summon_4_gods, Has("Gehrich"))
     world.set_rule(meru_hammer_spin, Has("Lenus 2"))
 
@@ -429,7 +431,7 @@ def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:
             for level in range(1, 5):
                 loc = world.get_location(f"{character} - {addition} Level {level + 1}")
                 world.set_rule(loc, Has(f"{character} {addition}") | Has(f"{character} Progressive Addition",
-                                                                         count=additions.index(addition) + 1))
+                                                                         count=list(additions).index(addition) + 1))
 
 
 def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:

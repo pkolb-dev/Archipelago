@@ -1,7 +1,7 @@
 from typing import Dict
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocationInfo
 
-dart_additions_table: list[str] = [
+dart_additions_table = dict.fromkeys([
     "Double Slash",
     "Volcano",
     "Burning Rush",
@@ -9,80 +9,80 @@ dart_additions_table: list[str] = [
     "Madness Hero",
     "Moon Strike",
     "Blazing Dynamo",
-]
+])
 
-rose_additions_table: list[str] = [
+rose_additions_table = dict.fromkeys([
     "Whip Smack",
     "More and More",
     "Hard Blade",
     "Demon's Dance"
-]
+])
 
-lavitz_additions_table: list[str] = [
+lavitz_additions_table = dict.fromkeys([
     "Harpoon",
     "Spinning Cane",
     "Rod Typhoon",
     "Gust Of Wind Dance",
     "Flower Storm"
-]
+])
 
-shana_additions_table: list[str] = []
+shana_additions_table: Dict[str, str] = {}
 
-haschel_additions_table: list[str] = [
+haschel_additions_table = dict.fromkeys([
     "Double Punch",
     "Flurry of Styx",
     "Summon 4 Gods",
     "5-Ring Shattering",
     "Hex Hammer",
     "Omni-Sweep"
-]
+])
 
-albert_additions_table: list[str] = [
+albert_additions_table = dict.fromkeys([
     "Harpoon",
     "Spinning Cane",
     "Rod Typhoon",
     "Gust Of Wind Dance",
     "Flower Storm"
-]
+])
 
-meru_additions_table: list[str] = [
+meru_additions_table = dict.fromkeys([
     "Double Smack",
     "Hammer Spin",
     "Cool Boogie",
     "Cat's Cradle",
     "Perky Step"
-]
+])
 
-kongol_additions_table: list[str] = [
+kongol_additions_table = dict.fromkeys([
     "Pursuit",
     "Inferno",
     "Bone Crush"
-]
+])
 
-miranda_additions_table: list[str] = []
+miranda_additions_table = dict.fromkeys([])
 
-starting_additions: list[str] = [
-    dart_additions_table[0],
-    lavitz_additions_table[0],
-    rose_additions_table[0],
+starting_additions = dict.fromkeys([
+    dart_additions_table.get("Double Slash"),
+    lavitz_additions_table.get("Harpoon"),
+    rose_additions_table.get("Whip Smack"),
     # shana_additions_table[0],
-    haschel_additions_table[0],
-    albert_additions_table[0],
-    meru_additions_table[0],
-    kongol_additions_table[0],
+    haschel_additions_table.get("Double Punch"),
+    albert_additions_table.get("Harpoon"),
+    meru_additions_table.get("Double Smack"),
+    kongol_additions_table.get("Pursuit"),
     # miranda_additions_table[0],
-]
+])
 
-all_character_unlocks_table: Dict[str, list[str]] = {
-    "Dart": dart_additions_table,
-    "Lavitz": lavitz_additions_table,
-    "Rose": rose_additions_table,
-    "Shana": shana_additions_table,
-    "Haschel": haschel_additions_table,
-    "Albert": albert_additions_table,
-    "Meru": meru_additions_table,
-    "Kongol": kongol_additions_table,
-    "Miranda": miranda_additions_table,
+all_character_unlocks_table = {
+    "Dart": dart_additions_table.keys(),
+    "Lavitz": lavitz_additions_table.keys(),
+    "Rose": rose_additions_table.keys(),
+    "Shana": shana_additions_table.keys(),
+    "Haschel": haschel_additions_table.keys(),
+    "Albert": albert_additions_table.keys(),
+    "Meru": meru_additions_table.keys(),
+    "Kongol": kongol_additions_table.keys(),
+    "Miranda": miranda_additions_table.keys(),
 }
 
 chapter_unlock_order: dict[int, list[str]] = {

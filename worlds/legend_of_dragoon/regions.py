@@ -212,8 +212,7 @@ def connect_chapter_two_regions(world):
     barrens.connect(donau, "Barrens to Donau")
     barrens.connect(valley_of_corrupted_gravity, "Barrens to Valley of Corrupted Gravity")
     valley_of_corrupted_gravity.connect(barrens, "Valley of Corrupted Gravity to Barrens")
-    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto",
-                                        Has("Valley Virage"))
+    valley_of_corrupted_gravity.connect(home_of_giganto, "Valley of Corrupted Gravity to Home of Giganto")
     home_of_giganto.connect(valley_of_corrupted_gravity, "Home of Giganto to Valley of Corrupted Gravity")
     donau.connect(queen_fury, "Donau to Queen Fury")
     queen_fury.connect(donau, "Queen Fury to Donau")

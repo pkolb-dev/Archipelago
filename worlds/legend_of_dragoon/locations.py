@@ -9,7 +9,7 @@ from worlds.legend_of_dragoon.loc.chests import chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocation
-from worlds.legend_of_dragoon.loc.shops import shop_table, get_all_shops
+from worlds.legend_of_dragoon.loc.shops import all_shops_table, get_all_shops
 from .item.item_data import LegendOfDragoonItem
 from .loc.goods import goods_location_table
 from .loc.magic import all_magic_locations_table, all_character_magic_unlocks_table
@@ -24,7 +24,7 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **events_table,
     **enemy_table,
     **goods_location_table,
-    **get_all_shops(),
+    **all_shops_table,
     **all_magic_locations_table,
 }
 
@@ -32,7 +32,6 @@ dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **enemy_table,
     **events_table,
     **chests_table,
-    **goods_location_table,
 }
 
 
@@ -96,9 +95,11 @@ def setup_addition_unlock_locations(world) -> None:
     }
 
     for chapter, table in chapter_tables.items():
-        categories = {data.category for data in table.values()}
+        categories: Dict[str, str] = {}
+        for data in table.values():
+            categories[data.category] = ""
 
-        for category in categories:
+        for category in categories.keys():
             if chapter == 2 and world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
                 continue
             if chapter == 3 and world.options.lod_completion_condition in [CompletionCondition.option_chapter_1,
@@ -118,7 +119,7 @@ def setup_addition_mastery_locations(world) -> None:
             continue
         region = world.get_region(f"{character} Additions")
 
-        locations = {loc: data for loc, data in all_addition_locations_table.items() if
+        locations = {loc: data.code for loc, data in all_addition_locations_table.items() if
                      character in loc and "Level" in loc}
         region.add_locations(locations, LegendOfDragoonLocation)
 
@@ -145,28 +146,16 @@ def create_regular_locations(world: LegendOfDragoonWorld) -> None:
     configure_magicsanity(world)
 
 
-def create_magic_location(number_of_slots: int, character_key: str) -> None:
-    character_data: Dict[str, LegendOfDragoonLocationData] = all_character_magic_unlocks_table[character_key]
-
-    for number in range(number_of_slots):
-        # locations start from level 1
-        location_key = f"{character_key} - Magic Level {number + 2} Unlock"
-        location_data = character_data.get(location_key)
-        if location_data is None:
-            continue
-        dynamic_location_table[location_key] = location_data
-
-
 def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
-    create_magic_location(world.options.magic_slots.value, "Dart")
-    create_magic_location(world.options.magic_slots.value, "Lavitz")
-    create_magic_location(world.options.magic_slots.value, "Shana")
-    create_magic_location(world.options.magic_slots.value, "Rose")
-    create_magic_location(world.options.magic_slots.value, "Haschel")
-    create_magic_location(world.options.magic_slots.value, "Albert")
-    create_magic_location(world.options.magic_slots.value, "Meru")
-    create_magic_location(world.options.magic_slots.value, "Kongol")
-    create_magic_location(world.options.magic_slots.value, "Miranda")
+    for character, locations in all_character_magic_unlocks_table.items():
+        if character == "Lloyd" and not world.options.enable_lloyd:
+            continue
+        for number in range(world.options.magic_slots.value):
+            location_key = f"{character} - Magic Level {number + 2} Unlock"
+            location_data = all_character_magic_unlocks_table.get(character).get(location_key)
+            if location_data is None:
+                continue
+            dynamic_location_table[location_key] = location_data
 
     dart_spells = world.get_region("Dart Spells")
     lavitz_spells = world.get_region("Lavitz Spells")
@@ -189,7 +178,6 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
     miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
 
     if world.options.enable_lloyd:
-        create_magic_location(world.options.magic_slots.value, "Lloyd")
         lloyd_spells = world.get_region("Lloyd Spells")
         lloyd_spells.add_locations(get_locations_by_category_with_ids("Lloyd"))
 
@@ -197,57 +185,9 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
 def configure_shopsanity(world: LegendOfDragoonWorld) -> None:
     if not world.options.enable_shopsanity.value:
         return
-    # now we go through each shop and add the number of locations per options.
-    create_shop_location(world.options.bale_equipment_shop_slots.value, "Bale Equipment Shop")
-    create_shop_location(world.options.serdio_item_shop_slots.value, "Bale Item Shop")
-    create_shop_location(world.options.lohan_equipment_shop_slots.value, "Lohan Equipment Shop")
-    create_shop_location(world.options.lohan_item_shop_slots.value, "Lohan Item Shop")
-    create_shop_location(world.options.kazas_equipment_shop_slots.value, "Kazas Equipment Shop")
-    create_shop_location(world.options.kazas_fort_item_shop_slots.value, "Kazas Fort Item Shop")
-    create_shop_location(world.options.fletz_equipment_shop_slots.value, "Fletz Equipment Shop")
-    create_shop_location(world.options.fletz_item_shop_slots.value, "Fletz Item Shop")
-    create_shop_location(world.options.donau_equipment_shop_slots.value, "Donau Equipment Shop")
-    create_shop_location(world.options.donau_item_shop_slots.value, "Donau Item Shop")
-    create_shop_location(world.options.queen_fury_equipment_shop_slots.value, "Queen Fury Equipment Shop")
-    create_shop_location(world.options.queen_fury_item_shop_slots.value, "Queen Fury Item Shop")
-    create_shop_location(world.options.fueno_equipment_shop_slots.value, "Fueno Equipment Shop")
-    create_shop_location(world.options.fueno_item_shop_slots.value, "Fueno Item Shop")
-    create_shop_location(world.options.furni_equipment_shop_slots.value, "Furni Equipment Shop")
-    create_shop_location(world.options.furni_item_shop_slots.value, "Furni Item Shop")
-    create_shop_location(world.options.deningrad_equipment_shop_slots.value, "Deningrad Equipment Shop")
-    create_shop_location(world.options.deningrad_item_shop_slots.value, "Deningrad Item Shop")
-    create_shop_location(world.options.wingly_forest_equipment_shop_slots.value, "Wingly Forest Equipment Shop")
-    create_shop_location(world.options.wingly_forest_item_shop_slots.value, "Wingly Forest Item Shop")
-    create_shop_location(world.options.vellweb_equipment_shop_slots.value, "Vellweb Equipment Shop")
-    create_shop_location(world.options.vellweb_item_shop_slots.value, "Vellweb Item Shop")
-    create_shop_location(world.options.ulara_equipment_shop_slots.value, "Ulara Equipment Shop")
-    create_shop_location(world.options.ulara_item_shop_slots.value, "Ulara Item Shop")
-    create_shop_location(world.options.rouge_equipment_shop_slots.value, "Rouge Equipment Shop")
-    create_shop_location(world.options.rouge_item_shop_slots.value, "Rouge Item Shop")
-    create_shop_location(world.options.moon_equipment_shop_slots.value, "Moon Equipment Shop")
-    create_shop_location(world.options.moon_item_shop_slots.value, "Moon Item Shop")
-    create_shop_location(world.options.hellena_01_item_shop_slots.value, "Hellena 01 Item Shop")
-    create_shop_location(world.options.kashua_equipment_shop_slots.value, "Kashua Equipment Shop")
-    create_shop_location(world.options.kashua_item_shop_slots.value, "Kashua Item Shop")
-    create_shop_location(world.options.fletz_accessory_shop_slots.value, "Fletz Accessory Shop")
-    create_shop_location(world.options.forest_item_shop_slots.value, "Forest Item Shop")
-    create_shop_location(world.options.kazas_fort_equipment_shop_slots.value, "Kazas Fort Equipment Shop")
-    create_shop_location(world.options.volcano_item_shop_slots.value, "Volcano Item Shop")
-    create_shop_location(world.options.zenebatos_equipment_shop_slots.value, "Zenebatos Equipment Shop")
-    create_shop_location(world.options.zenebatos_item_shop_slots.value, "Zenebatos Item Shop")
-    create_shop_location(world.options.hellena_02_item_shop_slots.value, "Hellena 02 Item Shop")
-    create_shop_location(world.options.black_castle_item_shop_slots.value, "Black Castle Item Shop")
 
-
-def create_shop_location(number_of_slots: int, key: str) -> None:
-    base_data = shop_table[key]
-    if base_data.code is None:
-        return
-
-    for number in range(number_of_slots):
-        complete_name = key + " - Slot " + str(number + 1)
-        updated_data = LegendOfDragoonLocationData(base_data.category, base_data.code + number + 1, base_data.type)
-        dynamic_location_table[complete_name] = updated_data
+    dynamic_location_table.update(
+        get_all_shops(world.options.default_shop_slots.value, world.options.missable_shop_slots.value))
 
 
 def create_chapter_one_locations(world):

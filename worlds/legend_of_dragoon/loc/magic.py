@@ -3,7 +3,6 @@ from typing import Dict
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData
 
 dart_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Dart - Magic Level 1 Unlock": LegendOfDragoonLocationData("Dart", 108_90000, "Magic"),
     "Dart - Magic Level 2 Unlock": LegendOfDragoonLocationData("Dart", 108_90001, "Magic"),
     "Dart - Magic Level 3 Unlock": LegendOfDragoonLocationData("Dart", 108_90002, "Magic"),
     "Dart - Magic Level 4 Unlock": LegendOfDragoonLocationData("Dart", 108_90003, "Magic"),
@@ -11,7 +10,6 @@ dart_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 lavitz_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Lavitz - Magic Level 1 Unlock": LegendOfDragoonLocationData("Lavitz", 108_90010, "Magic"),
     "Lavitz - Magic Level 2 Unlock": LegendOfDragoonLocationData("Lavitz", 108_90011, "Magic"),
     "Lavitz - Magic Level 3 Unlock": LegendOfDragoonLocationData("Lavitz", 108_90012, "Magic"),
     "Lavitz - Magic Level 4 Unlock": LegendOfDragoonLocationData("Lavitz", 108_90013, "Magic"),
@@ -19,7 +17,6 @@ lavitz_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 shana_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Shana - Magic Level 1 Unlock": LegendOfDragoonLocationData("Shana", 108_90020, "Magic"),
     "Shana - Magic Level 2 Unlock": LegendOfDragoonLocationData("Shana", 108_90021, "Magic"),
     "Shana - Magic Level 3 Unlock": LegendOfDragoonLocationData("Shana", 108_90022, "Magic"),
     "Shana - Magic Level 4 Unlock": LegendOfDragoonLocationData("Shana", 108_90023, "Magic"),
@@ -27,7 +24,6 @@ shana_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 rose_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Rose - Magic Level 1 Unlock": LegendOfDragoonLocationData("Rose", 108_90030, "Magic"),
     "Rose - Magic Level 2 Unlock": LegendOfDragoonLocationData("Rose", 108_90031, "Magic"),
     "Rose - Magic Level 3 Unlock": LegendOfDragoonLocationData("Rose", 108_90032, "Magic"),
     "Rose - Magic Level 4 Unlock": LegendOfDragoonLocationData("Rose", 108_90033, "Magic"),
@@ -35,7 +31,6 @@ rose_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 haschel_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Haschel - Magic Level 1 Unlock": LegendOfDragoonLocationData("Haschel", 108_90040, "Magic"),
     "Haschel - Magic Level 2 Unlock": LegendOfDragoonLocationData("Haschel", 108_90041, "Magic"),
     "Haschel - Magic Level 3 Unlock": LegendOfDragoonLocationData("Haschel", 108_90042, "Magic"),
     "Haschel - Magic Level 4 Unlock": LegendOfDragoonLocationData("Haschel", 108_90043, "Magic"),
@@ -43,7 +38,6 @@ haschel_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 albert_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Albert - Magic Level 1 Unlock": LegendOfDragoonLocationData("Albert", 108_90050, "Magic"),
     "Albert - Magic Level 2 Unlock": LegendOfDragoonLocationData("Albert", 108_90051, "Magic"),
     "Albert - Magic Level 3 Unlock": LegendOfDragoonLocationData("Albert", 108_90052, "Magic"),
     "Albert - Magic Level 4 Unlock": LegendOfDragoonLocationData("Albert", 108_90053, "Magic"),
@@ -51,7 +45,6 @@ albert_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 meru_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Meru - Magic Level 1 Unlock": LegendOfDragoonLocationData("Meru", 108_90060, "Magic"),
     "Meru - Magic Level 2 Unlock": LegendOfDragoonLocationData("Meru", 108_90061, "Magic"),
     "Meru - Magic Level 3 Unlock": LegendOfDragoonLocationData("Meru", 108_90062, "Magic"),
     "Meru - Magic Level 4 Unlock": LegendOfDragoonLocationData("Meru", 108_90063, "Magic"),
@@ -59,7 +52,6 @@ meru_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 kongol_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Kongol - Magic Level 1 Unlock": LegendOfDragoonLocationData("Kongol", 108_90070, "Magic"),
     "Kongol - Magic Level 2 Unlock": LegendOfDragoonLocationData("Kongol", 108_90071, "Magic"),
     "Kongol - Magic Level 3 Unlock": LegendOfDragoonLocationData("Kongol", 108_90072, "Magic"),
     "Kongol - Magic Level 4 Unlock": LegendOfDragoonLocationData("Kongol", 108_90073, "Magic"),
@@ -67,7 +59,6 @@ kongol_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 miranda_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Miranda - Magic Level 1 Unlock": LegendOfDragoonLocationData("Miranda", 108_90080, "Magic"),
     "Miranda - Magic Level 2 Unlock": LegendOfDragoonLocationData("Miranda", 108_90081, "Magic"),
     "Miranda - Magic Level 3 Unlock": LegendOfDragoonLocationData("Miranda", 108_90082, "Magic"),
     "Miranda - Magic Level 4 Unlock": LegendOfDragoonLocationData("Miranda", 108_90083, "Magic"),
@@ -75,7 +66,6 @@ miranda_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
 }
 
 lloyd_magic_unlocks_table: Dict[str, LegendOfDragoonLocationData] = {
-    "Lloyd - Magic Level 1 Unlock": LegendOfDragoonLocationData("Lloyd", 108_90090, "Magic"),
     "Lloyd - Magic Level 2 Unlock": LegendOfDragoonLocationData("Lloyd", 108_90091, "Magic"),
     "Lloyd - Magic Level 3 Unlock": LegendOfDragoonLocationData("Lloyd", 108_90092, "Magic"),
     "Lloyd - Magic Level 4 Unlock": LegendOfDragoonLocationData("Lloyd", 108_90093, "Magic"),
