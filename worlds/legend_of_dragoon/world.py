@@ -56,7 +56,7 @@ class LegendOfDragoonWorld(CachedRuleBuilderWorld):
             "minimum_shop_price": self.options.minimum_shop_price.value,
             "allow_repeat_consumables": self.options.allow_repeat_consumables.value,
             "death_link": self.options.death_link.value,
-            "perma_shop_slots": self.options.default_shop_slots.value,
+            "default_shop_slots": self.options.default_shop_slots.value,
             "missable_shop_slots": self.options.missable_shop_slots.value,
         }
 

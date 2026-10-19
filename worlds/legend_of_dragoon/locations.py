@@ -28,11 +28,7 @@ all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **all_magic_locations_table,
 }
 
-dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {
-    **enemy_table,
-    **events_table,
-    **chests_table,
-}
+dynamic_location_table: Dict[str, LegendOfDragoonLocationData] = {}
 
 
 def get_location_names_with_ids(location_names: list[str]) -> dict[str, int | None]:
@@ -130,6 +126,11 @@ def setup_addition_locations(world):
 
 
 def create_all_locations(world: LegendOfDragoonWorld) -> None:
+    dynamic_location_table.clear()
+    dynamic_location_table.update(**enemy_table,
+                                  **events_table,
+                                  **chests_table,
+                                  **goods_location_table)
     create_regular_locations(world)
     # create_events(world) - unused atm
 
@@ -185,9 +186,10 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
 def configure_shopsanity(world: LegendOfDragoonWorld) -> None:
     if not world.options.enable_shopsanity.value:
         return
-
-    dynamic_location_table.update(
-        get_all_shops(world.options.default_shop_slots.value, world.options.missable_shop_slots.value))
+    default_slots = world.options.default_shop_slots.value
+    missable_slots = world.options.missable_shop_slots.value
+    shops = get_all_shops(default_slots, missable_slots)
+    dynamic_location_table.update(shops)
 
 
 def create_chapter_one_locations(world):
@@ -223,8 +225,8 @@ def create_chapter_one_locations(world):
     black_castle_throne_room.add_locations(get_locations_by_category_with_ids("Black Castle Throne Room"),
                                            LegendOfDragoonLocation)
 
-    hellena_prison_01.add_locations(get_locations_by_category_with_ids("Hellena 01"), LegendOfDragoonLocation)
-    hellena_prison_02.add_locations(get_locations_by_category_with_ids("Hellena 02"), LegendOfDragoonLocation)
+    hellena_prison_01.add_locations(get_locations_by_category_with_ids("Hellena Prison 01"), LegendOfDragoonLocation)
+    hellena_prison_02.add_locations(get_locations_by_category_with_ids("Hellena Prison 02"), LegendOfDragoonLocation)
     volcano_villude.add_locations(get_locations_by_category_with_ids("Volcano Villude"), LegendOfDragoonLocation)
 
 
@@ -300,7 +302,8 @@ def create_chapter_four_locations(world):
     zenebatos.add_locations(get_locations_by_category_with_ids("Zenebatos"), LegendOfDragoonLocation)
     mayfil.add_locations(get_locations_by_category_with_ids("Mayfil"), LegendOfDragoonLocation)
     divine_tree.add_locations(get_locations_by_category_with_ids("Divine Tree"), LegendOfDragoonLocation)
-    moon_that_never_sets.add_locations(get_locations_by_category_with_ids("Moon"), LegendOfDragoonLocation)
+    moon_that_never_sets.add_locations(get_locations_by_category_with_ids("Moon That Never Sets"),
+                                       LegendOfDragoonLocation)
 
 
 def setup_chapter_one_events(world):

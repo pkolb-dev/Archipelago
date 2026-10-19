@@ -87,7 +87,7 @@ def set_chapter_two_entrance_rules(world):
     world.set_rule(black_castle_throne_room_to_fletz, Has("Dragoon Doel"))
 
     barrens_to_valley = world.get_entrance("Barrens to Valley of Corrupted Gravity")
-    world.set_rule(barrens_to_valley, HasAll("Pass for Valley", "Letter from Lynn"))
+    world.set_rule(barrens_to_valley, HasAll("Pass for Valley"))
 
     valley_to_home_of_giganto = world.get_entrance("Valley of Corrupted Gravity to Home of Giganto")
     world.set_rule(valley_to_home_of_giganto, Has("Valley Virage"))
@@ -176,7 +176,7 @@ def set_spell_entrance_rules(world: LegendOfDragoonWorld) -> None:
     kongol_spells = world.get_entrance("Menu to Kongol Spells")
     miranda_spells = world.get_entrance("Menu to Miranda Spells")
 
-    world.set_rule(dart_spells, Has("Dart") | Has("Dart Progressive Spirit", 2))
+    world.set_rule(dart_spells, Has("Dart") & Has("Dart Progressive Spirit", 2))
     world.set_rule(lavitz_spells, HasAll("Lavitz", "Jade Dragoon Spirit"))
     world.set_rule(shana_spells, HasAll("Shana", "Silver Dragoon Spirit"))
     world.set_rule(rose_spells, HasAll("Rose", "Dark Dragoon Spirit"))
@@ -351,7 +351,7 @@ def set_chapter_two_addition_unlock_rules(world):
             demons_dance,
             HasAll(
                 "Rose Whip Smack",
-                "Rose More More",
+                "Rose More and More",
                 "Rose Hard Blade",
             )
         )
@@ -385,9 +385,9 @@ def set_chapter_three_addition_unlock_rules(world):
             omni_sweep,
             HasAll(
                 "Haschel Double Punch",
-                "Haschel Ferry Of Styx",
+                "Haschel Flurry of Styx",
                 "Haschel Summon 4 Gods",
-                "Haschel Five Ring Shattering",
+                "Haschel 5-Ring Shattering",
                 "Haschel Hex Hammer",
             )
         )
@@ -422,7 +422,7 @@ def set_chapter_four_addition_unlock_rules(world):
                               "Dart Madness Hero", "Dart Moon Strike"))
 
         world.set_rule(perky_step,
-                       HasAll("Meru Double Smack", "Meru Hammer Spin", "Meru Cool Boogie", "Meru Cats Cradle"))
+                       HasAll("Meru Double Smack", "Meru Hammer Spin", "Meru Cool Boogie", "Meru Cat's Cradle"))
 
 
 def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:

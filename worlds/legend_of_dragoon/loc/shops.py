@@ -39,10 +39,10 @@ perma_shop_table: dict[str, str] = {
 missable_shop_table: dict[str, str] = {
     "Queen Fury Equipment Shop": "Queen Fury",
     "Queen Fury Item Shop": "Queen Fury",
-    "Hellena 01 Item Shop": "Hellena 01",
+    "Hellena 01 Item Shop": "Hellena Prison 01",
     "Forest Item Shop": "Forest",
     "Volcano Item Shop": "Volcano Villude",
-    "Hellena 02 Item Shop": "Hellena 02",
+    "Hellena 02 Item Shop": "Hellena Prison 02",
     "Black Castle Item Shop": "Black Castle",
 }
 

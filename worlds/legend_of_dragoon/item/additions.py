@@ -101,7 +101,7 @@ chapter_addition_order: dict[int, list[str]] = {
         "Dart Burning Rush",
         "Dart Crush Dance",
         "Rose Whip Smack",
-        "Rose More More",
+        "Rose More and More",
         "Lavitz Harpoon",
         "Lavitz Spinning Cane",
         "Lavitz Rod Typhoon",
@@ -113,11 +113,11 @@ chapter_addition_order: dict[int, list[str]] = {
         "Albert Gust Of Wind Dance",
         "Albert Flower Storm",
         "Haschel Double Punch",
-        "Haschel Ferry Of Styx"
+        "Haschel Flurry of Styx"
     ],
     2: [
         "Rose Hard Blade",
-        "Rose Demons Dance",
+        "Rose Demon's Dance",
         "Haschel Summon 4 Gods",
         "Meru Double Smack",
         "Meru Hammer Spin",
@@ -125,9 +125,9 @@ chapter_addition_order: dict[int, list[str]] = {
     ],
     3: [
         "Dart Madness Hero",
-        "Haschel Five Ring Shattering",
+        "Haschel 5-Ring Shattering",
         "Haschel Hex Hammer",
-        "Haschel Omni Sweep",
+        "Haschel Omni-Sweep",
         "Meru Cool Boogie",
         "Kongol Inferno",
         "Kongol Bone Crush",
@@ -135,7 +135,7 @@ chapter_addition_order: dict[int, list[str]] = {
     4: [
         "Dart Moon Strike",
         "Dart Blazing Dynamo",
-        "Meru Cats Cradle",
+        "Meru Cat's Cradle",
         "Meru Perky Step",
     ],
 }
