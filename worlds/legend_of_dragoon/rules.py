@@ -430,8 +430,18 @@ def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:
         for addition in additions:
             for level in range(1, 5):
                 loc = world.get_location(f"{character} - {addition} Level {level + 1}")
-                world.set_rule(loc, Has(f"{character} {addition}") | Has(f"{character} Progressive Addition",
-                                                                         count=list(additions).index(addition) + 1))
+                has_addition = Has(f"{character} {addition}") | Has(f"{character} Progressive Addition",
+                                                                    count=list(additions).index(addition) + 1)
+                level_rule = has_addition
+                match level:
+                    case 2:
+                        level_rule = Has("Urobolus")
+                    case 3:
+                        level_rule = Has("Greham")
+                    case 4:
+                        level_rule = Has("Fruegel 2")
+
+                world.set_rule(loc, has_addition & level_rule)
 
 
 def set_addition_unlock_rules(world: LegendOfDragoonWorld) -> None:
