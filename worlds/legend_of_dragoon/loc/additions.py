@@ -61,17 +61,15 @@ kongol_additions_table = dict.fromkeys([
 
 miranda_additions_table = dict.fromkeys([])
 
-starting_additions = dict.fromkeys([
-    dart_additions_table.get("Double Slash"),
-    lavitz_additions_table.get("Harpoon"),
-    rose_additions_table.get("Whip Smack"),
-    # shana_additions_table[0],
-    haschel_additions_table.get("Double Punch"),
-    albert_additions_table.get("Harpoon"),
-    meru_additions_table.get("Double Smack"),
-    kongol_additions_table.get("Pursuit"),
-    # miranda_additions_table[0],
-])
+starting_additions = [
+    "Double Slash",
+    "Harpoon",
+    "Whip Smack",
+    "Double Punch",
+    "Harpoon",
+    "Double Smack",
+    "Pursuit",
+]
 
 all_character_unlocks_table = {
     "Dart": dart_additions_table.keys(),
@@ -127,7 +125,6 @@ chapter_unlock_order: dict[int, list[str]] = {
 
 def get_all_addition_locations() -> Dict[str, LegendOfDragoonLocationData]:
     base_id: int = 108_60000
-
     unlock_locations: list[LegendOfDragoonLocationInfo] = []
     addition_mastery_locations: list[LegendOfDragoonLocationInfo] = []
     for character, additions in all_character_unlocks_table.items():
