@@ -74,7 +74,9 @@ def setup_spells(world: LegendOfDragoonWorld) -> list[LegendOfDragoonItem]:
     itempool = []
     option_value = world.options.magic_randomizer
     if option_value == DragoonMagicRandomization.option_shuffled:
-        for table in active_characters.values():
+        for character, table in active_characters.items():
+            if not world.options.enable_lloyd and character == "Lloyd":
+                continue
             for spell_name in table.keys():
                 itempool.append(world.create_item(spell_name))
 
@@ -84,6 +86,8 @@ def setup_spells(world: LegendOfDragoonWorld) -> list[LegendOfDragoonItem]:
             world.push_precollected(lloyd_spell)
     elif option_value == DragoonMagicRandomization.option_progressive:
         for [character_name, table] in active_characters.items():
+            if not world.options.enable_lloyd and character_name == "Lloyd":
+                continue
             for _spell_name in table.keys():
                 progressive_name = f"{character_name} Progressive Spell"
                 itempool.append(world.create_item(progressive_name))
