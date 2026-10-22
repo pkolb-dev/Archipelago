@@ -130,7 +130,8 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
     dynamic_location_table.update(**enemy_table,
                                   **events_table,
                                   **chests_table,
-                                  **goods_location_table)
+                                  **goods_location_table
+                                  )
     create_regular_locations(world)
     # create_events(world) - unused atm
 
