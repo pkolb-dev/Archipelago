@@ -240,6 +240,9 @@ def set_chapter_two_rules(world):
     ghost_commander = world.get_location("Ghost Commander")
     world.set_rule(ghost_commander, Has("Key to Ship"))
 
+    lenus_1 = world.get_location("Lenus 1")
+    world.set_rule(lenus_1, HasAll("Gehrich", "Pass for Valley"))
+
 
 def set_chapter_three_rules(world):
     goal = world.options.lod_completion_condition
