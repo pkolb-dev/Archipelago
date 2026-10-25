@@ -154,7 +154,7 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
             continue
         for number in range(world.options.magic_slots.value):
             location_key = f"{character} - Magic Level {number + 2} Unlock"
-            location_data = all_character_magic_unlocks_table.get(character).get(location_key)
+            location_data = locations.get(location_key)
             if location_data is None:
                 continue
             dynamic_location_table[location_key] = location_data
@@ -218,7 +218,7 @@ def create_chapter_one_locations(world):
     bale.add_locations(get_locations_by_category_with_ids("Bale"), LegendOfDragoonLocation)
     hoax.add_locations(get_locations_by_category_with_ids("Hoax"), LegendOfDragoonLocation)
     marshland.add_locations(get_locations_by_category_with_ids("Marshland"), LegendOfDragoonLocation)
-    lohan.add_locations(get_locations_by_category_with_ids("Lohan"), LegendOfDragoonLocation)
+
     shrine_of_shirley.add_locations(get_locations_by_category_with_ids("Shrine of Shirley"), LegendOfDragoonLocation)
     dragons_nest.add_locations(get_locations_by_category_with_ids("Dragon's Nest"), LegendOfDragoonLocation)
     kazas.add_locations(get_locations_by_category_with_ids("Kazas"), LegendOfDragoonLocation)
@@ -229,6 +229,14 @@ def create_chapter_one_locations(world):
     hellena_prison_01.add_locations(get_locations_by_category_with_ids("Hellena Prison 01"), LegendOfDragoonLocation)
     hellena_prison_02.add_locations(get_locations_by_category_with_ids("Hellena Prison 02"), LegendOfDragoonLocation)
     volcano_villude.add_locations(get_locations_by_category_with_ids("Volcano Villude"), LegendOfDragoonLocation)
+
+    lohan_locations = {}
+
+    for name, id in get_locations_by_category_with_ids("Lohan").items():
+        if name == "Gold Dragoon Spirit" and world.options.lod_completion_condition.value == CompletionCondition.option_chapter_1:
+            continue
+        lohan_locations.update({name: id})
+    lohan.add_locations(lohan_locations)
 
 
 def create_chapter_two_locations(world):

@@ -256,7 +256,15 @@ def set_chapter_four_rules(world):
     world.set_rule(k_s_v, HasAll("Law Making License", "Law Launching License"))
 
 
+def set_goods_rules(world: LegendOfDragoonWorld):
+    if world.options.lod_completion_condition.value == CompletionCondition.option_chapter_1:
+        return
+    gold_dragoon_spirit = world.get_location("Gold Dragoon Spirit")
+    world.set_rule(gold_dragoon_spirit, Has("Gehrich"))
+
+
 def set_all_location_rules(world: LegendOfDragoonWorld) -> None:
+    set_goods_rules(world)
     set_addition_unlock_rules(world)
     set_addition_level_rules(world)
 
