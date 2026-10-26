@@ -143,7 +143,11 @@ def setup_equipment(world, itempool):
 
     needed_number_of_equipment_items = min(number_of_unfilled_locations - number_of_items, number_of_equipment)
     for _ in range(needed_number_of_equipment_items):
-        equipment_map = map(world.create_item, equipment_table)
+        equipment_map = map(world.create_item,
+                            filter(
+                                lambda equip_item: equipment_table[
+                                                       equip_item].classification != ItemClassification.filler,
+                                equipment_table))
         itempool.append(world.random.choice(list(equipment_map)))
 
 
