@@ -21,3 +21,4 @@ class ItemCategory:
     ADDITION = "Addition"
     EVENT = "Event"
     SPELL = "Spell"
+    CHARACTER = "Character"
