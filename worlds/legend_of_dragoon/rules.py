@@ -440,18 +440,24 @@ def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:
     for character, additions in all_character_unlocks_table.items():
         for addition in additions:
             for level in range(1, 5):
-                loc = world.get_location(f"{character} - {addition} Level {level + 1}")
                 has_addition = Has(f"{character} {addition}") | Has(f"{character} Progressive Addition",
                                                                     count=list(additions).index(addition) + 1)
                 level_rule = has_addition
-                match level:
-                    case 2:
-                        level_rule = Has("Urobolus")
-                    case 3:
-                        level_rule = Has("Greham")
-                    case 4:
-                        level_rule = Has("Fruegel 2")
+                goal = world.options.lod_completion_condition
 
+                match level:
+                    case 2:  # level 3
+                        level_rule = Has("Fruegel 2")
+                    case 3:  # level 4
+                        if goal < CompletionCondition.option_chapter_2:
+                            continue
+                        level_rule = Has("Lenus 1")
+                    case 4:  # level 5
+                        if goal < CompletionCondition.option_chapter_3:
+                            continue
+                        level_rule = Has("Grand Jewel")
+
+                loc = world.get_location(f"{character} - {addition} Level {level + 1}")
                 world.set_rule(loc, has_addition & level_rule)
 
 

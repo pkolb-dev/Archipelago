@@ -115,8 +115,18 @@ def setup_addition_mastery_locations(world) -> None:
             continue
         region = world.get_region(f"{character} Additions")
 
-        locations = {loc: data.code for loc, data in all_addition_locations_table.items() if
-                     character in loc and "Level" in loc}
+        locations = {}
+        for loc, data in all_addition_locations_table.items():
+            if character not in loc or "Level" not in loc:
+                continue
+
+            goal = world.options.lod_completion_condition
+            if "Level 4" in loc and goal < CompletionCondition.option_chapter_2:
+                continue
+            elif "Level 5" in loc and goal < CompletionCondition.option_chapter_3:
+                continue
+
+            locations.update({loc: data.code})
         region.add_locations(locations, LegendOfDragoonLocation)
 
 
