@@ -5,7 +5,7 @@ from typing import Dict, TYPE_CHECKING
 from worlds.legend_of_dragoon.loc.additions import all_addition_locations_table, chapter_one_addition_unlock_table, \
     chapter_two_addition_unlock_table, chapter_three_addition_unlock_table, chapter_four_addition_unlock_table, \
     all_character_unlocks_table
-from worlds.legend_of_dragoon.loc.chests import chests_table
+from worlds.legend_of_dragoon.loc.chests import all_chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocation
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **all_addition_locations_table,
-    **chests_table,
+    **all_chests_table,
     **events_table,
     **enemy_table,
     **goods_location_table,
@@ -139,7 +139,7 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
     dynamic_location_table.clear()
     dynamic_location_table.update(**enemy_table,
                                   **events_table,
-                                  **chests_table,
+                                  **all_chests_table,
                                   **goods_location_table
                                   )
     create_regular_locations(world)
