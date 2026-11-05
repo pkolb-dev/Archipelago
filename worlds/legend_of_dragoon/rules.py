@@ -197,13 +197,22 @@ def set_all_entrance_rules(world: LegendOfDragoonWorld) -> None:
 
 
 def set_chapter_one_rules(world):
+    # TODO: UNCOMMENT WHEN GOLD CHESTS IMPLEMENTED
+    # shana_chest_1 = world.get_location("Hellena - Chest in Shana Tower East Cell")
+    # shana_chest_2 = world.get_location("Hellena - Chest in Shana Tower West Cell")
+
+    # world.set_rule(shana_chest_1, Has("Prison Key"))
+    # world.set_rule(shana_chest_2, Has("Prison Key"))
+
     fruegel_1 = world.get_location("Fruegel 1")
     fruegel_1_event = world.get_location("Defeat Fruegel 1")
     world.set_rule(fruegel_1, Has("Prison Key"))
     world.set_rule(fruegel_1_event, Has("Prison Key"))
 
+    prairie_chest_1 = world.get_location("Prairie - Chest by Family before Cave")
     urobolus_event = world.get_location("Defeat Urobolus")
-    world.set_rule(urobolus_event, Has("Fruegel 1"))
+    world.set_rule(prairie_chest_1, HasAll("Fruegel 1", "Axe from the Shack"))
+    world.set_rule(urobolus_event, HasAll("Fruegel 1", "Axe from the Shack"))
 
     gorgaga = world.get_location("Gorgaga")
     serfius = world.get_location("Serfius")

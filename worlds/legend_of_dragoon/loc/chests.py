@@ -15,8 +15,9 @@ forest_chests: Dict[str, LegendOfDragoonLocationData] = {
 
 hellena_01_chests: Dict[str, LegendOfDragoonLocationData] = {
     "Hellena - Chest in NW Room from Entrance": LegendOfDragoonLocationData("Hellena Prison 01", 108_40005, "Chest"),
-    "Hellena - Chest in Guard Bedroom (West)": LegendOfDragoonLocationData("Hellena Prison 01", 108_40006, "Chest"),
-    "Hellena - Chest in Guatd Bedroom (Middle)": LegendOfDragoonLocationData("Hellena Prison 01", 108_40007, "Chest"),
+    "Hellena - Chest in Guard Bedroom (Top Right)": LegendOfDragoonLocationData("Hellena Prison 01", 108_40006,
+                                                                                "Chest"),
+    "Hellena - Chest in Guard Bedroom (Top Left)": LegendOfDragoonLocationData("Hellena Prison 01", 108_40007, "Chest"),
     # "Hellena - Chest in Guard Bedroom (South)": LegendOfDragoonLocationData("Hellena Prison 01", 108_40008, "Chest"),
     # "Hellena - Chest in Lavitz Tower West Cell": LegendOfDragoonLocationData("Hellena Prison 01", 108_40009, "Chest"),
     "Hellena - Chest in Lavitz Tower East Cell": LegendOfDragoonLocationData("Hellena Prison 01", 108_40010, "Chest"),
