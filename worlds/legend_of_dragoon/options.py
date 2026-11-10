@@ -1,36 +1,32 @@
 from dataclasses import dataclass
-from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, DeathLink
+from Options import PerGameCommonOptions, Choice, OptionGroup, Toggle, Range, DeathLink, TextChoice
 
 
 class AdditionRandomization(Choice):
     """
     Controls how character Additions are unlocked.
-    Off:
-        Additions will not be added to the item pool.
-
-    Progressive (Character):
-        Progressive addition items are added to the item pool
-        and unlock additions for their respective character.
-
-    Addition Sanity:
+   Shuffled:
         Each addition unlock is its own item in the item pool
         and can be placed in any world.
         Starting additions are randomly chosen.
+
+    Progressive:
+        Progressive addition items are added to the item pool
+        and unlock additions for their respective character.
     """
     display_name = "Addition Randomization"
 
-    option_off = 0
-    option_addition_sanity = 1
-    option_progressive_character = 2
+    option_shuffled = 1
+    option_progressive = 2
 
-    default = 0
+    default = 2
 
 
 class DragoonMagicRandomization(Choice):
     """
     Controls how Dragoon Magic are unlocked.
 
-    Progressive (Character):
+    Progressive:
         Progressive dragoon magic is added to the item pool
         and unlock spells for their respective character.
 
@@ -47,7 +43,7 @@ class DragoonMagicRandomization(Choice):
 
 class Shopsanity(Toggle):
     """
-    Toggles all shop items to be locations. This disables vanilla behavior and makes all items one-time purchases.
+    Toggles all shop items to be exclusively locations. This disables vanilla behavior and makes all items one-time purchases.
     Every shop will have randomized prices as well.
     """
     display_name = "Shopsanity"
@@ -76,346 +72,31 @@ class MaximumShopPrice(Range):
     default = 700
 
 
-class BaleEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Bale Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class BaleItemShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Bale Item Shop Slots"
-    default = 7
-    range_end = 20
-
-
-class LohanEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Lohan Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class LohanItemShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Lohan Item Shop Slots"
-    default = 8
-    range_end = 20
-
-
-class KazasEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Kazas Equipment Shop Slots"
-    default = 5
-    range_end = 20
-
-
-class KazasFortEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Kazas Fort Equipment Shop Slots"
-    default = 5
-    range_end = 20
-
-
-class KazasFortItemShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Kazas Fort Item Shop Slots"
-    default = 5
-    range_end = 20
-
-
-class FletzEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Fletz Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class FletzItemShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Fletz Item Shop Slots"
-    default = 9
-    range_end = 20
-
-
-class DonauEquipmentShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Donau Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class DonauItemShopSlots(Range):
-    """For each slot, add a location to the shop"""
-    display_name = "Donau Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class QueenFuryEquipmentShopSlots(Range):
+class DefaultShopSlots(Range):
     """
     For each slot, add a location to the shop
-    WARNING:
-        This is a missable location! This is only available
-        on the phantom ship!
+    This setting targets all shops that are always present
     """
-    display_name = "Queen Fury Equipment Shop Slots"
+    display_name = "Default Shop Slots"
     default = 10
+    range_start = 10
     range_end = 20
 
 
-class QueenFuryItemShopSlots(Range):
+class MissableShopSlots(Range):
     """
     For each slot, add a location to the shop
-    WARNING:
-        This is a missable location! This is only available
-        on the phantom ship!
+    This setting targets all shops that are missable:
+    Shops:
+    - Black Castle Item Shop
+    - Forest Item Shop
+    - Hellena Item Shops (1 & 2)
+    - Queen Fury (Phantom ship)
+    - Volcano Item Shop
     """
-    display_name = "Queen Fury Item Shop Slots"
+    display_name = "Missable Shop Slots"
     default = 10
-    range_end = 20
-
-
-class FuenoEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Fueno Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class FuenoItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Fueno Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class FurniEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Furni Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class FurniItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Furni Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class DeningradEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Deningrad Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class DeningradItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Deningrad Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class WinglyForestEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Wingly Forest Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class WinglyForestItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Wingly Forest Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class VellwebEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Vellweb Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class VellwebItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Vellweb Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class UlaraEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Ulara Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class UlaraItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Ulara Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class RougeEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Rouge Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class RougeItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Rouge Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class MoonEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Moon Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class MoonItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Moon Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class Hellena01ItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop.
-    WARNING:
-        This is a missable location!
-    """
-    display_name = "Hellena (First Visit) Item Shop Slots"
-    default = 4
-    range_end = 20
-
-
-class Hellena02ItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    WARNING:
-        This is a missable location!
-    """
-    display_name = "Hellena (Second Visit) Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class KashuaEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Kashua Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class KashuaItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Kashua Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class FletzAccessoryShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Fletz Accessory Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class ForestItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    WARNING:
-        This is a missable location!
-    """
-    display_name = "Forest Item Shop Slots"
-    default = 5
-    range_end = 20
-
-
-class VolcanoItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Volcano Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class ZenebatosEquipmentShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Zenebatos Equipment Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class ZenebatosItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    """
-    display_name = "Zenebatos Item Shop Slots"
-    default = 10
-    range_end = 20
-
-
-class BlackCastleItemShopSlots(Range):
-    """
-    For each slot, add a location to the shop
-    WARNING:
-        This is a missable location!
-    """
-    display_name = "Black Castle Item Shop Slots"
-    default = 10
+    range_start = 10
     range_end = 20
 
 
@@ -431,94 +112,42 @@ class AllowRepeatConsumables(Toggle):
     default = True
 
 
-class DartDragoonMagicLocations(Range):
+class DragoonMagicLocations(Range):
     """
     Number of magic locations to include in the playthrough.
     """
-    display_name = "Dart Dragoon Magic Locations"
+    display_name = "Dragoon Magic Locations"
     default = 2
     range_end = 4
-    range_start = 0
+    range_start = 1
 
 
-class LavitzDragoonMagicLocations(Range):
+class EnableLloyd(Toggle):
     """
-    Number of magic locations to include in the playthrough.
+    Allow Lloyd to be part of the multiworld
+    This requires the Lloyd Mod to be downloaded and included in the mods folder
     """
-    display_name = "Lavitz Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
+    display_name = "Enable Lloyd"
+    default = False
 
 
-class ShanaDragoonMagicLocations(Range):
+class StartingCharacter(TextChoice):
     """
-    Number of magic locations to include in the playthrough.
+    Choose which character to start with
+    Lloyd requires "Enable Lloyd" checked.
     """
-    display_name = "Shana Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class RoseDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Rose Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class HaschelDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Haschel Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class AlbertDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Albert Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class MeruDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Meru Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class KongolDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Kongol Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
-
-
-class MirandaDragoonMagicLocations(Range):
-    """
-    Number of magic locations to include in the playthrough.
-    """
-    display_name = "Miranda Dragoon Magic Locations"
-    default = 2
-    range_end = 4
-    range_start = 0
+    display_name = "Starting Character"
+    option_dart = "Dart"
+    option_lavitz = "Lavitz"
+    option_shana = "Shana"
+    option_rose = "Rose"
+    option_haschel = "Haschel"
+    option_albert = "Albert"
+    option_meru = "Meru"
+    option_kongol = "Kongol"
+    option_miranda = "Miranda"
+    option_lloyd = "Lloyd"
+    default = "Dart"
 
 
 class CompletionCondition(Choice):
@@ -537,10 +166,6 @@ class CompletionCondition(Choice):
     default = 1
 
 
-class LegendOfDragoonDeathLink(DeathLink):
-    __doc__ = DeathLink.__doc__ + "\n\n    Note: this will set every character's HP value to 0 instead of game over when receiving a deathlink trigger."
-
-
 @dataclass
 class LegendOfDragoonOptions(PerGameCommonOptions):
     addition_randomizer: AdditionRandomization
@@ -548,57 +173,14 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     lod_completion_condition: CompletionCondition
     enable_shopsanity: Shopsanity
     allow_repeat_consumables: AllowRepeatConsumables
-    death_link: LegendOfDragoonDeathLink
+    death_link: DeathLink
     minimum_shop_price: MinimumShopPrice
     maximum_shop_price: MaximumShopPrice
-    bale_equipment_shop_slots: BaleEquipmentShopSlots
-    serdio_item_shop_slots: BaleItemShopSlots
-    lohan_equipment_shop_slots: LohanEquipmentShopSlots
-    lohan_item_shop_slots: LohanItemShopSlots
-    kazas_equipment_shop_slots: KazasEquipmentShopSlots
-    kazas_fort_item_shop_slots: KazasFortItemShopSlots
-    fletz_equipment_shop_slots: FletzEquipmentShopSlots
-    fletz_item_shop_slots: FletzItemShopSlots
-    donau_equipment_shop_slots: DonauEquipmentShopSlots
-    donau_item_shop_slots: DonauItemShopSlots
-    queen_fury_equipment_shop_slots: QueenFuryEquipmentShopSlots
-    queen_fury_item_shop_slots: QueenFuryItemShopSlots
-    fueno_equipment_shop_slots: FuenoEquipmentShopSlots
-    fueno_item_shop_slots: FuenoItemShopSlots
-    furni_equipment_shop_slots: FurniEquipmentShopSlots
-    furni_item_shop_slots: FurniItemShopSlots
-    deningrad_equipment_shop_slots: DeningradEquipmentShopSlots
-    deningrad_item_shop_slots: DeningradItemShopSlots
-    wingly_forest_equipment_shop_slots: WinglyForestEquipmentShopSlots
-    wingly_forest_item_shop_slots: WinglyForestItemShopSlots
-    vellweb_equipment_shop_slots: VellwebEquipmentShopSlots
-    vellweb_item_shop_slots: VellwebItemShopSlots
-    ulara_equipment_shop_slots: UlaraEquipmentShopSlots
-    ulara_item_shop_slots: UlaraItemShopSlots
-    rouge_equipment_shop_slots: RougeEquipmentShopSlots
-    rouge_item_shop_slots: RougeItemShopSlots
-    moon_equipment_shop_slots: MoonEquipmentShopSlots
-    moon_item_shop_slots: MoonItemShopSlots
-    hellena_01_item_shop_slots: Hellena01ItemShopSlots
-    kashua_equipment_shop_slots: KashuaEquipmentShopSlots
-    kashua_item_shop_slots: KashuaItemShopSlots
-    fletz_accessory_shop_slots: FletzAccessoryShopSlots
-    forest_item_shop_slots: ForestItemShopSlots
-    kazas_fort_equipment_shop_slots: KazasFortEquipmentShopSlots
-    volcano_item_shop_slots: VolcanoItemShopSlots
-    zenebatos_equipment_shop_slots: ZenebatosEquipmentShopSlots
-    zenebatos_item_shop_slots: ZenebatosItemShopSlots
-    hellena_02_item_shop_slots: Hellena02ItemShopSlots
-    black_castle_item_shop_slots: BlackCastleItemShopSlots
-    dart_magic_slots: DartDragoonMagicLocations
-    lavitz_magic_slots: LavitzDragoonMagicLocations
-    shana_magic_slots: ShanaDragoonMagicLocations
-    rose_magic_slots: RoseDragoonMagicLocations
-    haschel_magic_slots: HaschelDragoonMagicLocations
-    albert_magic_slots: AlbertDragoonMagicLocations
-    meru_magic_slots: MeruDragoonMagicLocations
-    kongol_magic_slots: KongolDragoonMagicLocations
-    miranda_magic_slots: MirandaDragoonMagicLocations
+    default_shop_slots: DefaultShopSlots
+    missable_shop_slots: MissableShopSlots
+    magic_slots: DragoonMagicLocations
+    starting_character: StartingCharacter
+    enable_lloyd: EnableLloyd
 
 
 option_groups = [
@@ -610,66 +192,22 @@ option_groups = [
     ]),
     OptionGroup("Rando Options", [
         AllowRepeatConsumables,
-        LegendOfDragoonDeathLink,
+        DeathLink,
     ], False),
     OptionGroup("Dragoon Magic Settings", [
         DragoonMagicRandomization,
-        DartDragoonMagicLocations,
-        LavitzDragoonMagicLocations,
-        ShanaDragoonMagicLocations,
-        RoseDragoonMagicLocations,
-        HaschelDragoonMagicLocations,
-        AlbertDragoonMagicLocations,
-        MeruDragoonMagicLocations,
-        KongolDragoonMagicLocations,
-        MirandaDragoonMagicLocations,
+        DragoonMagicLocations,
     ]),
     OptionGroup("Shopsanity", [
         Shopsanity,
         MinimumShopPrice,
         MaximumShopPrice,
-        BaleEquipmentShopSlots,
-        BaleItemShopSlots,
-        LohanEquipmentShopSlots,
-        LohanItemShopSlots,
-        KazasEquipmentShopSlots,
-        KazasFortEquipmentShopSlots,
-        KazasFortItemShopSlots,
-        FletzEquipmentShopSlots,
-        FletzItemShopSlots,
-        DonauEquipmentShopSlots,
-        DonauItemShopSlots,
-        QueenFuryEquipmentShopSlots,
-        QueenFuryItemShopSlots,
-        FuenoEquipmentShopSlots,
-        FuenoItemShopSlots,
-        FurniEquipmentShopSlots,
-        FurniItemShopSlots,
-        DeningradEquipmentShopSlots,
-        DeningradItemShopSlots,
-        WinglyForestEquipmentShopSlots,
-        WinglyForestItemShopSlots,
-        VellwebEquipmentShopSlots,
-        VellwebItemShopSlots,
-        UlaraEquipmentShopSlots,
-        UlaraItemShopSlots,
-        RougeEquipmentShopSlots,
-        RougeItemShopSlots,
-        MoonEquipmentShopSlots,
-        MoonItemShopSlots,
-        Hellena01ItemShopSlots,
-        Hellena02ItemShopSlots,
-        KashuaEquipmentShopSlots,
-        KashuaItemShopSlots,
-        FletzAccessoryShopSlots,
-        ForestItemShopSlots,
-        VolcanoItemShopSlots,
-        ZenebatosEquipmentShopSlots,
-        ZenebatosItemShopSlots,
-        BlackCastleItemShopSlots,
-    ], False)
-    # OptionGroup("Starting Choices", [
-    # ])
+        DefaultShopSlots,
+        MissableShopSlots,
+    ], False),
+    OptionGroup("Starting Choices", [
+        StartingCharacter
+    ])
 ]
 option_presets = {
 

@@ -4,7 +4,7 @@ from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationDa
 
 enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Commander": LegendOfDragoonLocationData("Seles", 108_70001, "Enemy"),
-    "Fruegel 1": LegendOfDragoonLocationData("Hellena 01", 108_70002, "Enemy"),
+    "Fruegel 1": LegendOfDragoonLocationData("Hellena Prison 01", 108_70002, "Enemy"),
     "Urobolus": LegendOfDragoonLocationData("Limestone Cave", 108_70003, "Enemy"),
     "Sandora Elite": LegendOfDragoonLocationData("Hoax", 108_70004, "Enemy"),
     "Kongol 1": LegendOfDragoonLocationData("Hoax", 108_70005, "Enemy"),
@@ -18,7 +18,7 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Danton": LegendOfDragoonLocationData("Lohan", 108_70013, "Enemy"),
     "Atlow": LegendOfDragoonLocationData("Lohan", 108_70014, "Enemy"),
     "Lloyd 1": LegendOfDragoonLocationData("Lohan", 108_70015, "Enemy"),
-    "Fruegel 2": LegendOfDragoonLocationData("Hellena 02", 108_70016, "Enemy"),
+    "Fruegel 2": LegendOfDragoonLocationData("Hellena Prison 02", 108_70016, "Enemy"),
     "Kongol 2": LegendOfDragoonLocationData("Black Castle", 108_70017, "Enemy"),
     "Dragoon Doel": LegendOfDragoonLocationData("Black Castle Throne Room", 108_70018, "Enemy"),
     "Mappi": LegendOfDragoonLocationData("Barrens", 108_70019, "Enemy"),
@@ -49,7 +49,7 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Moon Virage": LegendOfDragoonLocationData("Moon That Never Sets", 108_70044, "Enemy"),
     "Zieg Feld": LegendOfDragoonLocationData("Moon That Never Sets", 108_70045, "Enemy"),
     "Melbu Frahma": LegendOfDragoonLocationData("Moon That Never Sets", 108_70046, "Enemy"),
-    "Jiango": LegendOfDragoonLocationData("Hellena 02", 108_70047, "Enemy"),
+    "Jiango": LegendOfDragoonLocationData("Hellena Prison 02", 108_70047, "Enemy"),
     "Kamuy": LegendOfDragoonLocationData("Evergreen Forest", 108_70048, "Enemy"),
     "Marshland Commander": LegendOfDragoonLocationData("Marshland", 108_70049, "Enemy"),
     "Black Castle Sandora Elite": LegendOfDragoonLocationData("Black Castle", 108_70050, "Enemy"),

@@ -66,6 +66,16 @@ miranda_spells_table: Dict[str, LegendOfDragoonItemData] = {
     "Miranda W Silver Dragon": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31084, IC.progression),
 }
 
+lloyd_spells_table: Dict[str, LegendOfDragoonItemData] = {
+    "Lloyd Running Slash": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31091, IC.progression),
+    "Lloyd Spectral Sword": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31092, IC.progression),
+    "Lloyd Sword Rush": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31093, IC.progression),
+    "Lloyd Aerial Crash": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31094, IC.progression),
+    "Lloyd Ball Barrage": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31095, IC.progression),
+    "Lloyd Sigil of Explosion": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31096, IC.progression),
+    "Lloyd Draconic Impale": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31097, IC.progression),
+}
+
 all_character_spell_items: Dict[str, Dict[str, LegendOfDragoonItemData]] = {
     "Dart": dart_spells_table,
     "Lavitz": lavitz_spells_table,
@@ -76,6 +86,7 @@ all_character_spell_items: Dict[str, Dict[str, LegendOfDragoonItemData]] = {
     "Meru": meru_spells_table,
     "Kongol": kongol_spells_table,
     "Miranda": miranda_spells_table,
+    "Lloyd": lloyd_spells_table,
 }
 
 all_spell_items: Dict[str, LegendOfDragoonItemData] = {
@@ -88,6 +99,7 @@ all_spell_items: Dict[str, LegendOfDragoonItemData] = {
     **meru_spells_table,
     **kongol_spells_table,
     **miranda_spells_table,
+    **lloyd_spells_table
 }
 
 progressive_spells_table: Dict[str, LegendOfDragoonItemData] = {
@@ -100,4 +112,5 @@ progressive_spells_table: Dict[str, LegendOfDragoonItemData] = {
     "Meru Progressive Spell": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31060, IC.progression, 4),
     "Kongol Progressive Spell": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31070, IC.progression, 3),
     "Miranda Progressive Spell": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31080, IC.progression, 4),
+    "Lloyd Progressive Spell": LegendOfDragoonItemData(ItemCategory.SPELL, 108_31090, IC.progression, 7)
 }
