@@ -204,6 +204,15 @@ def set_chapter_one_rules(world):
     # world.set_rule(shana_chest_1, Has("Prison Key"))
     # world.set_rule(shana_chest_2, Has("Prison Key"))
 
+    # bale_good_spirits_chest_1 = world.get_location("Bale - Chest in Tunnel After Drunk Man")
+    # bale_good_spirits_chest_2 = world.get_location("Bale - Chest in Lower East Castle from Tunnel")
+
+    # world.set_rule(bale_good_spirits_chest_1, Has("Good Spirits"))
+    # world.set_rule(bale_good_spirits_chest_2, Has("Good Spirits"))
+
+    black_castle_chest_1 = world.get_location("Black Castle - Chest After Kongol Fight Behind Pillar")
+    world.set_rule(black_castle_chest_1, HasAll("Red Stone", "Yellow Stone", "Blue Stone"))
+
     fruegel_1 = world.get_location("Fruegel 1")
     fruegel_1_event = world.get_location("Defeat Fruegel 1")
     world.set_rule(fruegel_1, Has("Prison Key"))
@@ -309,11 +318,9 @@ def set_chapter_one_addition_unlock_rules(world):
     lavitz_spinning_cane = world.get_location("Lavitz - Spinning Cane Unlock")
     lavitz_rod_typhoon = world.get_location("Lavitz - Rod Typhoon Unlock")
     lavitz_gust_of_wind_dance = world.get_location("Lavitz - Gust Of Wind Dance Unlock")
-    lavitz_blossom_storm = world.get_location("Lavitz - Flower Storm Unlock")
     albert_spinning_cane = world.get_location("Albert - Spinning Cane Unlock")
     albert_rod_typhoon = world.get_location("Albert - Rod Typhoon Unlock")
     albert_gust_of_wind_dance = world.get_location("Albert - Gust Of Wind Dance Unlock")
-    albert_blossom_storm = world.get_location("Albert - Flower Storm Unlock")
     haschel_flurry_of_styx = world.get_location("Haschel - Flurry of Styx Unlock")
 
     world.set_rule(dart_burning_rush, Has("Kongol 1"))
@@ -327,29 +334,6 @@ def set_chapter_one_addition_unlock_rules(world):
     world.set_rule(albert_gust_of_wind_dance, Has("Shirley"))
     world.set_rule(haschel_flurry_of_styx, Has("Dragoon Doel"))
 
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
-        world.set_rule(lavitz_blossom_storm, Has("Lavitz Progressive Addition", 4))
-        world.set_rule(albert_blossom_storm, Has("Albert Progressive Addition", 4))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
-        world.set_rule(
-            lavitz_blossom_storm,
-            HasAll(
-                "Lavitz Harpoon",
-                "Lavitz Spinning Cane",
-                "Lavitz Rod Typhoon",
-                "Lavitz Gust Of Wind Dance",
-            )
-        )
-        world.set_rule(
-            albert_blossom_storm,
-            HasAll(
-                "Albert Harpoon",
-                "Albert Spinning Cane",
-                "Albert Rod Typhoon",
-                "Albert Gust Of Wind Dance",
-            )
-        )
-
 
 def set_chapter_two_addition_unlock_rules(world):
     if world.options.lod_completion_condition == CompletionCondition.option_chapter_1:
@@ -358,23 +342,10 @@ def set_chapter_two_addition_unlock_rules(world):
     rose_hard_blade = world.get_location("Rose - Hard Blade Unlock")
     haschel_summon_4_gods = world.get_location("Haschel - Summon 4 Gods Unlock")
     meru_hammer_spin = world.get_location("Meru - Hammer Spin Unlock")
-    demons_dance = world.get_location("Rose - Demon's Dance Unlock")
 
     world.set_rule(rose_hard_blade, Has("Gehrich"))
     world.set_rule(haschel_summon_4_gods, Has("Gehrich"))
     world.set_rule(meru_hammer_spin, Has("Lenus 2"))
-
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
-        world.set_rule(demons_dance, Has("Rose Progressive Addition", 3))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
-        world.set_rule(
-            demons_dance,
-            HasAll(
-                "Rose Whip Smack",
-                "Rose More and More",
-                "Rose Hard Blade",
-            )
-        )
 
 
 def set_chapter_three_addition_unlock_rules(world):
@@ -385,10 +356,8 @@ def set_chapter_three_addition_unlock_rules(world):
     dart_madness_hero = world.get_location("Dart - Madness Hero Unlock")
     haschel_5_ring_shattering = world.get_location("Haschel - 5-Ring Shattering Unlock")
     haschel_hex_hammer = world.get_location("Haschel - Hex Hammer Unlock")
-    omni_sweep = world.get_location("Haschel - Omni-Sweep Unlock")
     meru_cool_boogie = world.get_location("Meru - Cool Boogie Unlock")
     kongol_inferno = world.get_location("Kongol - Inferno Unlock")
-    bone_crush = world.get_location("Kongol - Bone Crush Unlock")
 
     world.set_rule(dart_madness_hero, Has("Kamuy"))
     world.set_rule(haschel_5_ring_shattering, Has("Kamuy"))
@@ -397,33 +366,16 @@ def set_chapter_three_addition_unlock_rules(world):
 
     world.set_rule(kongol_inferno, Has("Divine Dragon"))
 
-    if world.options.addition_randomizer == world.options.addition_randomizer.option_progressive:
-        world.set_rule(omni_sweep, Has("Haschel Progressive Addition", 5))
-        world.set_rule(bone_crush, Has("Kongol Progressive Addition", 2))
-    elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
-        world.set_rule(
-            omni_sweep,
-            HasAll(
-                "Haschel Double Punch",
-                "Haschel Flurry of Styx",
-                "Haschel Summon 4 Gods",
-                "Haschel 5-Ring Shattering",
-                "Haschel Hex Hammer",
-            )
-        )
-
-        world.set_rule(
-            bone_crush,
-            HasAll(
-                "Kongol Pursuit",
-                "Kongol Inferno",
-            )
-        )
-
 
 def set_chapter_four_addition_unlock_rules(world):
     if world.options.lod_completion_condition != CompletionCondition.option_chapter_4:
         return
+
+    lavitz_blossom_storm = world.get_location("Lavitz - Flower Storm Unlock")
+    albert_blossom_storm = world.get_location("Albert - Flower Storm Unlock")
+    demons_dance = world.get_location("Rose - Demon's Dance Unlock")
+    omni_sweep = world.get_location("Haschel - Omni-Sweep Unlock")
+    bone_crush = world.get_location("Kongol - Bone Crush Unlock")
 
     dart_moon_strike = world.get_location("Dart - Moon Strike Unlock")
     blazing_dynamo = world.get_location("Dart - Blazing Dynamo Unlock")
@@ -434,15 +386,34 @@ def set_chapter_four_addition_unlock_rules(world):
     world.set_rule(meru_cats_cradle, Has("Kraken"))
 
     if world.options.addition_randomizer == AdditionRandomization.option_progressive:
-        world.set_rule(blazing_dynamo, Has("Dart Progressive Addition", 6))
-        world.set_rule(perky_step, Has("Meru Progressive Addition", 4))
+        world.set_rule(lavitz_blossom_storm, Has("Lavitz Progressive Addition", 4) & Has("Grand Jewel"))
+        world.set_rule(albert_blossom_storm, Has("Albert Progressive Addition", 4) & Has("Grand Jewel"))
+        world.set_rule(demons_dance, Has("Rose Progressive Addition", 3) & Has("Grand Jewel"))
+        world.set_rule(blazing_dynamo, Has("Dart Progressive Addition", 6) & Has("Grand Jewel"))
+        world.set_rule(perky_step, Has("Meru Progressive Addition", 4) & Has("Grand Jewel"))
+        world.set_rule(omni_sweep, Has("Haschel Progressive Addition", 5) & Has("Grand Jewel"))
+        world.set_rule(bone_crush, Has("Kongol Progressive Addition", 2) & Has("Grand Jewel"))
     elif world.options.addition_randomizer == world.options.addition_randomizer.option_shuffled:
+        world.set_rule(lavitz_blossom_storm,
+                       HasAll("Lavitz Harpoon", "Lavitz Spinning Cane", "Lavitz Rod Typhoon",
+                              "Lavitz Gust Of Wind Dance", "Grand Jewel"))
+        world.set_rule(albert_blossom_storm,
+                       HasAll(
+                           "Albert Harpoon", "Albert Spinning Cane", "Albert Rod Typhoon", "Albert Gust Of Wind Dance",
+                           "Grand Jewel"))
+        world.set_rule(demons_dance,
+                       HasAll("Rose Whip Smack", "Rose More and More", "Rose Hard Blade", "Grand Jewel"))
+        world.set_rule(omni_sweep,
+                       HasAll("Haschel Double Punch", "Haschel Flurry of Styx", "Haschel Summon 4 Gods",
+                              "Haschel 5-Ring Shattering", "Haschel Hex Hammer", "Grand Jewel"))
+        world.set_rule(bone_crush,
+                       HasAll("Kongol Pursuit", "Kongol Inferno", "Grand Jewel"))
         world.set_rule(blazing_dynamo,
                        HasAll("Dart Double Slash", "Dart Volcano", "Dart Burning Rush", "Dart Crush Dance",
-                              "Dart Madness Hero", "Dart Moon Strike"))
-
+                              "Dart Madness Hero", "Dart Moon Strike", "Grand Jewel"))
         world.set_rule(perky_step,
-                       HasAll("Meru Double Smack", "Meru Hammer Spin", "Meru Cool Boogie", "Meru Cat's Cradle"))
+                       HasAll("Meru Double Smack", "Meru Hammer Spin", "Meru Cool Boogie", "Meru Cat's Cradle",
+                              "Grand Jewel"))
 
 
 def set_addition_level_rules(world: LegendOfDragoonWorld) -> None:
