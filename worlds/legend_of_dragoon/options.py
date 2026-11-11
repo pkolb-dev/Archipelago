@@ -131,6 +131,15 @@ class EnableLloyd(Toggle):
     default = False
 
 
+class IncludeFaust(Toggle):
+    """
+    Allow Faust (and the chests behind him) to have progressive items
+    Only applies to chapter 4 goals.
+    """
+    display_name = "Include Faust"
+    default = False
+
+
 class StartingCharacter(TextChoice):
     """
     Choose which character to start with
@@ -181,6 +190,7 @@ class LegendOfDragoonOptions(PerGameCommonOptions):
     magic_slots: DragoonMagicLocations
     starting_character: StartingCharacter
     enable_lloyd: EnableLloyd
+    include_faust: IncludeFaust
 
 
 option_groups = [
