@@ -18,6 +18,7 @@
 - Download the latest release of [Archipelagoon](https://github.com/pkolb-dev/Archipelagoon/releases/latest)
 - Extract the .zip into Severed Chains' mods folder
     - you should see an `archipelagoon` folder AND a .jar file.
+      ![mods_folder_example.png](mods_folder_example.png)
 
 ## Updates and New Releases via Severed Chains
 
@@ -32,50 +33,20 @@ To enable archipelago, please create a new campaign with the Archipelagoon mod e
 ### Returning / Async Game
 
 Simply load your save that you used prior and enter your connection info! Done!
+If your port changed, you can update that in the options menu.
 
 ## Severed Chains Options
 
-Below will be a list of recommended options to enhance your Archipelagoon experience:
-
-Gameplay
-
-- Addition Mode
-    - normal
-- Automatic Dragoon Addition
-    - on
-- Battle Gold Gain
-    - 200%
-- Battle XP Gain
-    - on
-- Extended Dragoon Actions
-    - on
-- Inventory Size
-    - 108
-- Item Stack Size
-    - 32
-- Save Anywhere
-    - on
-- Secondary Character XP Gain
-    - 100%
-- Unlock Party
-    - on
-
-User Interface
-
-- Automatic Text Advance
-    - on
-- Automatic Text Delay (seconds)
-    - 0.00
-- Quick Text
-    - always
-    - instant
+Please select the "Archipelago" preset to set the various settings properly
 
 ## Troubleshooting
 
-If you have any issues with setup, please ask in the Legend of Dragoon thread of `#future game design`
+If you have any issues with setup, please ask in the Legend of Dragoon thread of `#custom-games`
 
 ### Common Issues:
 
 1) My game is crashing when I open a shop
     - Please ensure that your mod is installed correctly. This is typically caused by an improper file structure.
         - In your Severed Chains `mods` folder you should have an `archipelagoon` folder AND an archipelagoon .jar file.
+2) I don't have any characters
+    - Please verify you are actually connected to the archipelago server and slot.

@@ -48,9 +48,15 @@ enemy_table: Dict[str, LegendOfDragoonLocationData] = {
     "Michael": LegendOfDragoonLocationData("Moon That Never Sets", 108_70043, "Enemy"),
     "Moon Virage": LegendOfDragoonLocationData("Moon That Never Sets", 108_70044, "Enemy"),
     "Zieg Feld": LegendOfDragoonLocationData("Moon That Never Sets", 108_70045, "Enemy"),
-    "Melbu Frahma": LegendOfDragoonLocationData("Moon That Never Sets", 108_70046, "Enemy"),
+    # "Melbu Frahma": LegendOfDragoonLocationData("Moon That Never Sets", 108_70046, "Enemy"),
     "Jiango": LegendOfDragoonLocationData("Hellena Prison 02", 108_70047, "Enemy"),
     "Kamuy": LegendOfDragoonLocationData("Evergreen Forest", 108_70048, "Enemy"),
     "Marshland Commander": LegendOfDragoonLocationData("Marshland", 108_70049, "Enemy"),
     "Black Castle Sandora Elite": LegendOfDragoonLocationData("Black Castle", 108_70050, "Enemy"),
+    "Death Rose": LegendOfDragoonLocationData("Moon That Never Sets", 108_70051, "Enemy"),
+    "Claire": LegendOfDragoonLocationData("Moon That Never Sets", 108_70052, "Enemy"),
+    "Indora": LegendOfDragoonLocationData("Moon That Never Sets", 108_70053, "Enemy"),
+    "Dark Doel": LegendOfDragoonLocationData("Moon That Never Sets", 108_70054, "Enemy"),
+    "Archangel": LegendOfDragoonLocationData("Moon That Never Sets", 108_70055, "Enemy"),
+
 }

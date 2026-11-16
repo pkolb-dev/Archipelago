@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import Dict, TYPE_CHECKING
 
+from BaseClasses import LocationProgressType
 from worlds.legend_of_dragoon.loc.additions import all_addition_locations_table, chapter_one_addition_unlock_table, \
     chapter_two_addition_unlock_table, chapter_three_addition_unlock_table, chapter_four_addition_unlock_table, \
     all_character_unlocks_table
-from worlds.legend_of_dragoon.loc.chests import chests_table
+from worlds.legend_of_dragoon.loc.chests import all_chests_table
 from worlds.legend_of_dragoon.loc.enemies import enemy_table
 from worlds.legend_of_dragoon.loc.events import events_table
 from worlds.legend_of_dragoon.loc.location_data import LegendOfDragoonLocationData, LegendOfDragoonLocation
@@ -20,7 +21,7 @@ if TYPE_CHECKING:
 
 all_location_table: Dict[str, LegendOfDragoonLocationData] = {
     **all_addition_locations_table,
-    **chests_table,
+    **all_chests_table,
     **events_table,
     **enemy_table,
     **goods_location_table,
@@ -139,7 +140,7 @@ def create_all_locations(world: LegendOfDragoonWorld) -> None:
     dynamic_location_table.clear()
     dynamic_location_table.update(**enemy_table,
                                   **events_table,
-                                  **chests_table,
+                                  **all_chests_table,
                                   **goods_location_table
                                   )
     create_regular_locations(world)
@@ -179,15 +180,15 @@ def configure_magicsanity(world: LegendOfDragoonWorld) -> None:
     kongol_spells = world.get_region("Kongol Spells")
     miranda_spells = world.get_region("Miranda Spells")
 
-    dart_spells.add_locations(get_locations_by_category_with_ids("Dart"))
-    lavitz_spells.add_locations(get_locations_by_category_with_ids("Lavitz"))
-    shana_spells.add_locations(get_locations_by_category_with_ids("Shana"))
-    rose_spells.add_locations(get_locations_by_category_with_ids("Rose"))
-    haschel_spells.add_locations(get_locations_by_category_with_ids("Haschel"))
-    albert_spells.add_locations(get_locations_by_category_with_ids("Albert"))
-    meru_spells.add_locations(get_locations_by_category_with_ids("Meru"))
-    kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"))
-    miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"))
+    dart_spells.add_locations(get_locations_by_category_with_ids("Dart"), LegendOfDragoonLocation)
+    lavitz_spells.add_locations(get_locations_by_category_with_ids("Lavitz"), LegendOfDragoonLocation)
+    shana_spells.add_locations(get_locations_by_category_with_ids("Shana"), LegendOfDragoonLocation)
+    rose_spells.add_locations(get_locations_by_category_with_ids("Rose"), LegendOfDragoonLocation)
+    haschel_spells.add_locations(get_locations_by_category_with_ids("Haschel"), LegendOfDragoonLocation)
+    albert_spells.add_locations(get_locations_by_category_with_ids("Albert"), LegendOfDragoonLocation)
+    meru_spells.add_locations(get_locations_by_category_with_ids("Meru"), LegendOfDragoonLocation)
+    kongol_spells.add_locations(get_locations_by_category_with_ids("Kongol"), LegendOfDragoonLocation)
+    miranda_spells.add_locations(get_locations_by_category_with_ids("Miranda"), LegendOfDragoonLocation)
 
     if world.options.enable_lloyd:
         lloyd_spells = world.get_region("Lloyd Spells")
@@ -246,7 +247,7 @@ def create_chapter_one_locations(world):
         if name == "Gold Dragoon Spirit" and world.options.lod_completion_condition.value == CompletionCondition.option_chapter_1:
             continue
         lohan_locations.update({name: id})
-    lohan.add_locations(lohan_locations)
+    lohan.add_locations(lohan_locations, LegendOfDragoonLocation)
 
 
 def create_chapter_two_locations(world):
@@ -299,7 +300,22 @@ def create_chapter_three_locations(world):
     mortal_dragon_mountain.add_locations(get_locations_by_category_with_ids("Mortal Dragon Mountain"),
                                          LegendOfDragoonLocation)
     kashua_glacier.add_locations(get_locations_by_category_with_ids("Kashua Glacier"), LegendOfDragoonLocation)
-    tower_of_flanvel.add_locations(get_locations_by_category_with_ids("Tower of Flanvel"), LegendOfDragoonLocation)
+
+    tower_of_flanvel_locations = {}
+    for name, id in get_locations_by_category_with_ids("Tower of Flanvel").items():
+        loc = LegendOfDragoonLocation(world.player, name, LOCATION_NAME_TO_ID[name], tower_of_flanvel)
+        if "Faust Battle" not in name:
+            tower_of_flanvel.locations.append(loc)
+            continue
+
+        if world.options.include_faust and world.options.lod_completion_condition.value == CompletionCondition.option_chapter_4:
+            tower_of_flanvel_locations.update({name: id})
+        else:
+            loc.progress_type = LocationProgressType.EXCLUDED
+            tower_of_flanvel.locations.append(loc)
+
+    tower_of_flanvel.add_locations(tower_of_flanvel_locations, LegendOfDragoonLocation)
+
     snowfield.add_locations(get_locations_by_category_with_ids("Snowfield"), LegendOfDragoonLocation)
     fort_magrad.add_locations(get_locations_by_category_with_ids("Fort Magrad"), LegendOfDragoonLocation)
 
