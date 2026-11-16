@@ -303,13 +303,14 @@ def create_chapter_three_locations(world):
 
     tower_of_flanvel_locations = {}
     for name, id in get_locations_by_category_with_ids("Tower of Flanvel").items():
-        if "Faust" not in name:
+        loc = LegendOfDragoonLocation(world.player, name, LOCATION_NAME_TO_ID[name], tower_of_flanvel)
+        if "Faust Battle" not in name:
+            tower_of_flanvel.locations.append(loc)
             continue
 
         if world.options.include_faust and world.options.lod_completion_condition.value == CompletionCondition.option_chapter_4:
             tower_of_flanvel_locations.update({name: id})
         else:
-            loc = LegendOfDragoonLocation(world.player, name, LOCATION_NAME_TO_ID[name], tower_of_flanvel)
             loc.progress_type = LocationProgressType.EXCLUDED
             tower_of_flanvel.locations.append(loc)
 
