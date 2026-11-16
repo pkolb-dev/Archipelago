@@ -228,14 +228,14 @@ def set_chapter_one_rules(world):
     atlow = world.get_location("Atlow")
     danton = world.get_location("Danton")
     lloyd_1 = world.get_location("Lloyd 1")
-    world.set_rule(gorgaga, Has("Shirley"))
-    world.set_rule(serfius, Has("Shirley"))
-    world.set_rule(atlow, Has("Shirley"))
-    world.set_rule(danton, Has("Shirley"))
-    world.set_rule(lloyd_1, Has("Shirley"))
+    world.set_rule(gorgaga, HasAll("Shirley", "Dart"))
+    world.set_rule(serfius, HasAll("Shirley", "Dart"))
+    world.set_rule(atlow, HasAll("Shirley", "Dart"))
+    world.set_rule(danton, HasAll("Shirley", "Dart"))
+    world.set_rule(lloyd_1, HasAll("Shirley", "Dart"))
 
     lloyd_1_event = world.get_location("Lose to Lloyd")
-    world.set_rule(lloyd_1_event, Has("Shirley"))
+    world.set_rule(lloyd_1_event, HasAll("Shirley", "Dart"))
 
     kongol_2 = world.get_location("Kongol 2")
     kongol_2_event = world.get_location("Defeat Kongol 2")
@@ -275,6 +275,20 @@ def set_chapter_four_rules(world):
 
     k_s_v = world.get_location("Kubila, Vector, and Selebus")
     world.set_rule(k_s_v, HasAll("Law Making License", "Law Launching License"))
+
+    death_rose = world.get_location("Death Rose")
+    claire = world.get_location("Claire")
+    indora = world.get_location("Indora")
+    dark_doel = world.get_location("Dark Doel")
+    archangel = world.get_location("Archangel")
+    michael = world.get_location("Michael")
+
+    world.set_rule(death_rose, Has("Miranda"))
+    world.set_rule(claire, Has("Haschel"))
+    world.set_rule(indora, Has("Kongol"))
+    world.set_rule(dark_doel, Has("Albert"))
+    world.set_rule(archangel, Has("Meru"))
+    world.set_rule(michael, Has("Rose"))
 
 
 def set_goods_rules(world: LegendOfDragoonWorld):
