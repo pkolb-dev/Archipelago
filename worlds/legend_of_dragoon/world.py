@@ -61,5 +61,10 @@ class LegendOfDragoonWorld(CachedRuleBuilderWorld):
         }
 
     def generate_early(self) -> None:
-        if self.options.starting_character == lod_options.StartingCharacter.option_lloyd and not self.options.enable_lloyd:
-            raise OptionError(f"{self.player_name}: Cannot pick Lloyd as starting character if not enabled")
+        if self.options.enable_lloyd:
+            return
+
+        if self.options.starting_character == lod_options.StartingCharacter.option_lloyd:
+            self.options.starting_character.value = lod_options.StartingCharacter.default
+            # uncomment when we can detect rando option value
+            # raise OptionError(f"{self.player_name}: Cannot pick Lloyd as starting character if not enabled")
