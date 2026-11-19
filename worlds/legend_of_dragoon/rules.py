@@ -290,6 +290,9 @@ def set_chapter_four_rules(world):
     world.set_rule(archangel, Has("Meru"))
     world.set_rule(michael, Has("Rose"))
 
+    faust = world.get_location("Magician Faust")
+    world.set_rule(faust, Has("Vanishing Stone"))
+
 
 def set_goods_rules(world: LegendOfDragoonWorld):
     if world.options.lod_completion_condition.value == CompletionCondition.option_chapter_1:

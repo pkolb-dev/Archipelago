@@ -32,7 +32,6 @@ chapter_two_table: Dict[str, LegendOfDragoonItemData] = {
 chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
     "Boat License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20025, IC.progression),
     "Dragon Blocker": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20026, IC.progression),
-    "Vanishing Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20036, IC.progression),
     "Moon Gem": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20027, IC.useful),
     "Moon Dagger": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20028, IC.useful),
     "Moon Mirror": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20029, IC.useful),
@@ -41,6 +40,7 @@ chapter_three_table: Dict[str, LegendOfDragoonItemData] = {
 chapter_four_table: Dict[str, LegendOfDragoonItemData] = {
     "Law Making License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20032, IC.progression),
     "Law Launching License": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20033, IC.progression),
+    "Vanishing Stone": LegendOfDragoonItemData(ItemCategory.GOOD, 108_20036, IC.progression),
 }
 
 progressive_spirit_table: Dict[str, LegendOfDragoonItemData] = {
