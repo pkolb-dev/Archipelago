@@ -1,61 +1,8 @@
 from .bases import LegendOfDragoonTestBase
-from ..item.additions import chapter_one_addition_item_table, all_addition_items, chapter_two_addition_item_table, \
-    chapter_three_addition_item_table, chapter_four_addition_item_table
+from ..item.additions import addition_item_table
 
 
-class TestOptionOffChapter1(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 1,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter2(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 2,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter3(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 3,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestOptionOffChapter4(LegendOfDragoonTestBase):
-    options = {
-        "addition_randomizer": 0,
-        "lod_completion_condition": 4,
-    }
-    run_default_tests = False
-
-    def test_additions_dont_exist(self) -> None:
-        present = self.get_items_by_name(list(all_addition_items.keys()))
-        self.assertFalse(len(present))
-        self.assertEqual(0, len(present))
-
-
-class TestAdditionSanityChapter1(LegendOfDragoonTestBase):
+class TestShuffledChapter1(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 1,
@@ -63,11 +10,11 @@ class TestAdditionSanityChapter1(LegendOfDragoonTestBase):
     run_default_tests = False
 
     def test_additions_are_present(self) -> None:
-        present = self.get_items_by_name(list(chapter_one_addition_item_table.keys()))
+        present = self.get_items_by_name(list(addition_item_table.keys()))
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter2(LegendOfDragoonTestBase):
+class TestShuffledChapter2(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 2,
@@ -76,14 +23,13 @@ class TestAdditionSanityChapter2(LegendOfDragoonTestBase):
 
     def test_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table
+            **addition_item_table
         }
         present = self.get_items_by_name(list(items.keys()))
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter3(LegendOfDragoonTestBase):
+class TestShuffledChapter3(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 3,
@@ -92,15 +38,13 @@ class TestAdditionSanityChapter3(LegendOfDragoonTestBase):
 
     def test_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table,
-            **chapter_three_addition_item_table,
+            **addition_item_table
         }
         present = self.get_items_by_name(list(items.keys()))
         self.assertTrue(len(present))
 
 
-class TestAdditionSanityChapter4(LegendOfDragoonTestBase):
+class TestShuffledChapter4(LegendOfDragoonTestBase):
     options = {
         "addition_randomizer": 1,
         "lod_completion_condition": 4,
@@ -109,10 +53,7 @@ class TestAdditionSanityChapter4(LegendOfDragoonTestBase):
 
     def test_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table,
-            **chapter_three_addition_item_table,
-            **chapter_four_addition_item_table,
+            **addition_item_table
         }
         present = self.get_items_by_name(list(items.keys()))
         self.assertTrue(len(present))
@@ -127,7 +68,7 @@ class TestProgressiveAdditionsChapter1(LegendOfDragoonTestBase):
 
     def test_progressive_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table
+            **addition_item_table
         }
 
         # list should be empty - replaced by progressive items
@@ -145,15 +86,15 @@ class TestProgressiveAdditionsChapter1(LegendOfDragoonTestBase):
             rose_progressive_additions) + len(haschel_progressive_additions) + len(albert_progressive_additions) + len(
             meru_progressive_additions) + len(kongol_progressive_additions)
         precollected_items = len(self.multiworld.precollected_items[self.player])
-        self.assertEqual(5, precollected_items)
-        self.assertEqual(3, len(dart_progressive_additions))
+        self.assertEqual(8, precollected_items)
+        self.assertEqual(6, len(dart_progressive_additions))
         self.assertEqual(4, len(lavitz_progressive_additions))
-        self.assertEqual(1, len(rose_progressive_additions))
-        self.assertEqual(1, len(haschel_progressive_additions))
+        self.assertEqual(3, len(rose_progressive_additions))
+        self.assertEqual(5, len(haschel_progressive_additions))
         self.assertEqual(4, len(albert_progressive_additions))
-        self.assertEqual(0, len(meru_progressive_additions))
-        self.assertEqual(0, len(kongol_progressive_additions))
-        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
+        self.assertEqual(4, len(meru_progressive_additions))
+        self.assertEqual(2, len(kongol_progressive_additions))
+        self.assertEqual(total_progressive_additions, len(items.keys()) + 1 - precollected_items)
 
 
 class TestProgressiveAdditionsChapter2(LegendOfDragoonTestBase):
@@ -165,8 +106,7 @@ class TestProgressiveAdditionsChapter2(LegendOfDragoonTestBase):
 
     def test_progressive_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table,
+            **addition_item_table
         }
 
         empty = self.get_items_by_name(list(items.keys()))
@@ -184,16 +124,16 @@ class TestProgressiveAdditionsChapter2(LegendOfDragoonTestBase):
             meru_progressive_additions) + len(kongol_progressive_additions)
 
         precollected_items = len(self.multiworld.precollected_items[self.player])
-        self.assertEqual(7, precollected_items)
-        self.assertEqual(3, len(dart_progressive_additions))
+        self.assertEqual(8, precollected_items)
+        self.assertEqual(6, len(dart_progressive_additions))
         self.assertEqual(4, len(lavitz_progressive_additions))
         self.assertEqual(3, len(rose_progressive_additions))
-        self.assertEqual(2, len(haschel_progressive_additions))
+        self.assertEqual(5, len(haschel_progressive_additions))
         self.assertEqual(4, len(albert_progressive_additions))
-        self.assertEqual(1, len(meru_progressive_additions))
-        self.assertEqual(0, len(kongol_progressive_additions))
+        self.assertEqual(4, len(meru_progressive_additions))
+        self.assertEqual(2, len(kongol_progressive_additions))
 
-        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
+        self.assertEqual(total_progressive_additions, len(items.keys()) + 1 - precollected_items)
 
 
 class TestProgressiveAdditionsChapter3(LegendOfDragoonTestBase):
@@ -205,9 +145,7 @@ class TestProgressiveAdditionsChapter3(LegendOfDragoonTestBase):
 
     def test_progressive_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table,
-            **chapter_three_addition_item_table,
+            **addition_item_table
         }
 
         empty = self.get_items_by_name(list(items.keys()))
@@ -225,15 +163,15 @@ class TestProgressiveAdditionsChapter3(LegendOfDragoonTestBase):
             meru_progressive_additions) + len(kongol_progressive_additions)
 
         precollected_items = len(self.multiworld.precollected_items[self.player])
-        self.assertEqual(7, precollected_items)
-        self.assertEqual(4, len(dart_progressive_additions))
+        self.assertEqual(8, precollected_items)
+        self.assertEqual(6, len(dart_progressive_additions))
         self.assertEqual(4, len(lavitz_progressive_additions))
         self.assertEqual(3, len(rose_progressive_additions))
         self.assertEqual(5, len(haschel_progressive_additions))
         self.assertEqual(4, len(albert_progressive_additions))
-        self.assertEqual(2, len(meru_progressive_additions))
+        self.assertEqual(4, len(meru_progressive_additions))
         self.assertEqual(2, len(kongol_progressive_additions))
-        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
+        self.assertEqual(total_progressive_additions, len(items.keys()) + 1 - precollected_items)
 
 
 class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
@@ -245,10 +183,7 @@ class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
 
     def test_progressive_additions_are_present(self) -> None:
         items = {
-            **chapter_one_addition_item_table,
-            **chapter_two_addition_item_table,
-            **chapter_three_addition_item_table,
-            **chapter_four_addition_item_table,
+            **addition_item_table
         }
 
         empty = self.get_items_by_name(list(items.keys()))
@@ -266,7 +201,7 @@ class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
             meru_progressive_additions) + len(kongol_progressive_additions)
 
         precollected_items = len(self.multiworld.precollected_items[self.player])
-        self.assertEqual(7, precollected_items)
+        self.assertEqual(8, precollected_items)
         self.assertEqual(6, len(dart_progressive_additions))
         self.assertEqual(4, len(lavitz_progressive_additions))
         self.assertEqual(3, len(rose_progressive_additions))
@@ -275,4 +210,4 @@ class TestProgressiveAdditionsChapter4(LegendOfDragoonTestBase):
         self.assertEqual(4, len(meru_progressive_additions))
         self.assertEqual(2, len(kongol_progressive_additions))
 
-        self.assertEqual(total_progressive_additions, len(items.keys()) - precollected_items)
+        self.assertEqual(total_progressive_additions, len(items.keys()) + 1 - precollected_items)
