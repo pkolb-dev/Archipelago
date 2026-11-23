@@ -79,7 +79,7 @@ class DefaultShopSlots(Range):
     """
     display_name = "Default Shop Slots"
     default = 10
-    range_start = 10
+    range_start = 5
     range_end = 20
 
 
@@ -95,8 +95,8 @@ class MissableShopSlots(Range):
     - Volcano Item Shop
     """
     display_name = "Missable Shop Slots"
-    default = 10
-    range_start = 10
+    default = 5
+    range_start = 5
     range_end = 20
 
 
