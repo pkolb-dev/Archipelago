@@ -23,7 +23,7 @@ equipment_table: Dict[str, LegendOfDragoonItemData] = {
     "Bemusing Arrow": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10018, IC.useful),
     "Blue Dragoon Armor": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10019, IC.useful),
     "Blue Sea Stone": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10020, IC.useful),
-    "Bracelet": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10021, IC.useful),
+    "Bracelet": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10021, IC.filler),
     "Brass Knuckle": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10022, IC.useful),
     "Bravery Amulet": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10023, IC.useful),
     "Breast Plate": LegendOfDragoonItemData(ItemCategory.EQUIPMENT, 108_10024, IC.useful),
